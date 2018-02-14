@@ -1,0 +1,4828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>stateManager - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Tutorials</h3><ul><li><a href="tutorial-branching.html">Branching Strategy</a></li><li><a href="tutorial-contributing_guide.html">Contributing Guide</a></li><li><a href="tutorial-getting_started.html">Getting Started</a></li><li><a href="tutorial-meta_documentation.html">Meta Documentation</a></li><li><a href="tutorial-modules.html">Modules</a></li><li><a href="tutorial-translations.html">Translations</a></li><li><a href="tutorial-user.html">User Guide</a></li></ul><h3>Modules</h3><ul><li><a href="app.common.module_modelManager.html">modelManager</a><ul class='methods'><li data-type='method'><a href="app.common.module_modelManager.html#~applyDefault">applyDefault</a></li><li data-type='method'><a href="app.common.module_modelManager.html#~deleteColumns">deleteColumns</a></li><li data-type='method'><a href="app.common.module_modelManager.html#~getSchema">getSchema</a></li><li data-type='method'><a href="app.common.module_modelManager.html#~getSchema">getSchema</a></li><li data-type='method'><a href="app.common.module_modelManager.html#~modifyPropNames">modifyPropNames</a></li><li data-type='method'><a href="app.common.module_modelManager.html#~save">save</a></li><li data-type='method'><a href="app.common.module_modelManager.html#~setDefault">setDefault</a></li><li data-type='method'><a href="app.common.module_modelManager.html#~setModels">setModels</a></li><li data-type='method'><a href="app.common.module_modelManager.html#~setSchema">setSchema</a></li><li data-type='method'><a href="app.common.module_modelManager.html#~updateModel">updateModel</a></li></ul></li><li><a href="app.common.module_stateManager.html">stateManager</a><ul class='methods'><li data-type='method'><a href="app.common.module_stateManager.html#~addLink">addLink</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~addSpecific">addSpecific</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~buildStateTree">buildStateTree</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~existInStateModel">existInStateModel</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~findTitle">findTitle</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~getState">getState</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~getValidityValue">getValidityValue</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~goNoGoPreview">goNoGoPreview</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~isValid">isValid</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~listAdvanceHidden">listAdvanceHidden</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~reduceKey">reduceKey</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~reduceMapArray">reduceMapArray</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~removeNonExistent">removeNonExistent</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~searchUndefined">searchUndefined</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~setAdvance">setAdvance</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~setCustomTitles">setCustomTitles</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~setItemId">setItemId</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~setMapItemsState">setMapItemsState</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~setMasterValidity">setMasterValidity</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~setStateValueDown">setStateValueDown</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~setStateValueUp">setStateValueUp</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~setTitle">setTitle</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~uniqId">uniqId</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~updateSummaryForm">updateSummaryForm</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~updateSummaryFormMap">updateSummaryFormMap</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~updateValidity">updateValidity</a></li><li data-type='method'><a href="app.common.module_stateManager.html#~validateModel">validateModel</a></li></ul></li><li><a href="app.geo.module_gapiService.html">gapiService</a><ul class='methods'><li data-type='method'><a href="app.geo.module_gapiService.html#~init">init</a></li></ul></li><li><a href="app.geo.module_layerService.html">layerService</a></li><li><a href="app.geo.module_projectionService.html">projectionService</a><ul class='methods'><li data-type='method'><a href="app.geo.module_projectionService.html#~projectExtent">projectExtent</a></li></ul></li><li><a href="app.layout.module_avAccordion.html">avAccordion</a><ul class='methods'><li data-type='method'><a href="app.layout.module_avAccordion.html#~addButton">addButton</a></li><li data-type='method'><a href="app.layout.module_avAccordion.html#~addIcon">addIcon</a></li><li data-type='method'><a href="app.layout.module_avAccordion.html#~avAccordion">avAccordion</a></li><li data-type='method'><a href="app.layout.module_avAccordion.html#~setAccordion">setAccordion</a></li></ul></li><li><a href="app.layout.module_avDragHandle.html">avDragHandle</a><ul class='methods'><li data-type='method'><a href="app.layout.module_avDragHandle.html#~avDragHandle">avDragHandle</a></li></ul></li><li><a href="app.layout.module_avFrame.html">avFrame</a><ul class='methods'><li data-type='method'><a href="app.layout.module_avFrame.html#~avFrame">avFrame</a></li></ul></li><li><a href="app.layout.module_avShell.html">avShell</a><ul class='methods'><li data-type='method'><a href="app.layout.module_avShell.html#~updateClass">updateClass</a></li></ul></li><li><a href="app.module_core.html">core</a><ul class='methods'><li data-type='method'><a href="app.module_core.html#~addButton">addButton</a></li><li data-type='method'><a href="app.module_core.html#~addTranslations">addTranslations</a></li><li data-type='method'><a href="app.module_core.html#~clickSubTab">clickSubTab</a></li><li data-type='method'><a href="app.module_core.html#~clickTab">clickTab</a></li><li data-type='method'><a href="app.module_core.html#~compile">compile</a></li><li data-type='method'><a href="app.module_core.html#~getLang">getLang</a></li><li data-type='method'><a href="app.module_core.html#~getLangs">getLangs</a></li><li data-type='method'><a href="app.module_core.html#~getNested">getNested</a></li><li data-type='method'><a href="app.module_core.html#~getUUID">getUUID</a></li><li data-type='method'><a href="app.module_core.html#~isArray">isArray</a></li><li data-type='method'><a href="app.module_core.html#~isObject">isObject</a></li><li data-type='method'><a href="app.module_core.html#~parseJSON">parseJSON</a></li><li data-type='method'><a href="app.module_core.html#~post">post</a></li><li data-type='method'><a href="app.module_core.html#~registerDebounce">registerDebounce</a></li><li data-type='method'><a href="app.module_core.html#~scrollToElement">scrollToElement</a></li><li data-type='method'><a href="app.module_core.html#~setExtensionDialog">setExtensionDialog</a></li><li data-type='method'><a href="app.module_core.html#~setLang">setLang</a></li><li data-type='method'><a href="app.module_core.html#~setLangs">setLangs</a></li><li data-type='method'><a href="app.module_core.html#~setUniq">setUniq</a></li><li data-type='method'><a href="app.module_core.html#~whatsThat">whatsThat</a></li></ul></li><li><a href="app.module_ui.html">ui</a><ul class='methods'><li data-type='method'><a href="app.module_ui.html#~copyValueToFormIndex">copyValueToFormIndex</a></li><li data-type='method'><a href="app.module_ui.html#~copyValueToModelIndex">copyValueToModelIndex</a></li><li data-type='method'><a href="app.module_ui.html#~findValues">findValues</a></li><li data-type='method'><a href="app.module_ui.html#~initValueToFormIndex">initValueToFormIndex</a></li><li data-type='method'><a href="app.module_ui.html#~resestShowAdvance">resestShowAdvance</a></li><li data-type='method'><a href="app.module_ui.html#~setErrorMessage">setErrorMessage</a></li><li data-type='method'><a href="app.module_ui.html#~setExtent">setExtent</a></li><li data-type='method'><a href="app.module_ui.html#~showAdvance">showAdvance</a></li><li data-type='method'><a href="app.module_ui.html#~toggleAll">toggleAll</a></li><li data-type='method'><a href="app.module_ui.html#~toggleSection">toggleSection</a></li><li data-type='method'><a href="app.module_ui.html#~updateLinkValues">updateLinkValues</a></li></ul></li><li><a href="app.ui.module_avBindValue.html">avBindValue</a><ul class='methods'><li data-type='method'><a href="app.ui.module_avBindValue.html#~avBindValue">avBindValue</a></li></ul></li><li><a href="app.ui.module_avCompileHtml.html">avCompileHtml</a><ul class='methods'><li data-type='method'><a href="app.ui.module_avCompileHtml.html#~avCompileHtml">avCompileHtml</a></li></ul></li><li><a href="app.ui.module_avContentPanel.html">avContentPanel</a><ul class='methods'><li data-type='method'><a href="app.ui.module_avContentPanel.html#~addHeaderControl">addHeaderControl</a></li><li data-type='method'><a href="app.ui.module_avContentPanel.html#~initFooter">initFooter</a></li><li data-type='method'><a href="app.ui.module_avContentPanel.html#~link">link</a></li></ul></li><li><a href="app.ui.module_avHeader.html">avHeader</a><ul class='methods'><li data-type='method'><a href="app.ui.module_avHeader.html#~avHeader">avHeader</a></li><li data-type='method'><a href="app.ui.module_avHeader.html#~create">create</a></li><li data-type='method'><a href="app.ui.module_avHeader.html#~filesSubmitted">filesSubmitted</a></li><li data-type='method'><a href="app.ui.module_avHeader.html#~getTemplates">getTemplates</a></li><li data-type='method'><a href="app.ui.module_avHeader.html#~save">save</a></li><li data-type='method'><a href="app.ui.module_avHeader.html#~save">save</a></li><li data-type='method'><a href="app.ui.module_avHeader.html#~setLanguage">setLanguage</a></li><li data-type='method'><a href="app.ui.module_avHeader.html#~setTemplate">setTemplate</a></li></ul></li><li><a href="app.ui.module_avLanguage.html">avLanguage</a><ul class='methods'><li data-type='method'><a href="app.ui.module_avLanguage.html#~avLanguage">avLanguage</a></li></ul></li><li><a href="app.ui.module_avMap.html">avMap</a><ul class='methods'><li data-type='method'><a href="app.ui.module_avMap.html#~avMap">avMap</a></li><li data-type='method'><a href="app.ui.module_avMap.html#~setCollapsibleHeader">setCollapsibleHeader</a></li><li data-type='method'><a href="app.ui.module_avMap.html#~setCollapsibleHeaderEntry">setCollapsibleHeaderEntry</a></li></ul></li><li><a href="app.ui.module_avServices.html">avServices</a><ul class='methods'><li data-type='method'><a href="app.ui.module_avServices.html#~avServices">avServices</a></li></ul></li><li><a href="app.ui.module_avSummary.html">avSummary</a><ul class='methods'><li data-type='method'><a href="app.ui.module_avSummary.html#~avSummary">avSummary</a></li><li data-type='method'><a href="app.ui.module_avSummary.html#~expandSummary">expandSummary</a></li><li data-type='method'><a href="app.ui.module_avSummary.html#~initState">initState</a></li><li data-type='method'><a href="app.ui.module_avSummary.html#~openPreview">openPreview</a></li><li data-type='method'><a href="app.ui.module_avSummary.html#~previewReady">previewReady</a></li><li data-type='method'><a href="app.ui.module_avSummary.html#~setSubTab">setSubTab</a></li><li data-type='method'><a href="app.ui.module_avSummary.html#~setSubTabID">setSubTabID</a></li><li data-type='method'><a href="app.ui.module_avSummary.html#~walkTree">walkTree</a></li></ul></li><li><a href="app.ui.module_avTab.html">avTab</a><ul class='methods'><li data-type='method'><a href="app.ui.module_avTab.html#~avTab">avTab</a></li><li data-type='method'><a href="app.ui.module_avTab.html#~mapTabs">mapTabs</a></li></ul></li><li><a href="app.ui.module_avTest.html">avTest</a></li><li><a href="app.ui.module_avTree.html">avTree</a><ul class='methods'><li data-type='method'><a href="app.ui.module_avTree.html#~avTree">avTree</a></li></ul></li><li><a href="app.ui.module_avUi.html">avUi</a><ul class='methods'><li data-type='method'><a href="app.ui.module_avUi.html#~avUi">avUi</a></li><li data-type='method'><a href="app.ui.module_avUi.html#~getAboutChoice">getAboutChoice</a></li></ul></li><li><a href="app.ui.module_avVersion.html">avVersion</a><ul class='methods'><li data-type='method'><a href="app.ui.module_avVersion.html#~avVersion">avVersion</a></li></ul></li><li><a href="app.ui.module_dynamicSelect.html">dynamicSelect</a><ul class='methods'><li data-type='method'><a href="app.ui.module_dynamicSelect.html#~dynamicSelect">dynamicSelect</a></li></ul></li><li><a href="material.components.button.module_MdButtonDirectiveDecorator.html">MdButtonDirectiveDecorator</a><ul class='methods'><li data-type='method'><a href="material.components.button.module_MdButtonDirectiveDecorator.html#~decorateCompile">decorateCompile</a></li></ul></li><li><a href="material.components.tooltip.module_mdTooltipDirective.html">mdTooltipDirective</a><ul class='methods'><li data-type='method'><a href="material.components.tooltip.module_mdTooltipDirective.html#~decorateCompile">decorateCompile</a></li><li data-type='method'><a href="material.components.tooltip.module_mdTooltipDirective.html#~isTouch">isTouch</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="app.html">app</a></li><li><a href="app.addon.html">addon</a></li><li><a href="app.core.html">core</a><ul class='methods'><li data-type='method'><a href="app.core.html#.configBlock">configBlock</a></li><li data-type='method'><a href="app.core.html#.seed">seed</a></li><li data-type='method'><a href="app.core.html#~configureIconsets">configureIconsets</a></li><li data-type='method'><a href="app.core.html#~configureTheme">configureTheme</a></li><li data-type='method'><a href="app.core.html#~configureTranslations">configureTranslations</a></li></ul></li><li><a href="app.geo.html">geo</a></li><li><a href="app.layout.html">layout</a></li><li><a href="app.ui.html">ui</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$on">$on</a></li><li><a href="global.html#applyDefault">applyDefault</a></li><li><a href="global.html#AV">AV</a></li><li><a href="global.html#avDefaults">avDefaults</a></li><li><a href="global.html#compile">compile</a></li><li><a href="global.html#configureParser">configureParser</a></li><li><a href="global.html#initLanguages">initLanguages</a></li><li><a href="global.html#initShortcut">initShortcut</a></li><li><a href="global.html#loadExtensions">loadExtensions</a></li><li><a href="global.html#uploadDefault">uploadDefault</a></li><li><a href="global.html#uploadSchema">uploadSchema</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">stateManager</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+        
+            <div class="description"><p>The <code>stateManager</code> factory is a service controlling states content.</p></div>
+        
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="~addLink"><span class="type-signature">(private, inner) </span>addLink<span class="signature">(arrKeys)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line637">line 637</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Add hyperlink to arrays of key. The hyperlink === first key of keys array</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>arrKeys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>array of arrays [[keys], valid: true | false, hlink: 'id']</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~addSpecific"><span class="type-signature">(private, inner) </span>addSpecific<span class="signature">(arrKeys, modelName)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line742">line 742</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Add specific keys so missing tabs can be part of the summary</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>arrKeys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>array of object {key: [], valid: true | false}</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>modelName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>modelName</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>updated keys array</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~buildStateTree"><span class="type-signature">(private, inner) </span>buildStateTree<span class="signature">(state, element, arrKeys, mainSection)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line558">line 558</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Create state object from model/form for the summary panel</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the state object in JSON</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>element</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the current element name</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>arrKeys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>array of arrays [[keys], valid: true | false, hlink: 'id']</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mainSection</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>['map':1 | 'ui':2 | 'services':3 | 'version':4 | 'language':5]</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~existInStateModel"><span class="type-signature">(private, inner) </span>existInStateModel<span class="signature">(stateModel, keys, exist)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line167">line 167</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Look for the existence of a path in the stateModel</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>stateModel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the stateModel</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>keys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>set of keys defining a path</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>exist</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>true if the path exist</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~findTitle"><span class="type-signature">(private, inner) </span>findTitle<span class="signature">(key, itemForm, arrForm)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line455">line 455</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Search for the title corresponding to the provided key
+Ref: https://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript?page=1&amp;tab=votes#tab-top</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">key</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the key to look for (could be an array)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>itemForm</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>a form item</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>arrForm</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the form as an array of objects</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~getState"><span class="type-signature">(inner) </span>getState<span class="signature">(modelName)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line27">line 27</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get state object</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>modelName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the model/form name to get state on</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>the state object in JSON</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~getValidityValue"><span class="type-signature">(private, inner) </span>getValidityValue<span class="signature">(key, index, arrKeys)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line368">line 368</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get validity from an item in a list
+Currently works only with baseMaps, layers, tileSchemas, extentSets, lodSets</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>key to select the proper list</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>index in the form</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>arrKeys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>array of object {key: [], valid: true | false}</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>validity</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~goNoGoPreview"><span class="type-signature">(inner) </span>goNoGoPreview<span class="signature">()</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line51">line 51</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Check validity of state sections</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>the go or no go</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~isValid"><span class="type-signature">(private, inner) </span>isValid<span class="signature">(arrKeys)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line685">line 685</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Return validity</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>arrKeys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>array of arrays [[keys], valid: true | false, hlink: 'id']</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>return false if there's at least one false in validity array</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~listAdvanceHidden"><span class="type-signature">(private, inner) </span>listAdvanceHidden<span class="signature">(arrForm, list)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line389">line 389</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>List of hidden advance parameters</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>arrForm</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the form as an array of objects</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>list</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>list of hidden advance parameters</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~reduceKey"><span class="type-signature">(private, inner) </span>reduceKey<span class="signature">(arrKeys, keys)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line722">line 722</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Reduce map array to simplify hierarchy</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>arrKeys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>array of object {key: [], valid: true | false}</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>keys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>keys</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>reduced keys array</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~reduceMapArray"><span class="type-signature">(private, inner) </span>reduceMapArray<span class="signature">(arrKeys)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line698">line 698</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Reduce map array to simplify hierarchy</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>arrKeys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>array of object {key: [], valid: true | false}</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>reduced keys array</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~removeNonExistent"><span class="type-signature">(private, inner) </span>removeNonExistent<span class="signature">(stateModel, modelName, keysIn, keysOut)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line145">line 145</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Remove keys if they don't exist in the stateModel</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>stateModel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the stateModel</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>modelName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>modelName</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>keysIn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>list of original keys [[keys], valid]</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>keysOut</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>list of update keys [[keys], valid]</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~searchUndefined"><span class="type-signature">(private, inner) </span>searchUndefined<span class="signature">(modelKeys, model, arrKeys)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line257">line 257</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>List undefined attributes</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>modelKeys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the model name path</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>model</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the model</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>arrKeys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>array of keys</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~setAdvance"><span class="type-signature">(private, inner) </span>setAdvance<span class="signature">(stateModel, modelName, arrKeys)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line189">line 189</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Set advance parameter in state model
+All element and sub-element will have 'advance' parameter
+set to true</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>stateModel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the stateModel</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>modelName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>modelName</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>arrKeys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>list of advance parameter keys</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~setCustomTitles"><span class="type-signature">(private, inner) </span>setCustomTitles<span class="signature">(stateModel, modelName)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line427">line 427</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Retrieve the title corresponding to the provided key</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>stateModel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the stateModel</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>modelName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>modelName</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~setItemId"><span class="type-signature">(private, inner) </span>setItemId<span class="signature">(hlink, elType, index)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line649">line 649</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Set the item id in the DOM and return the id</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>hlink</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>subTab link</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>elType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>element type {'baseMaps'|'layers'}</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>rank in elements list</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>id</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~setMapItemsState"><span class="type-signature">(private, inner) </span>setMapItemsState<span class="signature">(stateModel, model, arrKeys)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line302">line 302</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Set new record for map items in state model</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>stateModel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the stateModel</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>model</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the model</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>arrKeys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>array of object {key: [], valid: true | false}</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~setMasterValidity"><span class="type-signature">(private, inner) </span>setMasterValidity<span class="signature">(state)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line773">line 773</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Set validity on master element of the model</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the state object in JSON</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~setStateValueDown"><span class="type-signature">(private, inner) </span>setStateValueDown<span class="signature">(stateModel, param, value)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line209">line 209</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Set a parameter value for an element of the state model
+and all is children</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>stateModel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the stateModel</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>param</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>parameter name</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>value to give to parameter</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~setStateValueUp"><span class="type-signature">(private, inner) </span>setStateValueUp<span class="signature">(stateModel, path, param, value)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line229">line 229</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Set a parameter value for an element of the state model
+and all parents</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>stateModel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the stateModel</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>path from root to element ['root','child','grandchild=element']</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>param</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>parameter name</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>value to give to parameter</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~setTitle"><span class="type-signature">(private, inner) </span>setTitle<span class="signature">(stateModel, arrForm)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line408">line 408</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Retrieve the title corresponding to the provided key</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>stateModel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the stateModel</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>arrForm</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the form as an array of objects</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~uniqId"><span class="type-signature">(private, inner) </span>uniqId<span class="signature">(arrKeys)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line667">line 667</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Return a unique id</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>arrKeys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>array of arrays [[keys], valid: true | false, hlink: 'id']</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>id</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~updateSummaryForm"><span class="type-signature">(private, inner) </span>updateSummaryForm<span class="signature">(state, modelName, form, list)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line522">line 522</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Create state object from model/form for the summary panel</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the state object in JSON</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>modelName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the current model name</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>form</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the form object in JSON</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>list</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>hidden advance parameters list</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~updateSummaryFormMap"><span class="type-signature">(private, inner) </span>updateSummaryFormMap<span class="signature">(state, modelName, form)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line482">line 482</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Create state object from model/form for the map section of the summary panel</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the state object in JSON</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>modelName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the current model name</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>form</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the form object in JSON</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>arrKeys array of object {key: [], valid: true | false}</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~updateValidity"><span class="type-signature">(private, inner) </span>updateValidity<span class="signature">(stateModel, modelName, undefKeys)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line284">line 284</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Set undefined parameter in state model and update
+validity of upper hierarchy</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>stateModel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the stateModel</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>modelName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>modelName</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>undefKeys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>list of advance parameter keys</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~validateModel"><span class="type-signature">(inner) </span>validateModel<span class="signature">(modelName, form, arrForm, model)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_stateManager.service.js.html">core/stateManager.service.js</a>, <a href="core_stateManager.service.js.html#line75">line 75</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Set state object with valid values from the form field validity</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>modelName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the model/form name to get state on</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>form</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the angular schema form active form</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>arrForm</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the form as an array of objects</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>model</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the model</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Feb 15 2018 14:54:04 GMT-0500 (EST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
