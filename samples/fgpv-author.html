@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <head>
+        
+            
+                <link rel="stylesheet" href="../av-styles.css" />
+            
+        
+    </head>
+
+    <body>
+        <div class="fgpa av-large"
+                data-av-langs='["en-CA", "fr-CA"]'
+                data-av-extensions='["./extensions/ddr/ddr.js"]'
+                data-av-schema="./schemaForm/"
+                data-av-config='["./config/config-authorA.json", "./config/config-authorB.json", "./config/config-full.json"]'>
+            <av-header></av-header>
+
+            <div class="av-tools" layout="row">
+                <av-tab flex="70"></av-tab>
+                <div class="av-summary" flex="30">
+                    <av-summary></av-summary>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var needIePolyfills = [
+                'Promise' in window,
+                'TextDecoder' in window,
+                'findIndex' in Array.prototype,
+                'find' in Array.prototype,
+                'from' in Array,
+                'startsWith' in String.prototype,
+                'endsWith' in String.prototype,
+                'outerHTML' in SVGElement.prototype
+            ].some(function(x) { return !x; });
+            if (needIePolyfills) {
+                // NOTE: this is the only correct way of injecting scripts into a page and have it execute before loading/executing any other scripts after this point (ie polyfills must be executed before the bootstrap)
+                // more info on script loading: https://www.html5rocks.com/en/tutorials/speed/script-loading/
+                document.write('<script src="../ie-polyfills.js"><\/script>');
+            }
+        </script>
+
+        
+            
+                <script src="../form/tv4.js"></script>
+            
+        
+            
+                <script src="../av-main.js"></script>
+            
+        
+            
+                <script src="../form/angular-schema-form-bootstrap-bundled.min.js"></script>
+            
+        
+    </body>
+</html>
