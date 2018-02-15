@@ -9,7 +9,8 @@
 # Authoring tool for Federal Geospatial Platform (FGP) viewer
 
 [Working Demo](https://jolevesq.github.io/fgpa-apgf/samples/fgpv-author.html)
-[documentation](https://fgpv-vpgf.github.io/fgpa-apgf/a2v2/0.1.0/index.html)
+
+[Documentation](https://fgpv-vpgf.github.io/fgpa-apgf/a2v2/0.1.0/index.html)
 
 ## Getting Started
 
