@@ -27665,6 +27665,7 @@ The fix is based on the following hack: https://codepen.io/mkstix6/pen/pRbErK
 }
 
 .fgpa .av-save-dialog md-input-container input,
+.fgpa .av-lods-dialog md-input-container input,
 .fgpa .av-preview-dialog md-input-container input,
 .fgpa .av-extent-dialog md-input-container input {
   font-size: 1.2em;
@@ -27672,6 +27673,7 @@ The fix is based on the following hack: https://codepen.io/mkstix6/pen/pRbErK
 }
 
 .fgpa .av-save-dialog md-input-container .av-hint,
+.fgpa .av-lods-dialog md-input-container .av-hint,
 .fgpa .av-preview-dialog md-input-container .av-hint,
 .fgpa .av-extent-dialog md-input-container .av-hint {
   position: relative;
@@ -27686,6 +27688,7 @@ The fix is based on the following hack: https://codepen.io/mkstix6/pen/pRbErK
 }
 
 .fgpa .av-save-dialog,
+.fgpa .av-lods-dialog,
 .fgpa .av-preview-dialog,
 .fgpa .av-extent-dialog {
   button-float: right;
@@ -28307,8 +28310,14 @@ The fix is based on the following hack: https://codepen.io/mkstix6/pen/pRbErK
 }
 
 .fgpa .av-save-dialog {
-  height: 225px;
+  height: 250px;
   width: 600px;
+  border-radius: 0;
+}
+
+.fgpa .av-lods-dialog {
+  height: 250px;
+  width: 800px;
   border-radius: 0;
 }
 
@@ -28475,6 +28484,10 @@ The fix is based on the following hack: https://codepen.io/mkstix6/pen/pRbErK
 
 .fgpa .av-legend-json-valid {
   color: #266A2E;
+}
+
+.fgpa .av-lods-error {
+  color: #e74c3c;
 }
 
 .fgpa .av-loading-screen {
