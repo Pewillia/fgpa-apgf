@@ -6,7 +6,7 @@ A configuration file may be read from an existing file, by clicking on the up ar
 
 To created new configuration file, click on the plus sign icon ![](plussign.png).
 
-To save the configuratio file once finished, click on the diskette icon ![](diskette.png) .
+To save the configuration file once finished, click on the diskette icon ![](diskette.png) .
 
 By default 3 templates that contain default values for most settings are available when
 creating a  configuration file. Select either config-authorA, config-AuthorB or config-full template.
@@ -33,7 +33,7 @@ The map section is divided into tabs that contain information on : Extents and L
 
 This section contains tabs that list the Tile schemas,Extents and Levels of detail.
 
-## Tile schemas
+## Tile Schemas
 
 The first field to enter is the id of the tileschema ( combination of extent set and zoom scale)
 
