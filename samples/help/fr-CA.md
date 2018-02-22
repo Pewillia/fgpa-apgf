@@ -5,7 +5,7 @@ visualisateur pour la plateforme géospatiale fédérale.
 
 Ouvrir un fichier existante en cliqaunt sur l'icône ![](uparrow.png).
 
-Creer un nouveau fichier de configuration en cliqaunt sur l'icône ![](plussign.png). 
+Creer un nouveau fichier de configuration en cliqaunt sur l'icône ![](plussign.png).
 
 Sauvegarder un fichier de configuration en cliqaunt sur l'icône ![](diskette.png) .
 
@@ -20,23 +20,23 @@ Cliquer sur  l'icone ![](magnifyinglass.png) pour lancer la recherche.
 
 # Carte
 
-La section carte est composer des onglets qui contient les informations sur les composantes de la carte. 
+La section carte est composer des onglets qui contient les informations sur les composantes de la carte.
 
 Cette section carte est diviser dans le onglets suivante:Extendues et details, composantes,cartes de base,couches,legende.
 
-	
+
 ## Extendues et details
-	
+
 Cette section liste des sous sections: Schéma des tuiles,Extents et Lots d'étendues spatiales,Lots de niveaux de détail.
 
 ##Schéma des tuiles
-				
+
 L'identifiant unique d'un schéma de tuiles (combinaison de l'étendue et de l'échelle)
-			
+
 Nom
 Le nom utilisé dans le sélecteur de cartes de base.
 
-ID du lot d'étendues 
+ID du lot d'étendues
 Le lot d'étendues à utiliser pour la carte de base.
 
 ID du lot de niv. de détail
@@ -46,7 +46,7 @@ Carte d'aperçu statique
 
 Type de couche
 
- 
+
 
 URL
 Le point de service de la couche. Le type de couche retourné par le service et le type de couche identifié dans les paramètres doivent être les mêmes.
@@ -56,8 +56,8 @@ Le point de service de la couche. Le type de couche retourné par le service et 
 Cette section liste les lots d'etendues spatiale pour la  carte de base.
 Étendue par défaut,Étendue complète, Étendue maximale
 
-ID 
-The id of the extext set indicates the projection 
+ID
+The id of the extext set indicates the projection
 
 WKID
 Entrez le numero de la projection a utiliser.
@@ -77,7 +77,7 @@ Entrez le numero Wkid la plus recente a utiliser
 L'étendue par défaut sera utilisée si l'étendue complète n'est pas définie..
 
 Étendue maximale
-L'étendue maximale permet de limiter le zoom et le pan. 
+L'étendue maximale permet de limiter le zoom et le pan.
 L'étendue complète ou par défaut sera utilisée si l'étendue maximale n'est pas définie
 
 
@@ -94,12 +94,12 @@ Entrez les Lots de niveaux de détai
  Utilise les fleches pour selectionner les valeur pour niveau resoltion et echelle.
 
 
-	
+
 
 ## Map Composantes
 
 
-The maps components tab lists the if mouse coordinates are enabled 
+The maps components tab lists the if mouse coordinates are enabled
 
 Coordonnées de la souris
 
@@ -110,11 +110,11 @@ Référence spatiale
 
 Selectionner la projection utiliser pour afficher les coordonnes de a souris.
 de la sourithe numerical values selectable by a click for the projection displayed by selecting the
- wkid,vcsid ( vertical coordinate wkid) and latestwkid,latestvcswkid, and wkt( Well-known text (WKT) is a text markup language for representing vector geometry objects on a map, 
+ wkid,vcsid ( vertical coordinate wkid) and latestwkid,latestvcswkid, and wkt( Well-known text (WKT) is a text markup language for representing vector geometry objects on a map,
 spatial reference systems of spatial objects and transformations between spatial reference systems.)
 of the mouse cooordinates to be displayed at the bottom of the map.
 
-It also lists the checkboxes if enabled for the north arrow displayed on the map, 
+It also lists the checkboxes if enabled for the north arrow displayed on the map,
 scale bar displayed at the bottom of the map and if the overviewmap is displayed at the upper right corner.
 
 It also list for the oveviewmap is enabled, its scale factor and if visible.
@@ -238,7 +238,7 @@ Ouvrir par défaut dans l'affichage restreint
 Indique si la légende est ouverte par défaut lors du chargement initial pour une fenêtre d'affichage restreinte
 Options d'ouverture de la table
 Indique si la table est ouverte par défaut lors du chargement initial pour les fenêtres d'affichage restreinte, moyenne et étendue.
-ID de la couche 
+ID de la couche
 L'ID de la couche pour des fins de référencement à l'intérieur du visualisateur
 Ouvrir par défaut dans l'affichage étendu
 Indique si la table est ouverte par défaut lors du chargement initial pour une fenêtre d'affichage étendue
@@ -251,7 +251,7 @@ Indique si la table est ouverte par défaut lors du chargement initial pour une 
 
 Navigation restreinte- Empêche l'utilisateur d'effectuer des déplacements au delà de l'étendue maximale.
 Barre de navigation
-Zoom 
+Zoom
 Composantes de navigation en extra
 geoLocator
 marquee
@@ -326,13 +326,13 @@ plugins
  Ajouter Fichier d'aide
 
 Propriétés de l'aide
-Nom du dossier 
+Nom du dossier
 default
 (success)
 Nom du dossier contenant les fichiers d'aide et les images connexes
 À propos de la carte- L'à propos de la carte provenant du fichier de configuration ou d'un répertoire contenant un fichier de type Markdown
 
-Source de l'à propos 
+Source de l'à propos
 Texte - À propos provenant d'un texte fourni (chaîne de caractères).
 
 
@@ -371,53 +371,72 @@ Désactiver des types de recherche spécifiques (SNRC, code postal/RTA, ou LAT/L
 
 ## Exporter la Carte
 
+Vous pouvez exporter une image de la carte et de ses couches visibles avec une légende, un titre, la flèche nord avec scalebar, la note en bas de page personnalisée et un timestamp.
+
+Le titre de l'image exportée peut être fabriqué sur commande en entrant une valeur.
+
+Si customizable un dialogue apparaîtra avec une image de la carte et d'une option pour entrer dans un titre de carte si désiré.
+
 Titre
 Titre du graphique à exporter.
-Valeur 
-Valeur par défaut
-Est présent
-Est personnalisable
-Carte
 Composantes de la carte
-Sont présentes
-Sont personnalisables
 Légende
-Est présente
-Est personnalisable
 Éléments de la carte
 La flèche du Nord et l'échelle.
-Sont présentes
-Sont personnalisables
 Note de bas de page
 Note de bas de page de la carte à exporter
-value
-Valeur par défaut
-Est présente
-Est personnalisable
 Horodateur
-Est présent
-Est personnalisable
 
+Si customizable un dialogue apparaîtra avec une image de la carte et d'une option pour entrer dans un titre de carte si désiré.
+
+![](exportmapwindowv2.png)
+
+Aussi, les utilisateurs peuvent ajouter ou enlever des sections de l'image exportée comme une légende,
+en cliquant sur la roue  d'options dans l'en-tête.
+
+Les utilisateurs seront en mesure de choisir/désélectionner les sections pour apparaître dans l'image exportée.
 
 # Version
 
-The vesion tab lists the version of the FGP viewer schema file. By default the oresetn value is 2.0.
+L'étiquette de version vous permet de choisir la version  de schéma de visualisateur FGP en utilisant un coup énumèrent en bas .
 
- 
+Par défaut la présente version est 2.0.
+
+
 # Langue
 
-THe language tab let you select the language to be used by the viewer.
-'
+L'étiquette de langue vous permet de choisir la langue du dossier de configuration, en utilisant un coup énumère en bas .
+Choisissez demi-cadratin-CA pour l'anglais ou fr-CA pour le français.
+
+La valeur est un ISO 639-1 code indiquant la langue de ficelles dans le dossier de schéma.
+
 
 # Panneau Sommaire
 
-Sommaire
-VALIDER   OUVRIR   FERMER APERÇU
-Carte
-UI
-Services
-Version
-Langue
+Le panneau sommaire vous autorise à valider les champs dans le dossier de configuration en cliquant sur le bouton valide).![](valider.png)
+
+Le  panneau sommaire vous autorise aussi à présenter le dossier de configuration dans un viewport en cliquant sur le bouton d'avant-première.
+![](apercu.png)
+
+![](previewsample.png)
+
+Une apercu de la carte affiche toutes les couches d'il de la carte comme il sera affiché par le visualisateur FGP.
+C'est un visualisateur complètement fonctionnel contenant toute la fonctionnalité de l'application de visualisateur.
+
+L'avant-première peut exiger à quelques secondes d'afficher.
+
+Le panneau sommaire vous permet de valider le fichier de configuration en appuyant sur le
+ le bouton validez ! [] (valider.png) pour valider tous les champs dans le fichier de configuration.
+
+ Une fleche vert! [] (greencheckbox.png) apparaîtra à côté des champs qui sont
+valide.
+
+Une boîte rouge ![](redcircle.png) avec un point d'exclamation apparaît à côté des champs qui
+ne sont pas valides.
+
+Vous pouvez utiliser des boutons d'effondrement ou le fait de développer! [] (expandcollapse.png) pour voir tous les champs dans les différentes sections de
+le dossier de configuration de téléspectateur.
+
 
 # Durée du chargement / Comportement imprévu
 
@@ -430,4 +449,3 @@ La durée des chargements peut varier selon:
 Un comportement imprévu peut survenir lorsque des interactions avec la carte ont lieu avant la conclusion du chargement des données. Veuillez permettre le chargement complet de la page Web avant d’activer d’autres fonctions sur la carte.
 
 **Remarque**: Si l'indicateur de chargement de ligne de défilement apparaît au bas de la carte ou dans la légende, ou lorsque le tableau de données affiche un message de chargement en cours, attendez que l’indicateur de chargement disparaisse avant d’activer d’autres fonctions sur la carte.
-
