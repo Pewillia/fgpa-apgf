@@ -81,7 +81,7 @@ function Controller($q, $mdDialog, $timeout, $rootElement, $http, events, modelM
         events.$broadcast(events.avShowSplash, events.avSchemaUpdate);
 
         // set active file name
-        self.saveName = self.template.file;
+        self.saveName = self.template;
     }
 
     function help() {
@@ -254,7 +254,7 @@ function Controller($q, $mdDialog, $timeout, $rootElement, $http, events, modelM
      * @function save
      */
     function save() {
-
+    
         // FIXME: we can't know the real saved file name because FileSaver.onwriteend doesn/t workaround
         // so if there is duplicate name the name will become nyname(1) on disk but will be myname on display
         $mdDialog.show({
@@ -276,7 +276,7 @@ function Controller($q, $mdDialog, $timeout, $rootElement, $http, events, modelM
         self.close = $mdDialog.hide;
         self.cancel = $mdDialog.hide;
         self.save = save;
-        self.fileName = 'p';
+        self.fileName = '';
 
         /**
          * Save current models to file
