@@ -3,19 +3,15 @@
 L'application Auteur pour la plateforme géospatiale fédérale est utiliser pour cree des fichier de configuration json pour le
 visualisateur pour la plateforme géospatiale fédérale.
 
-Ouvrir un fichier existante en cliqaunt sur l'icône ![](uparrow.png).
+Ouvrir un fichier existante en cliqant sur l'icône ![](uparrow.png).
 
-Creer un nouveau fichier de configuration en cliqaunt sur l'icône ![](plussign.png).
+Creer un nouveau fichier de configuration en cliqant sur l'icône ![](plussign.png).
 
-Sauvegarder un fichier de configuration en cliqaunt sur l'icône ![](diskette.png) .
+Sauvegarder un fichier de configuration en cliqant sur l'icône ![](diskette.png) .
 
-Par defaut 3 gabarit de configuration sont disponible pour avoir des valeus de defaut.
+Par defaut 3 gabarit de configuration sont disponible pour avoir des valeurs de defaut.
 
 Selectionner entre config-authorA, config-AuthorB ou config-full.
-
-Vous pouvez chercher dans cette fichier d'aide en entrant un chaine de characteres vous chercher.
-Cliquer sur  l'icone ![](magnifyinglass.png) pour lancer la recherche.
-
 
 
 # Carte
@@ -426,15 +422,15 @@ C'est un visualisateur complètement fonctionnel contenant toute la fonctionnali
 L'avant-première peut exiger à quelques secondes d'afficher.
 
 Le panneau sommaire vous permet de valider le fichier de configuration en appuyant sur le
- le bouton validez ! [] (valider.png) pour valider tous les champs dans le fichier de configuration.
+ le bouton validez ![](valider.png) pour valider tous les champs dans le fichier de configuration.
 
- Une fleche vert! [] (greencheckbox.png) apparaîtra à côté des champs qui sont
+ Une fleche vert ![](greencheckbox.png) apparaîtra à côté des champs qui sont
 valide.
 
 Une boîte rouge ![](redcircle.png) avec un point d'exclamation apparaît à côté des champs qui
 ne sont pas valides.
 
-Vous pouvez utiliser des boutons d'effondrement ou le fait de développer! [] (expandcollapse.png) pour voir tous les champs dans les différentes sections de
+Vous pouvez utiliser des boutons d'effondrement ou le fait de développer ![](expandcollapse.png) pour voir tous les champs dans les différentes sections de
 le dossier de configuration de téléspectateur.
 
 

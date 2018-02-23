@@ -11,9 +11,6 @@ To save the configuration file once finished, click on the diskette icon ![](dis
 By default 3 templates that contain default values for most settings are available when
 creating a  configuration file. Select either config-authorA, config-AuthorB or config-full template.
 
-You can search this help file by entering the topic in the search box and
-clicking on the magnifying glass icon ![](magnifyingglass.png) .
-
 A standard text search is used on the string entered.
 
 You can change the language of this application by selecting the language at the right upper corner using the pull down list.
@@ -222,28 +219,31 @@ This tab indicates if the legend is auto populated by the listed layers or a cus
 
 # User Interface
 
-The user interface section list table for general information, application bar, navigation bar and side menu.
+The user interface section table lists general information for the application bar, navigation bar and side menu.
 
 ## General tab
 
 General tab lists the following information.
 
-fullscreen checkbox if the viewer is to take the entire viewport.
+full screen checkbox if the viewer is to take the entire viewport.
+
 theme - ui theme of the viewer
 
 Failure message if the viewer fails to override the viewer default message.
 
 Failure image url to be used to override the viewers default image.
 
-![](layer_submenu/menu.png)
+![](menu.png)
 
 legend is reorderable but the selection of a structured legend ignores this option.
-Provides an alternative to the click-hold and drag reordering already available. When selected, layers are only reorderable by holding onto the handle icon next to each layer. Most useful for touch devices |
-![](layer_submenu/reorder.png)
+Provides an alternative to the click-hold and drag reordering already available. When selected, layers are only reorderable by holding onto the handle icon next to each layer. Most useful for touch devices
+
+![](reorder.png)
 
 allows layers import indicates that users can import additional layers at runtime besides those in the configuration file.
 Additional layers can be added to the map viewer. Supported formats include: ESRI Feature Layer, ESRI Dynamic Layer, ESRI Tile Layer, ESRI Image Layer, OGC Web Map Service, or a Raster Layer. The '+' button at the top of the Legend menu will launch the Add Layers menu.
-![](layer_submenu/add.png)
+
+![](add.png)
 
 Legend opening options
 
@@ -252,7 +252,6 @@ Click on the checkbox to specify whether the legend is opened by default on init
 Open by default in large display- Whether the legend is opened by default on initial loading of the map for large viewports
 Open by default in medium display- Whether the legend is opened by default on initial loading of the map for medium viewports
 Open by default in small display- Whether the legend is opened by default on initial loading of the map for small viewports
-
 
 ![](tablepanel.png)
 
@@ -285,7 +284,7 @@ layers selector.
 
 ![](sidemenulist.png)
 
-lists checkboxed fields  for extra navigation components:
+The navigation bar lists checkboxed fields  for extra navigation components:
 geolocator,
 marquee,
 home,
@@ -354,7 +353,7 @@ Type URL- Endpoint url for types service
 You can also use checkboxes to disable the NTS, Postal Code and Latitude/Longitude types of  which
 are available in the geosearch window.
 
-![](geosearch.png)
+![](geosearchexample.png)
 
 ## Export map
 
