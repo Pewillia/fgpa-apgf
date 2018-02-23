@@ -1,6 +1,6 @@
 # General Information
 
-The Federal Geospatial Platform Author tool is can be used to create,read, validate and preview json format configuration files to be used by the Federal Geospatial Platform Viewer.
+The Federal Geospatial Platform Author tool is can be used to create, read, validate and preview json format configuration files to be used by the Federal Geospatial Platform Viewer.
 
 A configuration file may be read from an existing file, by clicking on the up arrow icon  ![](uparrow.png).
 
