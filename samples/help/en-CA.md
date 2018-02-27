@@ -8,10 +8,8 @@ To created new configuration file, click on the plus sign icon ![](plussign.png)
 
 To save the configuration file once finished, click on the diskette icon ![](diskette.png) .
 
-By default 3 templates that contain default values for most settings are available when
-creating a  configuration file. Select either config-authorA, config-AuthorB or config-full template.
-
-A standard text search is used on the string entered.
+By default 3 templates that contain default values for your organization when
+creating a configuration file are listed. Select either the config-authorA, config-AuthorB or config-full template.
 
 You can change the language of this application by selecting the language at the right upper corner using the pull down list.
 
@@ -24,7 +22,7 @@ To close this help window click on the X at the right upper corner of this help 
 
 The map section  lists tabs that contain information about the map to be created. It  is the default section that is displayed.
 
-The map section is divided into tabs that contain information on : Extents and Levels of Detail, Map components, Basemaps, Layers, Legend.
+The map section is divided into tabs that contain information on : Extents and Levels of Detail, Map components, Basemaps, Layers and Legend.
 
 ## Extents and Levels of Detail
 
@@ -32,66 +30,67 @@ This section contains tabs that list the Tile schemas,Extents and Levels of deta
 
 ## Tile Schemas
 
-The first field to enter is the id of the tileschema ( combination of extent set and zoom scale)
+The fields to enter are the following:
 
-Name
-The projection name used to be displayed in the base map
-selector for the set of basemaps referencing the schema)
++ Id - The unique identifier of the tileschema ( combination of extent set and zoom scale).
 
-Exendsetid
-It is the extend set to be used for the basemap.
++ Name - The projection name used to be displayed for this base map selector and for the set of basemaps referencing the schema.
 
-Lodsetid
-This optional field indicates the level of detail to be used for a basemap.
++ Exendsetid - It is the extend set to be used for the basemap. It should reference the map.extentSets.id .
 
-Static overview map
-Layer type
-The layer type indicates ESRI type  of the layer.
++ Lodsetid - This field indicates the level of detail to be used for this basemap. It should reference the map.lod.id .
 
-URL
-This filed indicates the service end point of the layer
-and should match the type indicated in the layer type.
++ Static overview map - The overview map displayed at top left corner of viewer viewport.
+
++ Layer type - The layer type indicates ESRI type  of the layer for the overview map. It only works with esriImage and esriTile layers.
+
++ URL - This field indicates the service end point of the layer of the static overview map and should match the type indicated in the layer type.
 
 ## Extents
 
 This section lists the extents to be used by the basemap.
+
 Setextend (default),Setextend (full), Setextend (maximum)
 
-ID
-The id of the extent set indicates the projection.
+Click on the set extent button to select a default , full, or maximum extent dynamically.
 
-WKID
-Select the number of the well known Id that corresponds to the projection to be used.
++ Id - The identifier of the extent set.
 
-vcsWKID
-Select the number of the vcswkid Id that corresponds to the projection to be used.
++ WKID - Select the number of the well known Id that corresponds to the projection to be used.
 
-latestWKID
-Set the number of the latestwkid  that corresponds to the projection to be used.
++ VcsWKID - Select the number of the vertical control system wkid Id that corresponds to the vertical datum to be used.
 
-DefaultExtent
-Enter the xmin and ymax extents either interactively or by scrolling over the + sign and
-selecting a bounding box extent.
++ LatestWKID - Set the number of the Latest wkid  that corresponds to the projection to be used.
 
-FullExtent
-Enter the xmin and ymax extents either interactively or by scrolling over the + sign and
-selecting a bounding box extent.
++ LatestVcsWKID - Set the well known text to be used.
 
-Mamixum Extent
-Enter the xmin and ymax extents either interactively or by scrolling over the + sign and
-selecting a bounding box extent.
++ WKT - Select the number of the Well Known Text that corresponds to the projection to be used.
+
++ Default Extent - Enter the xmin and ymax extent when the extent is first loaded either interactively or by scrolling over the + sign and select a bounding box extent or a whole extent set.
+
++ Full Extent - Enter the xmin and ymax extent when the user selects the home button either interactively or by scrolling over the + sign and select a bounding box extent or a whole extent set.
+
++ Maximum Extent - Enter the xmin and ymax extent when the user zooms or pans out to a maximum level either interactively or by scrolling over the + sign and select a bounding box extent or a whole extent set. The default extent is used if no maximum is supplied.
 
 ## Levels of Detail Sets
 
-The Levels of detail lists for each level
-The level number, map resolution, scale corresponding to the levels of detail for the tile schema,
-maps displayed. Scroll over the value and use the arrows to select the numerical value for the level,resolution or scale.
+The id of the level of detail set is listed.
+
+The Levels of detail lists for each level:
+
++ level number
++ map resolution
++ scale
+
+Click on the set level of details button to enter a tile cache layer url from which to obtain the levels of detail set.
+
+You may click on the X button to remove a level of detail entry from the set of entries.
 
 ## Map Components
 
 The maps components tab lists the if mouse coordinates are enabled and
 the numerical values selectable by a click for the projection displayed by selecting the
- wkid,vcsid ( vertical coordinate wkid) and latestwkid,latestvcswkid, and wkt( Well-known text (WKT)
+ wkid, vcsid ( vertical coordinate wkid) and latestwkid, latestvcswkid, and wkt( Well-known text (WKT)
 is a text markup language for representing vector geometry objects on a map,
 spatial reference systems of spatial objects and transformations between spatial reference systems.
 
@@ -113,24 +112,45 @@ It also lists if the over view map is enabled, its scale factor and if visible.
 The Basemaps tab lists the base map id of the initial base map to be used and all basemaps that are available listed under the basemaps collection.
 
 For all base maps the fields to be entered are the following:
- -base mapid ( unique identifier of the basemap),
--name of the basemap used for labelling,
-- description displayed when the basemap selector is expanded,
--type summary  which is an optional basemap type,
- -alternate text  to be displayed with the basemap thumbnail image,
--thumbnail url which is the path to the thumbnail image use with the basemap selector
--tileschema id to be used with the basemap,
- -layerid,
- -layertype from the pull down list either feature, dyhnamic, image , tile or ogcWms.
--url of he tlayer
-- attribution
+
++ Basemap Id - The identifier of the basemap.
+
++ Name - The name of the basemap used for labelling.
+
++ Description - The description of basemap displayed when the basemap selector is expanded.
+
++ Type summary - A summary which is an optional basemap type.
+
++ Alternate Text - The text to be displayed with the basemap thumbnail image.
+
++ Thumbnail Url - The url which is the path to the thumbnail image use with the basemap selector.
+
++ Tileschema Id - The tile schema identifier to be used with the basemap.
+
++ Id - The identifier of the layer
+
++ Layertype - The type from the pull down list either feature, dynamic, image , tile or ogcWms.
+
++ Url - The url of the layer
+
+  Attribution   
+
+  + Text checkbox - If the text description is enabled.
+
+  + Description - This optional field contains the attribution value. If empty, it will use copyright text from the server.
+
+  + Logo checkbox - Select the checkbox if enabled.
+
+  + Alternate text - The alternate text to be displayed.
+
+  + URL - The url if the basemap if clicked.
 
 ## Layers
 
 The layers tab lists the map layers to be displayed.
 For each map layer to be displayed the  fields to enter are:
 
-layer type selector either one of these five types of layers that can be selected in the dropdown:
++ layer type selector - either one of these five types of layers that can be selected in the dropdown:
 
 |Layer Type|Interactive|Server Renders|Datatable support|Notes|
 |----|----|----|----|----|
@@ -140,59 +160,67 @@ layer type selector either one of these five types of layers that can be selecte
 | Tile | No | Yes | No | Fast, efficient - server contains pre-rendered map tiles |
 | WMS | Yes | Yes | No | Georeferenced map images which server generates using data from a GIS database |
 
-layerid,
-layer name to be displayed
-url to the service endpoint of the layer
-metadataurl
-layer type of the service either ESRI Feature, ESRI Dynamic, ogcWMS,ESRI Tile or ESRI Image.
++ Layerid - The identifier of the layer.
 
-check box for symbology toggle to allow individual symbols display to be toggled on or off
++ Layer name - The layer name to be displayed.
+
++ Url - The url of the service endpoint of the layer.
+
++ Meta data url  - The service endpoint for the metadata.
+
++ Layer type - The type of the service either ESRI Feature, ESRI Dynamic, ogcWMS,ESRI Tile or ESRI Image.
+
++ Check box for symbology toggle - This will allow individual symbols display to be toggled on or off
 tolerance in pixels to determine if a feature was selected by a click.
 
 For each Layer entry the:
 
-layer index of the layer indicating the
-outfields is a comma separated list of attributes to be returned on a query
-state only flag indicating the state setting of the layer
++ Layer index - Index of the layer in the map service.
+
++ Name - A name for the layer that can override the name from the service.
+
++ Outfields - This is a comma separated list of attributes to be returned on a query
+
++ State only - This flag indicates that state tracking is set for the layer. All controls will be ignored but the layer will be displayed with it's given state settings.
 
 Layer Controls and state
 
 ![](layersettings.png)
 
-This pull  down lists all the controls that  you can select for a specified layer.
-The list of controls hat can be enabled on the specified layer are the following:
+This list all the controls that you can select for a specified layer.
+The checkboxes for all controls that can be enabled on the specified layer are the following:
 
-opacity,
-visibility,
-boundingBox,
-query,
-snapshot,
-metadata,
-boundaryZoom,
-refresh,
-reload,
-remove,
-settings,
-data,
-styles
++ opacity
++ visibility
++ boundingBox
++ query
++ snapshot
++ metadata
++ boundaryZoom
++ refresh
++ reload
++ remove
++ settings
++ data
++ styles
 
-There is a pull  down lists of same controls which are visible, but disabled for user modification.
+There is a pull down list of same controls which are visible, but disabled for user modification.
 
 ## State
 
-opacity - Initial opacity requires you select a numerical value using the up or down arrows.
+Opacity - Initial opacity requires you select a numerical value using the up or down arrows.
 
 Select the checkbox desired for the following settings:
 
-Visibility -Initial visibility setting
++ Visibility - Initial visibility setting.
 
-Bounding box- Display bounding box
++ Bounding box - Display bounding box.
 
-Query- Allow querying
++ Query - Allow querying.
 
-Snapshot -Retrieve all feature data immediately on load
++ Snapshot - Retrieve all feature data immediately on load.
 
-Hovertips -Disable hover tips
++ Hovertips - Disable hover tips.
 
 ## Table
 
@@ -200,21 +228,23 @@ Hovertips -Disable hover tips
 
 The table section lists the fields to be returned on query in the table panel.
 
-Title of table
-description
-maximize specifies if the table is to be maximized on open or if false in a split view
-applymap specifies if the default filters (from columns filter) are applied to the map (definition query). True: it is applied; False: it is not applied.
++ Title of table - Specifies the title to apply.
+
++ Description - This field specifies additional information to be displayed in the settings panel.
+
++ Maximize - Specifies default table size if the table is to be maximized on open or if false in a split view.
+
++ Apply map - This specifies if the default filters (from columns filter) are applied to the map (definition query). True: it is applied; False: it is not applied.
 
 ## Fields section
-customize fields -specifies the array of columns for the table. When there is an item in this array, it will be use to define which and how column will be set for the table. If a column is not in the array it will be assume as disabled.
 
-Single entry collapse- indicates that the dynamic layer with a single layer entry should be rendered without the root group.
+Customize fields - Specifies the array of columns for the table. When there is an item in this array, it will be use to define which and how column will be set for the table. If a column is not in the array it will be assume as disabled.
 
-The list of fields that can be expanded or collapsed.
+Single entry collapse - Indicates that the dynamic layer with a single layer entry should be rendered without the root group. The list of fields that can be expanded or collapsed.
 
 ## Legend
 
-This tab indicates if the legend is auto populated by the listed layers or a customized user built structured legend.
+This tab indicates if the legend is auto populated by the listed layers or  if a customized user built structured legend is used.
 
 
 # User Interface
@@ -225,47 +255,51 @@ The user interface section table lists general information for the application b
 
 General tab lists the following information.
 
-full screen checkbox if the viewer is to take the entire viewport.
++ Full screen checkbox -  Selected if the viewer is to take the entire viewport.
 
-theme - ui theme of the viewer
++ Theme - Select the UI theme of the viewer from the pull down list.
 
-Failure message if the viewer fails to override the viewer default message.
++ Failure message -  Message if the viewer fails to override the viewer default message.
 
-Failure image url to be used to override the viewers default image.
++ Failure Image Url- The url of the image to be used to override the viewers default image.
 
 ![](menu.png)
 
-legend is reorderable but the selection of a structured legend ignores this option.
+The legend is reorderable but the selection of a structured legend ignores this option.
 Provides an alternative to the click-hold and drag reordering already available. When selected, layers are only reorderable by holding onto the handle icon next to each layer. Most useful for touch devices
 
 ![](reorder.png)
 
-allows layers import indicates that users can import additional layers at runtime besides those in the configuration file.
+Allow layers import indicates that users can import additional layers at runtime besides those in the configuration file.
 Additional layers can be added to the map viewer. Supported formats include: ESRI Feature Layer, ESRI Dynamic Layer, ESRI Tile Layer, ESRI Image Layer, OGC Web Map Service, or a Raster Layer. The '+' button at the top of the Legend menu will launch the Add Layers menu.
 
 ![](add.png)
 
 Legend opening options
 
-Click on the checkbox to specify whether the legend is opened by default on initial loading of the map for small, medium, and large viewports
+Click on the checkbox to specify whether the legend is opened by default on initial loading of the map for small, medium, and large viewports.
 
-Open by default in large display- Whether the legend is opened by default on initial loading of the map for large viewports
-Open by default in medium display- Whether the legend is opened by default on initial loading of the map for medium viewports
-Open by default in small display- Whether the legend is opened by default on initial loading of the map for small viewports
++ Open by default in large display- Whether the legend is opened by default on initial loading of the map for large viewports
+
++ Open by default in medium display- Whether the legend is opened by default on initial loading of the map for medium viewports
+
++ Open by default in small display- Whether the legend is opened by default on initial loading of the map for small viewports
 
 ![](tablepanel.png)
 
-table panel is opened by default upon clicking on a layer.
+The following controls specify if the table panel is opened by default upon loading of a layer for different size viewports.
 
-layer id  for referencing table within the viewer
++ Layer Id - The id of the layer for referencing within the viewer.
 
 Table opening options
 
 Click on the checkbox to specify whether the table panel is opened by default on initial loading of the map for small, medium, and large viewports
 
-Open by default in large display -Whether the table panel is opened by default on initial loading of the map for large viewports
-Open by default in medium display- Whether the table panel is opened by default on initial loading of the map for medium viewports
-Open by default in small display- Whether the table panel is opened by default on initial loading of the map for small viewports
++ Open by default in large display -Whether the table panel is opened by default on initial loading of the map for large viewports
+
++ Open by default in medium display- Whether the table panel is opened by default on initial loading of the map for medium viewports
+
++ Open by default in small display- Whether the table panel is opened by default on initial loading of the map for small viewports
 
 
 
@@ -275,54 +309,82 @@ Open by default in small display- Whether the table panel is opened by default o
 
 The application bar lists the configuration of the main toolbar.
 The tools that can be selectable via a check box in the main toolbar are the following:
-side menu,
-geosearch,
-basemap selector,
-layers selector.
+
++ Side Menu - Shows the side menu button in the main app toolbar
+
++ Geosearch- Shows the geosearch button in the main app toolbar. The button will be hidden if the geosearch component is disabled or no search service URLs are provided.
+
++ Basemap Selector -Shows the basemap selector button in the main app toolbar.
+
++ Layers Selector -Shows the layers button in the main app toolbar.
 
 ## Navigation Bar
 
 ![](sidemenulist.png)
 
-The navigation bar lists checkboxed fields  for extra navigation components:
-geolocator,
-marquee,
-home,
-history,
-basemap,
-help,
-fullscreen,
-geosearch,
-restrict navigation to within the maximum extent
+The navigation bar lists check boxed fields for extra navigation components:
+
++ geolocator
+
++ marquee
+
++ home
+
++ history
+
++ basemap
+
++ help
+
++ fullscreen
+
++ geosearch
+
++ restrict navigation to within the maximum extent
 
 ## Side Menu
+
 The side menu tab list the following fields
 
-showlogo if visible or not
-logoUrl which is an optional image
-Title used instead of the viewer default.
++ Title - Specifies an optional title instead of the viewer default.
+
++ Showlogo - Checkbox if the logo should be shown on the left side window.
+
++ Logo Url - Specifies a Url for an optional viewer logo.
+
 
 ![](menulist.png)
 
-Side Menu items to be listed in the side menu that are selectable via a check box:
-layers,
-basemap,
-geosearch,
-about,
-fullscreen,
-export,
-share,
-touch,
-help,
-language,
-plugins
+The Side Menu items to be listed in the side menu that are selectable via a check box:
 
-Helpfile folder name containing the help file and images.
++ layers
++ basemap
++ geosearch
++ about
++ fullscreen
++ export
++ share
++ touch
++ help
++ language
++ plugins
+
+
+Help File
+
++ Folder name  - Specifies the folder name containing the help description and images.
+
+The following fields are for About Map properties specified from a configuration file or markdown folder.
+
++ About source - Specifies a string or file content from a pull down list.
+
++ Content - Enter a string containing the about map text.
+
 
 # Services
 
-This section lists  sections for service End points  for the coordinate info url and print url,
- Geosearch service endpoints and export of the map configuration settings.
+This section lists  sections for service End points for the coordinate info url and print url,
+Geosearch service endpoints and export of the map configuration settings.
 
 ## Service endpoints
 
@@ -330,13 +392,13 @@ This tab lists the url for the service endpoints for the coordinate information 
 
 For advanced configuration options this tabs let you change the following service endpoints.
 
-Proxy URL- An optional proxy to be used for dealing with same-origin issues. URL must either be a relative path on the same server or an absolute path on a server which sets CORS headers.
++ Proxy URL- An optional proxy to be used for dealing with same-origin issues. The URL must either be a relative path on the same server or an absolute path on a server which sets CORS headers.
 
-Export Map URL - An ESRI service endpoint for generating map images. Should point directly to an endpoint that can be consumed by ESRI PrintTask.
++ Export Map URL - An ESRI service endpoint for generating map images. Should point directly to an endpoint that can be consumed by ESRI PrintTask.
 
-Geometry URL - A URL to an ESRI ArcGIS geometry service REST endpoint.
++ Geometry URL - A URL to an ESRI ArcGIS geometry service REST endpoint.
 
-Google API URL - Google API key to enable geo location and share link shortening.
++ Google API URL - Google API key to enable geo location and share link shortening.
 
 ## Geosearch
 
@@ -344,11 +406,15 @@ Google API URL - Google API key to enable geo location and share link shortening
 
 This tab lists the customizable properties of the geosearch function and urls of it's service endpoints.
 
-Geo Names URl - Endpoint url for geoNames service
-Geo Location URl -Endpoint url for geoLocation service
-Geo Suggest URl -Endpoint url for geoSuggest service
-Provinces URL - Endpoint url for provinces service
-Type URL- Endpoint url for types service
++ Geo Names URl - Endpoint url for geoNames service
+
++ Geo Location URl -Endpoint url for geoLocation service
+
++ Geo Suggest URl -Endpoint url for geoSuggest service
+
++ Provinces URL - Endpoint url for provinces service
+
++ Type URL- Endpoint url for types service
 
 You can also use checkboxes to disable the NTS, Postal Code and Latitude/Longitude types of  which
 are available in the geosearch window.
@@ -361,12 +427,19 @@ You can export an image of the map and its visible layers along with a legend, t
 
 The title of the exported graphic can be customized by entering a value.
 
-Check boxes are used to indicate if each of the export components is present or customizable.
-map component
-legend component
-map elements which are the north arrow and sidebar components.
-footnote to be added to the exported map as text
-timestamp component
+Check boxes are used to indicate if each of these export components is present or customizable.
+
++ Title - Enter the text value for the title of the exported graphic.
+
++ Map component - The map is included in the exported graphic.
+
++ Legend component - The legend is included in the exported graphic.
+
++ Map elements - The north arrow and sidebar components are included in the exported graphic.
+
++ Footnote - Enter a text footnote to be added to the exported map as text.
+
++ Timestamp component - The timestamp is included in the exported graphic.
 
 If customizable a dialog will appear with an image of the map, and an option to enter a map title if desired.
 
