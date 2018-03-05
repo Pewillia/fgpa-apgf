@@ -1,0 +1,33 @@
+<md-dialog  aria-label="{{ 'header.helpdialog.title' | translate }}" class="av-help-dialog">
+      <av-content-panel close-panel="self.close()" title-style="title" title-value="{{ 'header.helpdialog.title' | translate }}">
+        <ul class="av-help-dialog">
+            <li class="av-help-dialog" ng-repeat="section in ( self.sections )">
+                <div class="av-help-dialog">
+
+                    <md-button
+                            class="av-help-dialog"
+                            ng-click="section.isExpanded = !section.isExpanded"></md-button>
+
+                    <h4 class="av-group-name"
+                        ng-bind-html="section.header "></h4>
+
+                    <div class="av-help-dialog"
+                        <md-icon
+                            class="md-toggle-icon"
+                            ng-class="{ 'rv-toggled' : section.isExpanded }"
+                            md-svg-src="hardware:keyboard_arrow_down"></md-icon>
+                    </div>
+                </div>
+
+                <div class="av-help-dialog"
+                    ng-show="section.isExpanded"
+                    <p ng-bind-html="section.info "></p>
+                </div>
+
+                <div class="av-help-dialog"></div>
+            </li>
+        </ul>
+        <div ng-bind-html="self.help"   class="ng-scope ng-isolate-scope"></div>
+      <p class="av-help-dialog"></p>
+    </av-content-panel>
+</md-dialog>
