@@ -1,7 +1,6 @@
 ﻿# Generale
 
-L'application Auteur pour la plateforme géospatiale fédérale est utiliser pour cree des fichier de configuration json pour le
-visualisateur pour la plateforme géospatiale fédérale.
+L'application Auteur pour la plateforme géospatiale fédérale est utiliser pour cree des fichier de configuration json pour le visualisateur pour la plateforme géospatiale fédérale.
 
 Ouvrir un fichier existante en cliqant sur l'icône ![](uparrow.png).
 
@@ -9,10 +8,9 @@ Creer un nouveau fichier de configuration en cliqant sur l'icône ![](plussign.p
 
 Sauvegarder un fichier de configuration en cliqant sur l'icône ![](diskette.png) .
 
-Par defaut 3 gabarit de configuration sont disponible pour avoir des valeurs de defaut.
+Par defaut 3 gabarits de configuration sont disponible pour des valeurs de defaut.
 
-Selectionner entre config-authorA, config-AuthorB ou config-full.
-
+Choissiez entre config-authorA, config-AuthorB ou config-full.
 
 # Carte
 
@@ -20,63 +18,46 @@ La section carte est composer des onglets qui contient les informations sur les 
 
 Cette section carte est diviser dans le onglets suivante:Extendues et details, composantes,cartes de base,couches,legende.
 
-
-## Extendues et details
+## Etendues et details
 
 Cette section liste des sous sections: Schéma des tuiles,Extents et Lots d'étendues spatiales,Lots de niveaux de détail.
 
-##Schéma des tuiles
+## Schéma des tuiles
 
-L'identifiant unique d'un schéma de tuiles (combinaison de l'étendue et de l'échelle)
++ L'identifiant - l'identifiant unique d'un schéma de tuiles (combinaison de l'étendue et de l'échelle)
 
-Nom
-Le nom utilisé dans le sélecteur de cartes de base.
++ Nom - Le nom utilisé dans le sélecteur de cartes de base.
 
-ID du lot d'étendues
-Le lot d'étendues à utiliser pour la carte de base.
++ ID du lot d'étendues - Le lot d'étendues à utiliser pour la carte de base.
 
-ID du lot de niv. de détail
-Optionnel. Lot de niveaux de détail utilisé pour la carte de base.
++ ID du lot de niv. de détail - Optionnel. Lot de niveaux de détail utilisé pour la carte de base.
 
-Carte d'aperçu statique
++ Carte d'aperçu statique
 
-Type de couche
++ Type de couche -Selectionne entre esriTile ou esriImage.
 
-
-
-URL
-Le point de service de la couche. Le type de couche retourné par le service et le type de couche identifié dans les paramètres doivent être les mêmes.
++ URL - Le point de service de la couche. Le type de couche retourné par le service et le type de couche identifié dans les paramètres doivent être les mêmes.
 
 # Lots d'étendues spatiales
 
 Cette section liste les lots d'etendues spatiale pour la  carte de base.
 Étendue par défaut,Étendue complète, Étendue maximale
 
-ID
-The id of the extext set indicates the projection
++ ID -l'identifiant d'étendues spatiale.
 
-WKID
-Entrez le numero de la projection a utiliser.
++ WKID =Entrez le numero de la projection a utiliser.
 
-vcsWKID
-Entrez le numero VcsWkid la plus recente a utiliser.
++ VcsWKID - Entrez le numero VcsWkid la plus recente a utiliser.
 
++ latestWKID - Entrez le numero Wkid la plus recente a utiliser.
 
-latestWKID
-Entrez le numero Wkid la plus recente a utiliser
++ Étendue par défaut - Étendue utilisée par défaut ainsi que pour le chargement initial.
 
-Étendue par défaut
-Étendue utilisée par défaut ainsi que pour le chargement initial.
++ Étendue complète - Étendue utilisée lorsque l'utilisateur clique sur le bouton étendue initiale.
+L'étendue par défaut sera utilisée si l'étendue complète n'est pas définie.
 
-Étendue complète
-Étendue utilisée lorsque l'utilisateur clique sur le bouton étendue initiale.
-L'étendue par défaut sera utilisée si l'étendue complète n'est pas définie..
-
-Étendue maximale
-L'étendue maximale permet de limiter le zoom et le pan.
-L'étendue complète ou par défaut sera utilisée si l'étendue maximale n'est pas définie
-
-
++ Étendue maximale - L'étendue maximale permet de limiter le zoom et le pan.
+L'étendue complète ou par défaut sera utilisée si l'étendue maximale n'est pas définie.
 
 ## Lots de niveaux de détail
 
@@ -84,328 +65,388 @@ Niveau de détail pour un schéma de tuiles spécifique.
 
 Les niveaux de détail selon l'échelle offerts pour la carte.
 
-Entrez les Lots de niveaux de détai
- par niveau, resolution, et echelle.
+Entrez les Lots de niveaux de détai par
 
- Utilise les fleches pour selectionner les valeur pour niveau resoltion et echelle.
++ niveau
 
++ resolution
 
++ echelle.
 
+Utilise les fleches pour selectionner les valeurs par niveau de resolution et echelle.
 
 ## Map Composantes
 
-
-The maps components tab lists the if mouse coordinates are enabled
+La section composantes liste si les Coordonnées de la souris sont afficher.
 
 Coordonnées de la souris
 
-Selectionner si les coordonnees de la sosuris est afficher.
-
+Selectionnez si les coordonnees de la souris sont afficher.
 
 Référence spatiale
 
-Selectionner la projection utiliser pour afficher les coordonnes de a souris.
-de la sourithe numerical values selectable by a click for the projection displayed by selecting the
- wkid,vcsid ( vertical coordinate wkid) and latestwkid,latestvcswkid, and wkt( Well-known text (WKT) is a text markup language for representing vector geometry objects on a map,
-spatial reference systems of spatial objects and transformations between spatial reference systems.)
-of the mouse cooordinates to be displayed at the bottom of the map.
+Séléctionnez la référence spatiale utilisée pour l'affichage des coordonnées pour la souris.
 
-It also lists the checkboxes if enabled for the north arrow displayed on the map,
-scale bar displayed at the bottom of the map and if the overviewmap is displayed at the upper right corner.
+Séléctionnez la
 
-It also list for the oveviewmap is enabled, its scale factor and if visible.
++ WKID - Well-Known ID
+
++ VcsWKID - Systeme de référence verticale WKID
+
++ WKID le plus récent
+
++ VcsWKID le plus récent
+
++ WKT - Well-Known Text
+
+Aussi vous pouvez activée les composantes suivant.
+
++ flèche du Nord
+
++ echelle
+
++ carte d'aperçu
+
++ facteur d'expansion - facteur pour la carte d'aperçu peuvent etre activée.
 
 ## Cartes de base
 
-ID de la carte de base initiale
++ ID - l'identifiant de la carte de base initiale.
 
-Carte de base utilisée lors du chargement initial. Si celle-ci n'a pas été configurée, une autre carte de base sera sélectionnée
+ Carte de base utilisée lors du chargement initial. Si celle-ci n'a pas été configurée, une autre carte de base sera sélectionnée.
 
-Collection cartes de base
+### Collection cartes de base
 
-ID carte de base
-Un identifiant unique pour la carte de base.
++ ID carte de base - Un identifiant unique pour la carte de base.
 
-Nom
-Nom de la carte de base utilisé pour l'étiquettage.
++ Nom - Nom de la carte de base utilisé pour l'étiquettage.
 
-Description
-Description de la carte de base. Apparaît lorsque le sélecteur de carte de base est étendu.
++ Description - Description de la carte de base. Apparaît lorsque le sélecteur de carte de base est étendu.
 
-Type sommaire
-Optionnel. Type de la carte de base à afficher dans le sélecteur de carte de base.
++ Type sommaire - Optionnel. Type de la carte de base à afficher dans le sélecteur de carte de base.
 
-Texte alternatif
-Texte alternatif pour l'imagette de la carte de base.
++ Texte alternatif - Texte alternatif pour l'imagette de la carte de base.
 
-URL imagette
-Chemin vers le fichier image à afficher dans le sélecteur de carte de base.
++ URL imagette - Chemin vers le fichier image à afficher dans le sélecteur de carte de base.
 
-ID schéma de tuiles
-Le schéma de tuiles pour la carte de base.
++ ID schéma de tuiles - Le schéma de tuiles pour la carte de base.
 
 Couches
 
-ID,
-type de couche,
-url Un ensemble d'URLs qui permettent la composition d'une carte de base
++ ID - L'identifiant de la couche pour référencement interne au visualisateur ( n'est pas directement lié à un service externe).
+
++ Type de couche - Selectionner entre esriFeature, esriDynamic, esriTile, EsriImage, ou ogcWms.
+
++ Url  - Un ensemble d'URLs qui permettent la composition d'un carte de base
 
 Crédit
-texte
-description -Optionnel. Contient la valeur de l'attribution. Si celle-ci est vide, l'attribution retournée par le serveur sera utilisée.
-logo
-texte alternatif
-url -URL de la destination lorsque l'utilisateur clique sur le logo.
+
++ Texte - Activée ou non pour le description.
+
++ Description - Optionnel. Contient la valeur de l'attribution. Si celle-ci est vide, l'attribution retournée par le serveur sera utilisée.
+
+Logo
+
++ Logo visibe - Activée ou non.
+
++ Texte alternatif - URL pour l'image.
+
++ Url - URL de la destination lorsque l'utilisateur clique sur le logo.
 
 
 ## Couches
 
-Lot de couches
+### Lot de couches
 
-Sélecteur de type de couche -esrifeature, esridynamic,ogcWms
-L'ID de la couche pour référencement interne au visualisateur ( n'est pas directement lié à un service externe).
-Nom -Le nom de la couche pour les fins d'affichage. Si vide, le visualisateur tentera de trouver un nom
-URL - Le point de service de la couche. Le type de couche retourné par le service et le type de couche identifié dans les paramètres doivent être les mêmes
++ Sélecteur de type de couche - selectionnez entre esriFeature, esriDynamic, esri Image, esriTile, ogcWms.
 
-URL des métadonnées
-Type de couche
++ L'ID - L'identifiant de la couche - pour référencement interne au visualisateur ( n'est pas directement lié à un service externe).
 
-Basculer la symbologie
++ Nom - Le nom de la couche pour les fins d'affichage. Si vide, le visualisateur tentera de trouver un nom
 
-Permet de basculer la visibilité ( allumé/éteint ) pour un symbole particulier.
++ URL - Le point de service de la couche. Le type de couche retourné par le service et le type de couche identifié dans les paramètres doivent être les mêmes
 
-Tolerance -Spécifie la tolérance en pixels de la région cliquable entourant un élément. Doit êtreun entier positif
++ URL des métadonnées - L'URL du service de carte pour les métadonnées.
 
- Couches Utilisées
++ Basculer la symbologie - Permet de basculer la visibilité ( allumé/éteint ) pour un symbole particulier.
 
-index- index de la couche dans la service de la carte.
++ Tolerance - Spécifie la tolérance en pixels de la région cliquable entourant un élément. Doit êtreun entier positif
 
-nom - nom personnalise pourn la couche. Peut replacer celui fourni par le service.
+ ### Couches Utilisées
 
-champs externe - liste des nome des attributs separer par un virgule.
++ Index- L'index de la couche dans la service de la carte.
 
-etat seulement - un indicateur afin d'informer que l'entree est utilisee suelement pourbble suivi de l'etat. Par consequent tous les controles seront abscent de l'interface.
++ nom - Nom personnalise pourn la couche. Peut replacer celui fourni par le service.
 
-controle et etat de la couche - contient un liste des controles possible qu'on peut selcetionner pour la couche.
++ Champs externe - Liste des noms des attributs separer par un virgule.
 
- ## Table -
++ Etat seulement - Un indicateur afin d'informer que l'entree est utilisee suelement pourbble suivi de l'etat. Par consequent tous les controles seront abscent de l'interface.
+
+Controle et etat de la couche
+
+![](layersettings.png)
+
+Contient un liste des controles possible qu'on peut selcetionner pour la couche.
+
+Une liste des contrôles à activer sur une couche en particulier
+
++ opacity
++ visibility
++ boundingBox
++ query
++ snapshot
++ metadata
++ boundaryZoom
++ refresh
++ reload
++ remove
++ settings
++ data
++ styles
+
+ ### Table
+
+ ![](tablepanel.png)
 
 La section table specifie comment les champs et la recherche globales sont configurees.
-de configuration.
-titre - le ttire de la table.
 
-maximiser - taille de ela table lors d'ouverture
-appliquer a la carte - terminer si le filtres par defaut sont appliquer a la carte.
-personnalisation des champs - permet utilisateur de changer le noms des champs
++ Titre - Le titre de la table.
 
-description - information additionnele a propos de la table a  afficher dans le panneau
++ Description - Information additionnelle à propos de la table à afficher dans le panneau de configuration.
 
++ Maximiser - Taille de la table lors d'ouverture.
 
++ Appliquer a la carte - Determiner si le filtres par defaut sont appliquer a la carte.
 
+Personnalisation des champs - Permet l'utilisateur de changer le noms des champs.
 
+## Légende
 
-## Legende
++ Type de légende - Selectionner entre un type de legende automatique ou structuree.
 
-Sélecteur du type de légende
+Si un legende structuree et selectionner vous devez remplir la legende en fomat json avec un fichier json pour definir la legende personnaliser
 
-Type de legende
-
-
++ Ajouter une section à la légende - Vosu pouvez ajouter une section à la légende entre entree, groupe, information, couche non liée, et groupe visibilité.
 
 # Interface Usager
 
-Plein ecran - Indique si le visualisateur utilise l'entièreté de la fenêtre d'affichage
-theme -Le thème de l'interface utilisateur du visualisateur.
+Général
 
-# Légende
++ Plein ecran - Indique si le visualisateur utilise l'entièreté de la fenêtre d'affichage
 
-Est réordonnable
-Permettre l'importation de couches
++ Theme - Le thème de l'interface utilisateur du visualisateur.
+
+Lors de la défaillance du visualisateur
+
++ Message d'échec - (Optionnel) - Un message à afficher en cas de défaillance.
+
++ URL image d'échec - (Optionnel) - Une image à utiliser en cas de défaillance.
+
+![](menu.png)
+
+Légende
+
+Cliquez pour accéder aux propriétés de la légende dans la section UI.
+
++ Est réordonnable - indique si les éléments de la légende sont réordonnables. Cette propriété est ignorée si la légende est du type structurée.
+
+![](reorder.png)
+
++ Permettre l'importation de couches -Indique si l'utilisateur peut ajouter des couches à partir de l'interface.
+
+![](add.png)
 
 Options d'ouverture de la légende
-Indique si la légende est ouverte par défaut lors du chargement initial pour les fenêtres d'affichage restreinte, moyenne et étendue.
 
++ Indique si la légende est ouverte par défaut lors du chargement initial pour les fenêtres d'affichage restreinte, moyenne et étendue.
 
-Ouvrir par défaut dans l'affichage étendu
-Indique si la légende est ouverte par défaut lors du chargement initial pour une fenêtre d'affichage étendue
-Ouvrir par défaut dans l'affichage moyen
-Indique si la légende est ouverte par défaut lors du chargement initial pour une fenêtre d'affichage moyenne
-Ouvrir par défaut dans l'affichage restreint
-Indique si la légende est ouverte par défaut lors du chargement initial pour une fenêtre d'affichage restreinte
-Options d'ouverture de la table
-Indique si la table est ouverte par défaut lors du chargement initial pour les fenêtres d'affichage restreinte, moyenne et étendue.
-ID de la couche
-L'ID de la couche pour des fins de référencement à l'intérieur du visualisateur
-Ouvrir par défaut dans l'affichage étendu
-Indique si la table est ouverte par défaut lors du chargement initial pour une fenêtre d'affichage étendue
-Ouvrir par défaut dans l'affichage moyen
-Indique si la table est ouverte par défaut lors du chargement initial pour une fenêtre d'affichage moyenne
-Ouvrir par défaut dans l'affichage restreint
-Indique si la table est ouverte par défaut lors du chargement initial pour une fenêtre d'affichage restreinte
++ Ouvrir par défaut dans l'affichage étendu - Indique si la légende est ouverte par défaut lors du chargement initial pour une fenêtre d'affichage étendue
+
++ Ouvrir par défaut dans l'affichage moyen - Indique si la légende est ouverte par défaut lors du chargement initial pour une fenêtre d'affichage moyenne
+
++ Ouvrir par défaut dans l'affichage restreint - Indique si la légende est ouverte par défaut lors du chargement initial pour une fenêtre d'affichage restreinte
+
++ Options d'ouverture de la table- Indique si la table est ouverte par défaut lors du chargement initial pour les fenêtres d'affichage restreinte, moyenne et étendue.
+
++ ID de la couche - L'identifiante de la couche pour des fins de référencement à l'intérieur du visualisateur
+
++ Ouvrir par défaut dans l'affichage étendu - Indique si la table est ouverte par défaut lors du chargement initial pour une fenêtre d'affichage étendue
+
++ Ouvrir par défaut dans l'affichage moyen - Indique si la table est ouverte par défaut lors du chargement initial pour une fenêtre d'affichage moyenne
+
++ Ouvrir par défaut dans l'affichage restreint - Indique si la table est ouverte par défaut lors du chargement initial pour une fenêtre d'affichage restreinte
+
+## Barre d'application
+
+![](applicationbar.png)
+
+La Barre d'application vous permet de configuree la barre d'application et les boutons visible.
+
++ Menu latéral - Affiche le bouton du menu latéral dans la barre d'application principale.
+
++ Géorecherche - Affiche le bouton de la géorecherche dans la barre d'application principale. Le bouton sera cachée si la géorecherche est désactivée ou si aucun URL n'est fourni.
+
++ Sélecteur de carte de base - Affiche le bouton du sélecteur de carte de base dans la barre d'application principale.
+
++ Sélecteur de couches - Affiche le bouton du sélecteur de couches dans la barre d'application principale.
 
 ## Navigation
 
-Navigation restreinte- Empêche l'utilisateur d'effectuer des déplacements au delà de l'étendue maximale.
-Barre de navigation
-Zoom
-Composantes de navigation en extra
-geoLocator
-marquee
-home
-history
-basemap
-help
-fullscreen
-geoSearch
-sideMenu
+![](sidemenulist.png)
 
-## Menu laterale
++ Navigation restreinte - Empêche l'utilisateur d'effectuer des déplacements au delà de l'étendue maximale.
 
-Titre (Optionnel) - Un titre pour remplacer celui utilisé par défaut par le visualisateur.
-Afficher le logo - Indique si le logo doit être affiché dans le menu latéral à gauche.
-URL du logo  - (Optionnel)- Une image pour remplacer le logo utilisé par défaut par le visualisateur.
++ Barre de navigation
+
++ Zoom
+
+Composantes de navigation en extra.
+
+Selectionner les options voulu dans la barre de navigation.
+
++ geoLocator
++ marquee
++ home
++ history
++ basemap
++ help
++ fullscreen
++ geoSearch
++ sideMenu
++ couches
+
+## Menu latéral
+
++ Titre - (Optionnel)  Un titre pour remplacer celui utilisé par défaut par le visualisateur.
+
++ Afficher le logo - Indique si le logo doit être affiché dans le menu latéral à gauche.
+
++ URL du logo  - (Optionnel) Une image pour remplacer le logo utilisé par défaut par le visualisateur.
+
+![](menulist.png)
+
 Items du menu latéral
-×Close
-items
-layers
-basemap
-geoSearch
-about
-fullscreen
-export
-share
-touch
-help
-language
-plugins
-×Close
-items
-layers
-basemap
-geoSearch
-about
-fullscreen
-export
-share
-touch
-help
-language
-plugins
-×Close
-items
-layers
-basemap
-geoSearch
-about
-fullscreen
-export
-share
-touch
-help
-language
-plugins
-×Close
-items
-layers
-basemap
-geoSearch
-about
-fullscreen
-export
-share
-touch
-help
-language
-plugins
 
+Selectionner les items voulu dans le menu latéral.
 
- Ajouter Fichier d'aide
++ layers
++ basemap
++ geoSearch
++ about
++ fullscreen
++ export
++ share
++ touch
++ help
++ language
++ plugins
+
+Fichier d'aide
 
 Propriétés de l'aide
-Nom du dossier
-default
-(success)
-Nom du dossier contenant les fichiers d'aide et les images connexes
-À propos de la carte- L'à propos de la carte provenant du fichier de configuration ou d'un répertoire contenant un fichier de type Markdown
 
-Source de l'à propos
-Texte - À propos provenant d'un texte fourni (chaîne de caractères).
++ Nom du dossier - Nom du dossier contenant les fichiers d'aide et les images connexes.
 
+À propos de la carte - L'à propos de la carte provenant du fichier de configuration ou d'un répertoire contenant un fichier de type Markdown.
+
++ Source de l'à propos - Indique si le texte est entree ou la source du contenu est dans un fichier.
+
++ Texte - À propos provenant d'un texte fourni (chaîne de caractères).
 
 # Services
 
-## Liens oour les services
+## Liens pour les services
 
-URL pour les coordonnées
++ URL du proxy - Un proxy optionnel pouvante être utilisé afin de pallier au problème des origines semblables. L'URL doit être soit un chemin relatif pointant vers le même serveur ou bien un chemin absolu pointant vers un serveur qui met en place les entêtes des requêtes d'origines croisées (CORS).
 
-URL pour l'impression
++ URL de la carte à exporter - Un point de service ESRI pour générer des images à partir de cartes. Doit pointer directement vers un point de service qui peut être utilisé par un service d'impression d'ESRI (ESRI PrintTask).
+
++ URL de la géométrie - URL pointant sur un point de service REST ArcGIS d'ESRI pour la géométrie.
+
++ URL de l'API Google - Clé de l'API Google afin d'activer la géolocalisation et la simplification du lien de partage.
+
++ URL de l'API de géolocalisation
+
++ URL pour les coordonnées
+
++ URL pour l'impression
 
 ## Recherche par lieux
 
+![](geosearchmenu.png)
+
+ URLs des service
+
  URLs des points de service
 
-URL noms géographiques -https://geogratis.gc.ca/services/geoname/en/geonames.json
-(success)
-URL du point de service pour les noms géographiques.
-URL géolocalisation https://geogratis.gc.ca/services/geolocation/en/locate?q=
-(success)
-URL du point de service pour la géolocalisation
-URL géosuggestion https://geogratis.gc.ca/services/geolocation/en/suggest?q=
-(success)
-URL du point de service pour la géosuggestion
-URL provinces https://geogratis.gc.ca/services/geoname/en/codes/province.json
-(success)
-URL du point de service pour les provinces
-URL types - https://geogratis.gc.ca/services/geoname/en/codes/concise.json
-(success)
-URL du point de service pour les types
-Type de recherche à désactiver
-SNRC
-Code postal
-Latitude / Longitude
++ URL noms géographiques - URL du point de service pour les noms géographiques.
+
++ URL du point de service pour les noms géographiques  - URL du point de service pour la géolocalisation.
+
++ URL géolocalisation - URL du point de service pour la géolocalisation.
+
++ URL géosuggestion - URL du point de service pour la géosuggestion.
+
++ URL du point de service pour la géosuggestion.
+
++ URL provinces - URL du point de service pour les provinces.
+
++ URL types - URL du point de service pour les types.
+
 Désactiver des types de recherche spécifiques (SNRC, code postal/RTA, ou LAT/LNG)
+
++ SNRC -  Recherche par numéro du systeme nationale de références.
+
++ Code postal - Recherche par code postale.
+
++ Latitude / Longitude - Recherche par coordonnée géographique.
+
+![](geosearchexample.png)
 
 ## Exporter la Carte
 
-Vous pouvez exporter une image de la carte et de ses couches visibles avec une légende, un titre, la flèche nord avec scalebar, la note en bas de page personnalisée et un timestamp.
+Vous pouvez exporter une image de la carte et de ses couches visibles avec une légende, un titre, la flèche nord avec scalebar, la note en bas de page personnalisée et un horodateur.
+
+Si personnalisable un dialogue apparaîtra avec une image de la carte et d'une option pour entrer dans un titre de carte si désiré.
 
 Le titre de l'image exportée peut être fabriqué sur commande en entrant une valeur.
 
-Si customizable un dialogue apparaîtra avec une image de la carte et d'une option pour entrer dans un titre de carte si désiré.
++ Titre - Valeur du Titre du graphique à exporter.
 
-Titre
-Titre du graphique à exporter.
-Composantes de la carte
-Légende
++ Composantes de la carte
+
++ Légende
+
 Éléments de la carte
-La flèche du Nord et l'échelle.
-Note de bas de page
-Note de bas de page de la carte à exporter
-Horodateur
 
-Si customizable un dialogue apparaîtra avec une image de la carte et d'une option pour entrer dans un titre de carte si désiré.
++ La flèche du Nord et l'échelle.
+
++ Note de bas de page - Valeur du note de bas de page de la carte à exporter.
+
++ Horodateur
+
+Si personnalisable un dialogue apparaîtra avec une image de la carte et d'une option pour entrer dans un titre de carte si désiré.
 
 ![](exportmapwindowv2.png)
 
 Aussi, les utilisateurs peuvent ajouter ou enlever des sections de l'image exportée comme une légende,
-en cliquant sur la roue  d'options dans l'en-tête.
+en cliquant sur la roue d'options dans l'en-tête.
 
 Les utilisateurs seront en mesure de choisir/désélectionner les sections pour apparaître dans l'image exportée.
 
 # Version
 
-L'étiquette de version vous permet de choisir la version  de schéma de visualisateur FGP en utilisant un coup énumèrent en bas .
+L'étiquette de version vous permet de choisir la version de schéma utilisé pour valider le fichier de configuration.
 
 Par défaut la présente version est 2.0.
-
 
 # Langue
 
 L'étiquette de langue vous permet de choisir la langue du dossier de configuration, en utilisant un coup énumère en bas .
-Choisissez demi-cadratin-CA pour l'anglais ou fr-CA pour le français.
 
-La valeur est un ISO 639-1 code indiquant la langue de ficelles dans le dossier de schéma.
+Choisissez entre en-CA pour l'anglais ou fr-CA pour le français.
 
+La valeur est un ISO 639-1 code indiquant la langue de fichier de configuration.
 
 # Panneau Sommaire
 
