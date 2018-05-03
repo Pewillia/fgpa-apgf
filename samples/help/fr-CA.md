@@ -37,10 +37,8 @@ l'élément où il sera placé lorsque vous relâchez la poignée.
 _Note:_ il est plus facile de faire glisser un élément lorsque tous les éléments de la section sont réduits.
 
 Pour charger le fichier de configuration ou le modèle directement depuis l'URL, vous pouvez utiliser la syntaxe suivante:
-+ _votre instance url_?filename=_votre nom de fichier_ (par exemple
-  <a href="https://xxx/fgpv-author.html?filename=https://myfolder/myfilename.json" target="\_blank">https://xxx/fgpv-author.html?filename=https://myfolder/myfilename.json</a>)
-+ _votre instance url_?template=_votre nom de modèle_ (par exemple
-  <a href="https://xxx/fgpv-author.html?template=mytemplate.json" target="\_blank">https://xxx/fgpv-author.html?template=mytemplate.json</a>)
++ _votre instance url_?filename=_votre nom de fichier_ (par exemple https: //xxx/fgpv-author.html?filename=https: //myfolder/myfilename.json)
++ _votre instance url_?template=_votre nom de modèle_ (par exemple https: //xxx/fgpv-author.html?template=mytemplate.json )
 
 _Remarque:_ si l'application ne peut pas lire le fichier de configuration ou si le modèle n'existe pas, elle ouvrira
 une configuration par défaut ou le premier modèle dans la liste des modèles.

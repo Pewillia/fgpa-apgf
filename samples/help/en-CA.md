@@ -38,10 +38,8 @@ position. A yellow box will appear under the item where it will be placed when y
 _Note:_ it is easier to drag an item when all items inside the section are collapsed.
 
 To upload user configuration file or template directly from url you can use the following syntax:
-+ _your instance url_?filename=_your file name_ (e.g.
-   <a href="https://xxx/fgpv-author.html?filename=https://myfolder/myfilename.json" target="\_blank">https://xxx/fgpv-author.html?filename=https://myfolder/myfilename.json</a>)
-+ _your instance url_?template=_your template name_ (e.g.
-   <a href="https://xxx/fgpv-author.html?template=mytemplate.json" target="\_blank">https://xxx/fgpv-author.html?template=mytemplate.json</a>)
++ _your instance url_?filename=_your file name_ (e.g. http: //xxx/fgpv-author.html?filename=https ://myfolder/myfilename.json )
++ _your instance url_?template=_your template name_ (e.g. https: //xxx/fgpv-author.html?template=mytemplate.json)
 
 _Note:_ if the application can't read the configuration file or if the template doesn't exist, it will open the default configuration or the first template inside the list on templates.
 
