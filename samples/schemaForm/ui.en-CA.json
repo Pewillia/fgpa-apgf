@@ -120,6 +120,7 @@
                     "default": [["layers","basemap"],["fullscreen","export","share","touch","help","about"],["language"],["plugins"]],
                     "items": {
                         "type": "array",
+                        "title": "Items",
                         "items": {
                             "type": "string",
                             "enum": [
@@ -156,7 +157,7 @@
             "properties": {
                 "folderName": {
                     "type": "string",
-                    "description": "Help folder name who contain the help description and images",
+                    "description": "Help folder name who contain the help description and images. IMPORTANT: Can not be tested in preview mode. Opening the help will generate an error.",
                     "title": "Folder Name",
                     "default": "default"
                 }
@@ -207,7 +208,7 @@
                         }
                     },
                 "additionalProperties": false,
-                "title": "Legend openning options"
+                "title": "Legend Opening Options"
                 }
             }
         },
@@ -224,7 +225,7 @@
                   "required": true
               },
               "folderName": {
-                  "description": "About properties from configuration file or Markdown folder",
+                  "description": "About properties from configuration file or Markdown folder. IMPORTANT: Can not be tested in preview mode. Opening the about will generate an error.",
                   "title": "Folder Name",
                   "type": "string",
                   "required": true
@@ -271,7 +272,7 @@
             },
             "additionalProperties": false,
             "required": ["id"],
-            "title": "Table openning options"
+            "title": "Table Opening Options"
         },
         "widgetsWidget": {
             "type": "object",

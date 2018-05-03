@@ -23,7 +23,8 @@
                       "type": "number",
                       "title": "WKID",
                       "description": "Well-Known ID",
-                      "default": ""
+                      "default": 4326,
+                      "minimum": "0"
                   },
                   "vcsWkid": {
                       "type": "number",
@@ -48,7 +49,8 @@
                       "default": ""
                   }
               },
-                "additionalProperties": false
+              "required": ["wkid"],
+              "additionalProperties": false
               },
               "default": {
                 "description": "Étendue utilisée par défaut ainsi que pour le chargement initial.",
@@ -287,7 +289,7 @@
                     "properties": {
                         "enabled": {
                             "type": "boolean",
-                            "title": "Enabled",
+                            "title": "Activée",
                             "default": true
                         },
                         "spatialReference": {
@@ -298,7 +300,8 @@
                                     "type": "number",
                                     "title": "WKID",
                                     "description": "Well-Known ID",
-                                    "default": ""
+                                    "default": 4326,
+                                    "minimum": "0"
                                 },
                                 "vcsWkid": {
                                     "type": "number",
@@ -323,6 +326,7 @@
                                     "default": ""
                                 }
                             },
+                            "required": ["wkid"],
                             "additionalProperties": false
                         }
                     },
@@ -351,6 +355,7 @@
                             "type": "number",
                             "description": "Le rapport entre la taille de la carte d'aperçu et le rectangle d'étendue affiché sur cette carte. La valeur par défaut est 2, ce qui signifie que la carte d'aperçu aura au moins deux fois la taille du rectangle d'étendue.",
                             "default": 2,
+                            "minimum": "0",
                             "title": "Facteur d'expansion"
                         },
                         "initiallyExpanded": {
@@ -443,7 +448,7 @@
                         },
                         "layerType": {
                           "type": "string",
-                          "default": "",
+                          "default": "esriFeature",
                           "title": "Type de couche"
                         },
                         "url": {
@@ -593,6 +598,7 @@
                     "tolerance": {
                         "type": "number",
                         "default": 5,
+                        "minimum": "0",
                         "description": "Spécifie la tolérance en pixels de la région cliquable entourant un élément. Doit êtreun entier positif",
                         "title": "Tolérance"
                     },
@@ -670,8 +676,9 @@
                       "properties": {
                         "opacity": {
                           "type": "number",
-                          "default": 1,
-                          "description": "Opacité initiale.",
+                          "minimum": "0",
+                          "maximum": "1",
+                          "description": "Opacité initiale. La valeur doit être entre 0 et 1.",
                           "title": "Opacité initiale"
                         },
                         "visibility": {
@@ -757,6 +764,7 @@
                                         },
                                         "title": {
                                             "type": "string",
+                                            "default": "",
                                             "description": "Titre de la colonne. Si elle n'est pas fournie le nom de la colonne par défaut ou l'alias sera utilisé.",
                                             "title": "Titre"
                                         },
@@ -773,6 +781,7 @@
                                         },
                                         "width": {
                                             "type": "number",
+                                            "minimum": "0",
                                             "description": "Largeur de la colonne. Si elle n'est pas fournie, la valeur sera calculée.",
                                             "title": "Largeur"
                                         },
@@ -809,7 +818,7 @@
                                                     "type": "boolean",
                                                     "default": false,
                                                     "description": "Détermine si le filtre peut être modifié. Vrai: la valeur du filtre ne peut être modifiée; Faux: la valeur du filtre peut être modifiée.",
-                                                    "title": "Est statique ?"
+                                                    "title": "Est statique"
                                                 }
                                             },
                                             "required": ["type"],
@@ -832,6 +841,7 @@
                             "properties": {
                                 "index": {
                                     "type": "number",
+                                    "minimum": "0",
                                     "description": "L'index de la couche dans le service de carte.",
                                     "title": "Index"
                                 },
@@ -934,6 +944,7 @@
                                                   },
                                                   "width": {
                                                       "type": "number",
+                                                      "minimum": "0",
                                                       "description": "Largeur de la colonne. Si elle n'est pas fournie, la valeur sera calculée.",
                                                       "title": "Largeur"
                                                   },
@@ -1041,7 +1052,9 @@
                                     "opacity": {
                                       "type": "number",
                                       "default": 1,
-                                      "description": "Opacité initiale.",
+                                      "minimum": "0",
+                                      "maximum": "1",
+                                      "description": "Opacité initiale. La valeur doit être entre 0 et 1.",
                                       "title": "Opacité initiale"
                                     },
                                     "visibility": {

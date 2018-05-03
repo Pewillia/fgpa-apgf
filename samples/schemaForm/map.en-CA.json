@@ -23,7 +23,8 @@
                       "type": "number",
                       "title": "WKID",
                       "description": "Well-Known ID ( WKID )",
-                      "default": ""
+                      "default": 4326,
+                      "minimum": "0"
                   },
                   "vcsWkid": {
                       "type": "number",
@@ -48,7 +49,8 @@
                       "default": ""
                   }
               },
-                "additionalProperties": false
+              "required": ["wkid"],
+              "additionalProperties": false
               },
               "default": {
                 "description": "The default extent is the extent the map uses when first loaded.",
@@ -213,7 +215,7 @@
                 "title": "Level of Detail sets"
               },
               "description": "The levels of detail (zoom scales) available for the map",
-              "title": "Level of detail sets",
+              "title": "Levels of detail sets",
               "minItems": 1
         },
         "tileSchemas": {
@@ -298,7 +300,8 @@
                                     "type": "number",
                                     "title": "WKID",
                                     "description": "Well-Known ID ( WKID )",
-                                    "default": ""
+                                    "default": 4326,
+                                    "minimum": "0"
                                 },
                                 "vcsWkid": {
                                     "type": "number",
@@ -323,6 +326,7 @@
                                     "default": ""
                                 }
                             },
+                            "required": ["wkid"],
                             "additionalProperties": false
                         }
                     },
@@ -351,6 +355,7 @@
                             "type": "number",
                             "description": "The ratio between the size of the overview map and the extent rectangle displayed on the overview map. The default value is 2, meaning the overview map will be at least twice the size of the extent rectangle.",
                             "default": 2,
+                            "minimum": "0",
                             "title": "Expand Factor"
                         },
                         "initiallyExpanded": {
@@ -443,7 +448,7 @@
                         },
                         "layerType": {
                           "type": "string",
-                          "default": "",
+                          "default": "esriFeature",
                           "title": "Layer type"
                         },
                         "url": {
@@ -592,6 +597,7 @@
                     "tolerance": {
                         "type": "number",
                         "default": 5,
+                        "minimum": "0",
                         "description": "Specifies the tolerance in pixels when determining if a feature was clicked. Should be non-negative integer",
                         "title": "Tolerance"
                     },
@@ -670,7 +676,9 @@
                         "opacity": {
                           "type": "number",
                           "default": 1,
-                          "description": "Initial opacity",
+                          "minimum": "0",
+                          "maximum": "1",
+                          "description": "Initial opacity. Value must be between 0 and 1.",
                           "title": "Initial opacity"
                         },
                         "visibility": {
@@ -756,6 +764,7 @@
                                         },
                                         "title": {
                                             "type": "string",
+                                            "default": "",
                                             "description": "Specifies the column title, uses the layer column name or alias if missing.",
                                             "title": "Title"
                                         },
@@ -772,6 +781,7 @@
                                         },
                                         "width": {
                                             "type": "number",
+                                            "minimum": "0",
                                             "description": "Specifies the column width. If missing, calculated column width will be use.",
                                             "title": "Width"
                                         },
@@ -832,6 +842,7 @@
                                 "index": {
                                     "type": "number",
                                     "title": "Index",
+                                    "minimum": "0",
                                     "description": "The index of the layer in the map service."
                                 },
                                 "name": {
@@ -935,6 +946,7 @@
                                                     "width": {
                                                         "type": "number",
                                                         "title": "Width",
+                                                        "minimum": "0",
                                                         "description": "Specifies the column width. If missing, calculated column width will be use."
                                                     },
                                                     "sort": {
@@ -1042,7 +1054,9 @@
                                     "opacity": {
                                       "type": "number",
                                       "default": 1,
-                                      "description": "Initial opacity",
+                                      "minimum": "0",
+                                      "maximum": "1",
+                                      "description": "Initial opacity. Value must be between 0 and 1.",
                                       "title": ""
                                     },
                                     "visibility": {
