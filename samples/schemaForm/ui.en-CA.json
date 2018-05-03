@@ -69,7 +69,7 @@
                     "basemap": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Shows the basemap selector button in the main app toolbar.",
+                      "description": "Shows the basemap selector button in the main app toolbar when the layers menu is open.",
                       "title": "Basemap Selector"
                     },
                     "layers": {
@@ -221,7 +221,7 @@
               "content": {
                   "description": "About properties from string content",
                   "title": "Content",
-                  "type": "string",
+                  "type": "textarea",
                   "required": true
               },
               "folderName": {
@@ -233,7 +233,7 @@
               "aboutChoice": {
                   "description": "",
                   "type": "enum",
-                  "enum": ["string", "folder"],
+                  "enum": ["textarea", "folder"],
                   "title": "About source",
                   "default": "string",
                   "required": true
