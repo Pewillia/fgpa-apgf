@@ -69,7 +69,7 @@
                     "basemap": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Shows the basemap selector button in the main app toolbar when the layers menu is open.",
+                      "description": "Shows the basemap selector button in the main app toolbar.",
                       "title": "Basemap Selector"
                     },
                     "layers": {
