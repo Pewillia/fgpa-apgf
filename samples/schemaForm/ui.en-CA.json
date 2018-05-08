@@ -221,7 +221,7 @@
               "content": {
                   "description": "About properties from string content",
                   "title": "Content",
-                  "type": "textarea",
+                  "type": "string",
                   "required": true
               },
               "folderName": {
