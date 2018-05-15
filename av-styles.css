@@ -27605,6 +27605,10 @@ The fix is based on the following hack: https://codepen.io/mkstix6/pen/pRbErK
   /* Microsoft EdgeV13&14 CSS styles go here */
 }
 
+.fgpa textarea {
+  resize: vertical;
+}
+
 .fgpa h1,
 .fgpa h2,
 .fgpa h3,
