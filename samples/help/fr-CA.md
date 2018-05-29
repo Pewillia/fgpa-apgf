@@ -362,7 +362,8 @@ Vous trouverez les informations suivantes sur la version de l'application APGF a
 
 ![](summaryinfo.png "Informations sur la version APGF")
 
-# Accessibilité
+
+#  Accessibilité
 
 Cette page respecte les règles pour l’accessibilité des contenus Web WCAG 2.0 AA.
 
