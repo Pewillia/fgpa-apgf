@@ -341,6 +341,7 @@ You will find the following FGPA application version information at the bottom o
 
 ![](summaryinfo.png "FGPA version information")
 
+
 # Accessibility
 
 This page is WCAG 2.0 AA compliant.
