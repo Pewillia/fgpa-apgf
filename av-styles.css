@@ -28752,6 +28752,10 @@ The fix is based on the following hack: https://codepen.io/mkstix6/pen/pRbErK
   float: right;
 }
 
+.fgpa .av-version-dev-hide {
+  display: none;
+}
+
 .fgpa .av-loading-screen {
   overflow-x: hidden;
   position: absolute;
@@ -28946,6 +28950,7 @@ The fix is based on the following hack: https://codepen.io/mkstix6/pen/pRbErK
 
 .fgpa .list-group-item {
   padding: 0px 10px;
+  margin-bottom: 3px;
 }
 
 .fgpa fieldset {
