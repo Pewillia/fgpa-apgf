@@ -28875,6 +28875,11 @@ The fix is based on the following hack: https://codepen.io/mkstix6/pen/pRbErK
   font-style: italic;
 }
 
+.fgpa .av-summary-advlight {
+  font-style: italic;
+  opacity: 0.5;
+}
+
 .fgpa .av-summary-list {
   color: #4d90fe;
 }
