@@ -1,10 +1,10 @@
 # Répertoire de dissémination des données
 
-Le répertoire de dissemination des données est un service qui permet de publier des données dans le catalogue de la PGF, de mettre à jour et d'enlever les service cartographique et les fichiers de configuration.
+Le répertoire de dissémination des données est un service qui permet de publier des données dans le catalogue de la PGF, de mettre à jour et d'enlever les services cartographique et les fichiers de configuration.
 
-Le service dissémination des données permet la publication dans le catalogue PGF, la mise à jour et la dépublication des services de carte et des fichiers de configuration des outils de création PGF.
+Le service dissémination des données permet la publication dans le catalogue de la PGF, la mise à jour et la dépublication des services de carte et des fichiers de configuration des outils de création PGF.
 
-Le service DDR vous permet d'envoyer un fichier zip contenant un fichier de configuration (créé par utilisateur), un extrait de code HTML (inclus au-dessus ou au-dessous la carte à l'intérieur du page HTML) et des dossiers (images/help/about).
+Le service DDR vous permet d'envoyer un fichier zip contenant un fichier de configuration (créé par l'utilisateur), un extrait de code HTML (inclus au-dessus ou au-dessous la carte à l'intérieur du page HTML) et des dossiers (images/help/about).
 
 Le fichier zip doit être créé par un utilisateur avant de sélectionner le processus DDR à partir de l'outil de création.
 
@@ -32,9 +32,9 @@ Si vous choisissez de télécharger un fichier, le formulaire suivant sera affic
 
 ![](fig4fr.png)
 
-Entrez le nom du fichier de configuration d'outil sans le suffixe .json. Un fichier avec le même nom doit être inclus dans le fichier zip a téléverser.
+Entrez le nom du fichier de configuration sans le suffixe .json. Un fichier avec le même nom doit être inclus dans le fichier zip a téléverser.
 
-Sélectionnez, s'il existe, un extrait HTML dans le fichier ZIP. Sélectionnez aucun, presnippet.html, postsnippet.html ou tous. L’extrait de code HTML sera ajouté au-dessus ou au-dessous de la carte à l’intérieur de la page HTML.
+Sélectionnez, s'il existe, un extrait HTML dans le fichier ZIP. Sélectionnez aucun, presnippet.html, postsnippet.html ou tous. L’extrait de code HTML sera ajouté au-dessus et / ou au-dessous de la carte à l’intérieur de la page HTML.
 
 Puis appuyez sur le bouton sélectionner un fichier, pour sélectionner le fichier zip à téléverser.
 
