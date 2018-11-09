@@ -21,6 +21,11 @@ $toolbar-height: $icon-button-height + rem(0.8);
     }
 }
 
+
+main {  // due to overright of body font style by wet-boew theme.min.css
+     font-size: 1.0em !important;
+     }
+
 @mixin keyboard-focus {
     @include keyboard {
         &:focus {

@@ -54,7 +54,8 @@
     }
 
     .av-legend-snippet {
-        display: flex;
+        float: none !important;
+
 
         > div:not(:first-child) {
             padding-left: 20px;
