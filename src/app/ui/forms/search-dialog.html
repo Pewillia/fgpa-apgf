@@ -1,0 +1,73 @@
+<md-dialog-container aria-label="Search FGP Catalogue" class="av-search-dialog">
+    <av-content-panel close-panel="self.close()" title-style="title" title-value="Search FGP Catalogue">
+      <p class="av-save-desc">Select the Category or Subject of the service to add</p>
+
+            <p class="av-save-desc"></p>
+    <div  >
+            <table style="width:100%">
+              <tr>
+                 <th>Topic Category</th>
+                 <th colspan="2">Subject</th>
+              </tr>
+
+            </table>
+
+    </div  >
+
+    <div  >
+            <select  style='width:350px' ng-model="self.selectedCategory" ng-change='self.searchTitles()' ng-options="x for x in self.Categories">
+            </select>
+            <select  style='width:350px' ng-model="self.selectedSubject" ng-change='self.searchTitles2()' ng-options="x for x in self.Categories2">
+            </select>
+
+      </div>
+
+      <div  >
+        <p class="av-save-desc"> </p>
+
+        <p class="av-save-desc"> Select the Title of the web service to add</p>
+
+              <select  style='width:700px' ng-model="self.selectedTitle" ng-change='self.getAbstract()' ng-options="x for x in self.Titles">
+              </select>
+        </div>
+          <div>  &nbsp;  </div>
+
+           <div style=" max-width:500px; text-align:center;"> Abstract of Web Service   </div>
+           <div>  &nbsp;  </div>
+
+          <div   >
+
+          <p   style=" max-width:500px; text-align:left; word-wrap:break-word;"  ng-bind-html = self.Abstract ></p>
+          <div>  &nbsp;  </div>
+          <p    style=" max-width:500px; text-align:center;">  Graphic </p>
+
+          <p      ng-bind-html = self.Graphic  Graphic >Graphic </p>
+
+          </div>
+
+
+
+        <md-button
+            class="av-button-square md-raised md-primary av-searchdialog"
+            ng-click="self.saveUrl()"
+            ng-disabled="self.fileName.length === 0 || self.isError === true">
+            {{ 'button.save' | translate }}
+            <md-tooltip>{{ 'button.save' | translate }}</md-tooltip>
+        </md-button>
+        <md-button
+            class="av-button-square md-raised md-primary av-searchdialog"
+            ng-click="self.openPreview()"
+            ng-disabled="self.fileName.length === 0 || self.isError === true">
+            {{ 'summary.preview' | translate }}
+            <md-tooltip>{{ 'summary.preview' | translate }}</md-tooltip>
+        </md-button>
+        <md-button
+            class="av-button-square md-raised av-searchdialog-cancel"
+            ng-click="self.cancel()">
+            {{ 'button.cancel' | translate }}
+            <md-tooltip>{{ 'button.cancel' | translate }}</md-tooltip>
+        </md-button>
+
+
+    </av-content-panel>
+</md-dialog-container>

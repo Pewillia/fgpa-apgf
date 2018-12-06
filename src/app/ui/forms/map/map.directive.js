@@ -1,5 +1,15 @@
-const templateUrl = require('../form.html');
 
+import regeneratorRuntime from "regenerator-runtime"
+
+const templateUrl = require('../form.html');
+const templateUrls = {
+  preview: require('../preview-dialog2.html'),  // added for preview ???
+  search: require('../search-dialog.html')
+}
+
+
+
+const xjs = require('xml2js');
 /**
  * @module avMap
  * @memberof app.ui
@@ -53,12 +63,15 @@ function avMap() {
  * @param {Object} commonService service with common functions
  */
 function Controller($scope, $translate, $timeout,
-    events, modelManager, stateManager, formService, debounceService, constants, layerService, commonService) {
+    events, modelManager, stateManager, formService, debounceService, constants, layerService, commonService, $mdDialog) {
     'ngInject';
     const self = this;
     self.modelName = 'map';
     self.sectionName = $translate.instant('app.section.map');
     self.formService = formService;
+
+    self.search = search;
+
 
     // keep track of legend cursor position
     self.legendCursor = 0;
@@ -551,11 +564,13 @@ function Controller($scope, $translate, $timeout,
      * @param  {Object} layerEntries  array of layer entries to initialize
      */
     function initLayerEntry(layerEntries) {
+      console.log('in init layer entry');
 
         const entry = layerEntries[layerEntries.length -1];
         if (typeof entry !== 'undefined' && typeof entry.init === 'undefined') {
             entry.init = true;
             entry.controls = ['opacity', 'visibility', 'boundingBox', 'query', 'snapshot', 'metadata', 'boundaryZoom', 'refresh', 'reload', 'remove', 'settings', 'data', 'styles'];
+            console.log('iadding to init layer entry');
 
             // we need to reset value of all controls to true to refresh the ui
             // FIXME: know bug, the first time the use will click on a controls, it will have no effect
@@ -579,6 +594,85 @@ function Controller($scope, $translate, $timeout,
         }
     }
 
+    function addLayer($scope,layers) {
+
+      console.log('in add layer');
+
+        let flag = false;
+        // When we add a new layer, initialize the controls array to avoid linked layers controls bug
+    //  $scope.model
+    //  if (self.layers !== -1 && layers.length - 1 > self.layers) {
+  //    if ($scope.model.layers !== -1 && $scope.model.layers.length - 1 > $scope.model.layers) {
+  //const layer = $scope.model.layers[$scope.model.layers.length - 1];
+
+  const layer = $scope.model.layers[$scope.model.layers.length - 1];
+  console.log('in add ing layer inforamtion,num layers =', self.layers);
+
+  console.log('in add ing layer inforamtion,layersss =',layers);
+  console.log('in add ing layer inforamtion,layer ... =',layer);
+
+            // reinitialize to break the 'link'
+            layer.controls = ['opacity', 'visibility', 'boundingBox', 'query', 'snapshot', 'metadata', 'boundaryZoom', 'refresh', 'reload', 'remove', 'settings', 'data', 'styles'];
+            layer.state = {
+                'opacity': 1,
+                'visibility': true,
+                'boundingBox': false,
+                'query': true,
+                'snapshot': false,
+                'hovertips': true
+          //      'name': 'administrative' ,
+        //        'layerChoice':'ogsWms',
+        //        'url':'https://cartes.geogratis.gc.ca/wms/canvec_fr'
+            };
+            layer.name='administrative';
+            layer.layerChoice='ogcWms';
+            layer.url ='https://cartes.geogratis.gc.ca/wms/canvec_fr';
+
+            layer.layerEntries = [];
+
+            // broadcast the new item even to update accordion
+            events.$broadcast(events.avNewItems);
+            flag = true;
+  ///      } else if (self.layers === -1) {
+            // special case when it is the first layer
+  //          events.$broadcast(events.avNewItems);
+  //          flag = true;
+  //      }
+
+        // update id array when layer is deleted
+        if (self.layers !== -1 && layers.length - 1 < self.layers) {
+            self.formService.updateLinkValues($scope, [['layers', 'id']], 'initLayerId', 'avLayersIdUpdate');
+        }
+
+        // FIXME: there is bugs with ASF.
+        // We are not able to set step value... we need to set them manually
+        if (flag) {
+            // set opacity input step value
+            $timeout(() => {
+                $('.av-opacity-input input').each((index, element) => {
+                    element.step = 0.05;
+                });
+            }, constants.debInput);
+        }
+
+        // update layers numbers
+        self.layers = layers.length - 1;
+
+    }
+
+// added pw march 20
+        function SearchCatalogue($scope,layers,model) {
+            // set back the original name for save file name to be not changed
+        //    console.log(self.selectedName);
+      //      document.getElementById('avSearchName').value = name;
+      //      self.close();
+      console.log('calling add layer');
+            initLayerEntry(model);
+              addLayer($scope,layers);
+              console.log('after calling add layer');
+
+
+        }
     /**
      * Set map form
      *
@@ -599,7 +693,7 @@ function Controller($scope, $translate, $timeout,
                                 self.formService.updateLinkValues($scope, [['tileSchemas', 'id'], ['tileSchemas', 'name']], 'tileId');
                             }
 
-                            // update tiles schema numbers 
+                            // update tiles schema numbers
                             self.tileSchemas = tiles.length;
                         }, 'notitle': true, 'add': $translate.instant('button.add'), 'items': [
                             { 'type': 'fieldset', 'htmlClass': 'av-tileschema', 'items': [
@@ -634,8 +728,8 @@ function Controller($scope, $translate, $timeout,
                                 if (self.extentSets !== -1 && extents.length < self.extentSets) {
                                     self.formService.updateLinkValues(scope, [['extentSets', 'id']], 'extentId')
                                 }
-    
-                                // update extents numbers 
+
+                                // update extents numbers
                                 self.extentSets = extents.length;
                             }, 'notitle': true, 'add': $translate.instant('button.add'), 'items': [
                                 { 'type': 'template', 'template': addButton('extentdefault', 'setExtent', 'av-setdefaultext-button'), 'setExtent': () => self.formService.setExtent('default', $scope.model.extentSets) },
@@ -724,7 +818,7 @@ function Controller($scope, $translate, $timeout,
                             if (self.lodSets !== -1 && lods.length < self.lodSets) {
                                 self.formService.updateLinkValues($scope, [['lodSets', 'id']], 'lodId');
                             }
-                            // update lods numbers 
+                            // update lods numbers
                             self.lodSets = lods.length;
                         }, 'notitle': true, 'add': $translate.instant('button.add'), 'items': [
                             { 'key': 'lodSets[]', 'htmlClass': `av-lods-array`, 'items': [
@@ -817,6 +911,8 @@ function Controller($scope, $translate, $timeout,
                 { 'title': $translate.instant('form.map.layers'), 'items': [
                     { 'type': 'template', 'template': self.formService.addCustomAccordion($translate.instant('form.custom.help'), `help/info-layers-${commonService.getLang()}.md`, true) },
                     { 'type': 'help', 'helpvalue': '<div class="help-block">' + $translate.instant('form.map.expcoldesc') + '<div>' },
+                    { 'type': 'template', 'template': addButton('SearchCatalogue', 'SearchCatalogue'), 'SearchCatalogue': () =>  self.search() },
+            //        { 'type': 'template', 'template': addButton('SearchCatalogue', 'SearchCatalogue'), 'SearchCatalogue': () =>  SearchCatalogue($scope,scope.model.layers, scope.model) },
                     { 'key': 'layers', 'htmlClass': 'av-accordion-all av-layers av-sortable', 'startEmpty': true, 'onChange': () => { initLayer(scope.model.layers) }, 'add': $translate.instant('button.add'), 'items': [
                         { 'type': 'help', 'helpvalue': '<div class="av-drag-handle"></div>' },
                         { 'type': 'fieldset', 'htmlClass': 'av-accordion-toggle av-layer', 'title': $translate.instant('form.map.layer'), 'items': [
@@ -1151,4 +1247,1778 @@ function Controller($scope, $translate, $timeout,
                     <md-tooltip>{{ 'form.map.${type}' | translate }}</md-tooltip>
                 </md-button>`;
     }
+
+/* added search controller stuff hereh*/
+function search() {
+    // FIXME: we can't know the real saved file name because FileSaver.onwriteend doesn/t workaround
+    // so if there is duplicate name the name will become nyname(1) on disk but will be myname on display
+     console.log ("in search..1......................");
+     //         this.dialog.open(search, {height: '11900px',width: '11900px'
+    //                                  }
+    //                         );
+
+    $mdDialog.show({
+        controller: SearchController,
+        controllerAs: 'self',
+        templateUrl: templateUrls.search,
+        parent: $('.fgpa'),
+        clickOutsideToClose: true,
+        fullscreen: true,
+        multiple: true,
+    //    locals: { name: self.search },
+        locals: { name: "1" },
+      onRemoving: element => {
+            self.saveName = document.getElementById('avSearchName').value;
+            document.getElementsByClassName('av-search-button')[0].focus();
+        }
+    });
+}
+
+/**
+ * save controller
+ *
+ * @function SearchStatusController
+ * @private
+ * @param  {Object} $mdDialog  Angular dialog window object
+ * @param  {Object} $translate  Angular translation object
+ * @param {Object} constants service with all constants for the application
+ * @param {String} name previous file save name
+ */
+function SearchController($mdDialog, $translate, constants, name) {
+    'ngInject';
+    const self = this;
+
+//    self.close = $mdDialog.hide;
+//      self.cancel = cancel;
+//      self.search = search;
+    self.error = '';
+    self.isError = false;
+//      self.searchText ='';
+    self.searchSubject ='';
+    self.Categories = [];
+    self.Categories2 = [];
+    self.Subject = [];
+    self.Abstract = [];
+    self.Graphic = [];
+    self.URL = [];
+    self.searchTitles = searchTitles;
+    self.searchTitles2 = searchTitles2;
+    self.getAbstract = getAbstract;
+    self.Identifier = '';
+    // added or preview ???
+        self.openPreview = openPreview;
+        self.previewReady = previewReady;
+        self.saveUrl = saveUrl;
+  //  self.fileName = (name.search('^.*-V[0-9][0-9]$') === 0) ?
+//        `${name.slice(0, -2)}${(parseInt(name.slice(-2)) + 1).toString().padStart(2, '0')}` : `${name}-V01`;
+    let file = new XMLHttpRequest();
+// async open call https://dev.gcgeo.gc.ca/geonetwork/srv/eng/csw?request=GetCapabilities&service=CSW&acceptVersions=2.0.2&acceptFormats=application%252Fxml
+
+// works to query catalogue
+//  file.open('POST', 'https://dev.gcgeo.gc.ca/geonetwork/srv/eng/csw', true);
+//file.setRequestHeader('Content-type', 'application/xml');
+
+//  file.open('POST', 'https://160.106.128.113', true);
+//  file.setRequestHeader('Content-type', 'application/xml');
+
+//rcs call to tet rcsdev , not sure all i'd are in, add id at end and returns info
+//  file.open('GET',  '//160.106.128.113/v2/doc/en/0', true);
+//   file.send();
+
+// file.open('GET',   'https://internal.rcs.gcgeo.gc.ca', true);
+//   file.open('GET', 'https://internal.rcs.gcgeo.gc.ca/jstest', true);
+//file.send('GET /v2/doc/EN');
+
+//file.send('/v2/doc/en/0');
+
+//  query to get doain values for titles
+//    <?xml version="1.0"?>
+//    <csw:GetDomain xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" service="CSW" version="2.0.2">
+//        <csw:PropertyName>Title</csw:PropertyName>
+//    </csw:GetDomain>
+
+//
+
+//  file.open('POST', 'https://dev.gcgeo.gc.ca/geonetwork/srv/eng/csw?request=GetCapabilities&service=CSW&acceptVersions=2.0.2&acceptFormats=application%252Fxml', true);
+//  file.send('https://dev.gcgeo.gc.ca/geonetwork/srv/eng/csw?request=GetCapabilities&service=CSW&acceptVersions=2.0.2&acceptFormats=application%252Fxml');
+//file.send('');
+
+// works with GET
+//    file.open('GET', 'https://dev.gcgeo.gc.ca/geonetwork/srv/eng/csw?request=GetCapabilities&service=CSW&acceptVersions=2.0.2&acceptFormats=application%252Fxml', true);
+//     file.send();
+
+// Getcapabilities
+//    file.send('<?xml version="1.0"?>'+
+//'<csw:GetCapabilities xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" service="CSW">'+
+//    '<ows:AcceptVersions xmlns:ows="http://www.opengis.net/ows" >'+
+//    '    <ows:Version>2.0.2</ows:Version>'+
+//    '</ows:AcceptVersions>'+
+//        '<ows:AcceptFormats xmlns:ows="http://www.opengis.net/ows">'+
+//    '    <ows:OutputFormat>application/xml</ows:OutputFormat>'+
+//    '</ows:AcceptFormats>'+
+//'</csw:GetCapabilities>');
+//
+
+/**
+* Set local storage viewerversion parameter
+*
+* @function setLocalVersion
+* @private
+*/
+function setLocalVersion() {
+localStorage.setItem('viewerversion', modelManager.getModel('version', false).version);
+localStorage.setItem('viewerenv', modelManager.getModel('version', false).version === '2.5.0-0726' ? 'dev' : '');
+}
+
+/**
+* Check if preview can be done
+*
+* @function previewReady
+* @private
+* @return {Boolean} true if ready and false if not
+*/
+function previewReady() {
+return stateManager.goNoGoPreview();
+}
+
+/**
+* Open a dialog window to show current configuration
+*
+* @function openPreview
+* @private
+*/
+function openPreview() {
+
+//  validateForm();
+//  console.log('in open preview');
+
+if (stateManager.goNoGoPreview()) {
+//  console.log('in state manager open preview');
+
+    // set the config to use by the preview window/iFrame
+    localStorage.setItem('configpreview', modelManager.save(true));
+
+    // set the array of languages to use by the preview window/iFrame
+    const langs = commonService.setUniq([commonService.getLang()].concat(commonService.getLangs()));
+    localStorage.setItem('configlangs', `["${langs.join('","')}"]`);
+
+//  just added feb 20 to finish adn set key vale from gloabal identfiier variable
+  //  self.Identifier = "ce7873ff-fbc0-4864-946e-6a1b4d739154";
+    localStorage.setItem('configkeys', `["${self.Identifier}"]`);
+
+  // set the viewer version to use by the preview window/iFrame
+
+    setLocalVersion();
+
+    $mdDialog.show({
+        controller: previewController,
+        controllerAs: 'self',
+        templateUrl: templateUrls.preview,
+        parent: $('.fgpa'),
+        clickOutsideToClose: true,
+//        clickOutsideToClose: false,
+      fullscreen: false,
+      skipHide : true,
+      multiple: true,
+//        preserveScope:true,
+        onRemoving: () => { $timeout(() => {
+            document.getElementsByClassName('av-preview-button')[0].focus();
+        }, constants.delayWCAG); }
+    });
+}
+}
+
+/**
+* openPreview controller
+*
+* @function previewController
+* @private
+* @param  {Object} $mdDialog  Angular dialog window object
+*/
+function previewController($mdDialog) {
+'ngInject';
+const self = this;
+
+self.close = $mdDialog.hide;
+}
+
+
+
+
+//---------------------------------------------------------
+function GetCatalogueValue9 ( url,query,xpathsought) {
+// return variable  xpathsought
+console.log('GET cat 999999999 parameters --'+ url);
+//console.log('GET cat 999999999 parameters --'+url+' '+query+' '+xpathsought);
+file.open('POST', url, true);
+// file.open('POST', 'https://csw.open.canada.ca/geonetwork/srv/eng/csw', true);
+
+//  file.setRequestHeader('Content-type', 'application/xml');
+
+
+// tried the following, mar 13 may not work
+file.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+file.send(query);
+//console.log(' 5 just did send in get catalogue');
+
+//return new Promise((resolve,reject) => { //file.onreadystatechange =
+
+console.log('--- get capability ready state change =', file.readyState);//0 empty,1 loading ,2 done
+console.log('--- get capability file status =', file.status);//200okay
+
+file.onreadystatechange =  (r => { console.log ('get cat 9 bout to test');
+  //      if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+
+  console.log('2--- get capability ready state change =', file.readyState);//0 empty,1 loading ,2or 4 done
+  console.log('2--- get capability file status =', file.status);//200okay
+
+ if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+
+  //useMarkdown(language, self.sections, `${extenStringdir}/images/`, extenString + `-${language}.md`);
+     console.log(' 9 response from geose3rver is');
+     console.log(file.responseText);
+     let parser = new DOMParser();
+   let xmlText = parser.parseFromString(file.responseText,"text/xml");
+
+       let xmlDoc = "";
+  //     let  p = new xjs.Parser();
+      let  p = new xjs.Parser({ mergeAttrs: true });
+
+      p.parseString( file.responseText, function( err, result ) {
+        if (err) {
+               console.log(' 9 There was an error processing this image: ' + err)
+             }
+        else {
+
+
+                 console.log(  '9 result is' );
+
+              //    console.log(' 4 response xml evaluate',file.responseXML.evaluate);
+                  console.log('9 response xml',file.responseXML);
+//   http://www.opengis.net/cat/csw/2.0.2'
+               let xmlDoc = file.responseXML ;
+
+        //       let nsResolver =  function (prefix) {
+                 let nsResolver =  function (prefix) {
+
+                   return  'http://www.opengis.net/cat/csw/2.0.2';
+              //     return  'http://www.w3.org/1999/xlink';
+            //       return  'http://www.opengis.net/cat/csw/2.0.2/CSW-discovery.xsd';
+                 }
+        //  console.log('nsresolve response =',nsResolver);
+           if (file.responseXML.evaluate) {
+                 console.log( '9 evaluating xml,nrreslver is ',nsResolver());
+
+
+// let nodes = file.responseXML.evaluate("//*[name()='gmd:CI_OnlineResource']//*[name()='gmd:URL'][1]", file.LresponseXML, nsResolver, XPathResult.ANY_TYPE, null);
+let nodes = file.responseXML.evaluate("//*[name()='Layer']/*[name()='Name']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+//  let nodes = file.responseXML.evaluate("//*[name()='Layer']/*[name()='Title']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+//let nodes = file.responseXML.evaluate("//*[name()='gmd:fileIdentifier'][*[name()='gco:CharacterString']]", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+// works but gets everything ------------------------
+//let nodes = file.responseXML.evaluate("//*[name()='gco:CharacterString']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+//*[name()="head"]
+
+//let nodes = file.responseXML.evaluate("/*[local-name()='csw:GetRecordsResponse']/*[local-name()='csw:SearchResults/gmd:fileIdentifier']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+//let nodes = file.responseXML.evaluate("/*:csw:GetRecordsResponse/*:csw:SearchResults/@numberOfRecordsMatched",  file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+          //    let nodes = file.responseXML.evaluate("//gco:CharacterString", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+          //  let nodes = file.responseXML.evaluate("//csw:GetRecordsResponse/csw:SearchResults/gmd:MD_MetaData/gmd:fileIdentifier/gco:CharacterString", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+          //    let nodes = file.responseXML.evaluate("//gmd:fileIdentifier", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+              //      let nodes = file.responseXML.evaluate("//csw:SearchStatus", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+  //   let nodes = file.responseXML.evaluate("//csw:GetRecordsResponse", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+  console.log( '9 xpath result nodes',nodes);
+//    console.log( '4 xpath result nodes value',nodes.nodeValue);
+//        console.log( '4 xpath inner result',nodes.childNodes[0].nodeValue);
+// works
+                 self.Titles = [];
+                 let Categ = [];
+                let  result2 = nodes.iterateNext();
+    //            console.log( '4 xpath inner result',result2.childNodes[0].nodeValue);
+// works
+                while (result2) {
+                //     console.log( '4 xpath inner result',result2);
+                     console.log( '9 xpath inner result',result2.childNodes[0].nodeValue);
+// works
+//     self.Categories = [].concat(result2.childNodes[0].nodeValue);
+
+//    self.Categories =Array.from(self.Categories);
+     //       self.Categories = self.Categories.concat(result2.childNodes[0].nodeValue);
+           self.Titles = self.Titles.concat(result2.childNodes[0].nodeValue);
+        //   self.Graphic = '<a href=\"'+ self.Graphic +'\">';
+        //   self.Graphic = '<img src =\"'+ self.Graphic +'\" alt="Graphic"  height="500" width="500">';
+         //  self.Categories2 = self.Categories2.concat(result2.childNodes[0].nodeValue);
+            console.log(' URL =',self.Titles);
+                   result2 = nodes.iterateNext();
+  //  console.log( 'xpath inner result after iterate',result2.childNodes[0].nodeValue);
+  // works
+                                  }
+                                 // console.log('cat',self.Categories2);
+                   console.log('finished Titles');
+                                    return Categ;
+                         }
+
+                      }
+                 } //parseString
+              )
+  }
+
+} )
+
+}
+
+
+
+//---------------------------------------------------------
+function GetCatalogueValue8 ( url,query,xpathsought) {
+// return variable  xpathsought
+//console.log('6 value parameterd'+url+' '+query+' '+xpathsought);
+file.open('POST', 'https://csw.open.canada.ca/geonetwork/srv/eng/csw', true);
+file.setRequestHeader('Content-type', 'application/xml');
+file.send(query);
+//console.log(' 5 just did send in get catalogue');
+
+//return new Promise((resolve,reject) => { //file.onreadystatechange =
+file.onreadystatechange =  (r => { console.log ('5 bout to test');
+  //      if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+
+
+ if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+
+  //useMarkdown(language, self.sections, `${extenStringdir}/images/`, extenString + `-${language}.md`);
+     console.log(' 8 response from geose3rver is');
+     console.log(file.responseText);
+     let parser = new DOMParser();
+   let xmlText = parser.parseFromString(file.responseText,"text/xml");
+
+       let xmlDoc = "";
+  //     let  p = new xjs.Parser();
+      let  p = new xjs.Parser({ mergeAttrs: true });
+
+      p.parseString( file.responseText, function( err, result ) {
+        if (err) {
+               console.log(' 8 There was an error processing this image: ' + err)
+             }
+        else {
+
+
+                 console.log(  '8 result is' );
+
+              //    console.log(' 4 response xml evaluate',file.responseXML.evaluate);
+                  console.log('8 response xml',file.responseXML);
+//   http://www.opengis.net/cat/csw/2.0.2'
+               let xmlDoc = file.responseXML ;
+
+        //       let nsResolver =  function (prefix) {
+                 let nsResolver =  function (prefix) {
+
+                   return  'http://www.opengis.net/cat/csw/2.0.2';
+              //     return  'http://www.w3.org/1999/xlink';
+            //       return  'http://www.opengis.net/cat/csw/2.0.2/CSW-discovery.xsd';
+                 }
+        //  console.log('nsresolve response =',nsResolver);
+           if (file.responseXML.evaluate) {
+                 console.log( '8 evaluating xml,nrreslver is ',nsResolver());
+
+
+let nodes = file.responseXML.evaluate("//*[name()='gmd:CI_OnlineResource']//*[name()='gmd:URL'][1]", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+//let nodes = file.responseXML.evaluate("//*[name()='gmd:fileIdentifier'][*[name()='gco:CharacterString']]", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+// works but gets everything ------------------------
+//let nodes = file.responseXML.evaluate("//*[name()='gco:CharacterString']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+//*[name()="head"]
+
+//let nodes = file.responseXML.evaluate("/*[local-name()='csw:GetRecordsResponse']/*[local-name()='csw:SearchResults/gmd:fileIdentifier']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+//let nodes = file.responseXML.evaluate("/*:csw:GetRecordsResponse/*:csw:SearchResults/@numberOfRecordsMatched",  file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+          //    let nodes = file.responseXML.evaluate("//gco:CharacterString", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+          //  let nodes = file.responseXML.evaluate("//csw:GetRecordsResponse/csw:SearchResults/gmd:MD_MetaData/gmd:fileIdentifier/gco:CharacterString", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+          //    let nodes = file.responseXML.evaluate("//gmd:fileIdentifier", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+              //      let nodes = file.responseXML.evaluate("//csw:SearchStatus", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+  //   let nodes = file.responseXML.evaluate("//csw:GetRecordsResponse", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+  console.log( '8 xpath result nodes',nodes);
+//    console.log( '4 xpath result nodes value',nodes.nodeValue);
+//        console.log( '4 xpath inner result',nodes.childNodes[0].nodeValue);
+// works
+                 self.URL = [];
+                 let Categ = [];
+                let  result2 = nodes.iterateNext();
+    //            console.log( '4 xpath inner result',result2.childNodes[0].nodeValue);
+// works
+                while (result2) {
+                //     console.log( '4 xpath inner result',result2);
+                     console.log( '8 xpath inner result',result2.childNodes[0].nodeValue);
+// works
+//     self.Categories = [].concat(result2.childNodes[0].nodeValue);
+
+//    self.Categories =Array.from(self.Categories);
+     //       self.Categories = self.Categories.concat(result2.childNodes[0].nodeValue);
+     if (result2.childNodes[0].nodeValue.search("getcapabilities") !== -1 )
+        {
+           self.URL = self.URL.concat(result2.childNodes[0].nodeValue);
+           console.log(' file url =',self.URL);
+
+         }
+         //   self.Graphic = '<a href=\"'+ self.Graphic +'\">';
+        //   self.Graphic = '<img src =\"'+ self.Graphic +'\" alt="Graphic"  height="500" width="500">';
+         //  self.Categories2 = self.Categories2.concat(result2.childNodes[0].nodeValue);
+            console.log(' file url =',self.URL);
+                   result2 = nodes.iterateNext();
+  //  console.log( 'xpath inner result after iterate',result2.childNodes[0].nodeValue);
+  // works
+                                  }
+                                 // console.log('cat',self.Categories2);
+                   console.log('cat');
+                                    return Categ;
+                         }
+
+                      }
+                 } //parseString
+              )
+  }
+
+} )
+
+}
+
+
+//---------------------------------------------------------
+function GetCatalogueValue7 ( url,query,xpathsought) {
+// return variable  xpathsought
+//console.log('6 value parameterd'+url+' '+query+' '+xpathsought);
+file.open('POST', 'https://csw.open.canada.ca/geonetwork/srv/eng/csw', true);
+file.setRequestHeader('Content-type', 'application/xml');
+file.send(query);
+//console.log(' 5 just did send in get catalogue');
+
+//return new Promise((resolve,reject) => { //file.onreadystatechange =
+file.onreadystatechange =  (r => { console.log ('5 bout to test');
+  //      if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+
+
+ if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+
+  //useMarkdown(language, self.sections, `${extenStringdir}/images/`, extenString + `-${language}.md`);
+     console.log(' 7 response from geose3rver is');
+     console.log(file.responseText);
+     let parser = new DOMParser();
+   let xmlText = parser.parseFromString(file.responseText,"text/xml");
+
+       let xmlDoc = "";
+  //     let  p = new xjs.Parser();
+      let  p = new xjs.Parser({ mergeAttrs: true });
+
+      p.parseString( file.responseText, function( err, result ) {
+        if (err) {
+               console.log(' 7 There was an error processing this image: ' + err)
+             }
+        else {
+
+
+                 console.log(  '7 result is' );
+
+              //    console.log(' 4 response xml evaluate',file.responseXML.evaluate);
+                  console.log('7 response xml',file.responseXML);
+//   http://www.opengis.net/cat/csw/2.0.2'
+               let xmlDoc = file.responseXML ;
+
+        //       let nsResolver =  function (prefix) {
+                 let nsResolver =  function (prefix) {
+
+                   return  'http://www.opengis.net/cat/csw/2.0.2';
+              //     return  'http://www.w3.org/1999/xlink';
+            //       return  'http://www.opengis.net/cat/csw/2.0.2/CSW-discovery.xsd';
+                 }
+        //  console.log('nsresolve response =',nsResolver);
+           if (file.responseXML.evaluate) {
+                 console.log( '7 evaluating xml,nrreslver is ',nsResolver());
+
+
+let nodes = file.responseXML.evaluate("//*[name()='gmd:fileIdentifier']//*[name()='gco:CharacterString'][1]", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+//let nodes = file.responseXML.evaluate("//*[name()='gmd:fileIdentifier'][*[name()='gco:CharacterString']]", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+// works but gets everything ------------------------
+//let nodes = file.responseXML.evaluate("//*[name()='gco:CharacterString']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+//*[name()="head"]
+
+//let nodes = file.responseXML.evaluate("/*[local-name()='csw:GetRecordsResponse']/*[local-name()='csw:SearchResults/gmd:fileIdentifier']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+//let nodes = file.responseXML.evaluate("/*:csw:GetRecordsResponse/*:csw:SearchResults/@numberOfRecordsMatched",  file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+          //    let nodes = file.responseXML.evaluate("//gco:CharacterString", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+          //  let nodes = file.responseXML.evaluate("//csw:GetRecordsResponse/csw:SearchResults/gmd:MD_MetaData/gmd:fileIdentifier/gco:CharacterString", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+          //    let nodes = file.responseXML.evaluate("//gmd:fileIdentifier", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+              //      let nodes = file.responseXML.evaluate("//csw:SearchStatus", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+  //   let nodes = file.responseXML.evaluate("//csw:GetRecordsResponse", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+  console.log( '6 xpath result nodes',nodes);
+//    console.log( '4 xpath result nodes value',nodes.nodeValue);
+//        console.log( '4 xpath inner result',nodes.childNodes[0].nodeValue);
+// works
+                 self.Identifier = '';
+                 let Categ = [];
+                let  result2 = nodes.iterateNext();
+    //            console.log( '4 xpath inner result',result2.childNodes[0].nodeValue);
+// works
+                while (result2) {
+                //     console.log( '4 xpath inner result',result2);
+                     console.log( '7 xpath inner result',result2.childNodes[0].nodeValue);
+// works
+//     self.Categories = [].concat(result2.childNodes[0].nodeValue);
+
+//    self.Categories =Array.from(self.Categories);
+     //       self.Categories = self.Categories.concat(result2.childNodes[0].nodeValue);
+           self.Identifier = self.Identifier.concat(result2.childNodes[0].nodeValue);
+        //   self.Graphic = '<a href=\"'+ self.Graphic +'\">';
+        //   self.Graphic = '<img src =\"'+ self.Graphic +'\" alt="Graphic"  height="500" width="500">';
+         //  self.Categories2 = self.Categories2.concat(result2.childNodes[0].nodeValue);
+            console.log(' file identifier =',self.Identifier);
+                   result2 = nodes.iterateNext();
+  //  console.log( 'xpath inner result after iterate',result2.childNodes[0].nodeValue);
+  // works
+                                  }
+                                 // console.log('cat',self.Categories2);
+                   console.log('cat');
+                                    return Categ;
+                         }
+
+                      }
+                 } //parseString
+              )
+  }
+
+} )
+
+}
+
+function GetCatalogueValue6 ( url,query,xpathsought) {
+// return variable  xpathsought
+//console.log('6 value parameterd'+url+' '+query+' '+xpathsought);
+file.open('POST', 'https://csw.open.canada.ca/geonetwork/srv/eng/csw', true);
+file.setRequestHeader('Content-type', 'application/xml');
+file.send(query);
+//console.log(' 5 just did send in get catalogue');
+
+//return new Promise((resolve,reject) => { //file.onreadystatechange =
+file.onreadystatechange =  (r => { console.log ('5 bout to test');
+  //      if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+
+
+ if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+
+  //useMarkdown(language, self.sections, `${extenStringdir}/images/`, extenString + `-${language}.md`);
+     console.log(' 6 response from geose3rver is');
+     console.log(file.responseText);
+     let parser = new DOMParser();
+   let xmlText = parser.parseFromString(file.responseText,"text/xml");
+
+       let xmlDoc = "";
+  //     let  p = new xjs.Parser();
+      let  p = new xjs.Parser({ mergeAttrs: true });
+
+      p.parseString( file.responseText, function( err, result ) {
+        if (err) {
+               console.log(' 6 There was an error processing this image: ' + err)
+             }
+        else {
+
+
+                 console.log(  '6 result is' );
+
+              //    console.log(' 4 response xml evaluate',file.responseXML.evaluate);
+                  console.log('6 response xml',file.responseXML);
+//   http://www.opengis.net/cat/csw/2.0.2'
+               let xmlDoc = file.responseXML ;
+
+        //       let nsResolver =  function (prefix) {
+                 let nsResolver =  function (prefix) {
+
+                   return  'http://www.opengis.net/cat/csw/2.0.2';
+              //     return  'http://www.w3.org/1999/xlink';
+            //       return  'http://www.opengis.net/cat/csw/2.0.2/CSW-discovery.xsd';
+                 }
+        //  console.log('nsresolve response =',nsResolver);
+           if (file.responseXML.evaluate) {
+                 console.log( '6 evaluating xml,nrreslver is ',nsResolver());
+
+
+let nodes = file.responseXML.evaluate("//*[name()='gmd:MD_BrowseGraphic']//*[name()='gco:CharacterString'][1]", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+//let nodes = file.responseXML.evaluate("//*[name()='gmd:fileIdentifier'][*[name()='gco:CharacterString']]", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+// works but gets everything ------------------------
+//let nodes = file.responseXML.evaluate("//*[name()='gco:CharacterString']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+//*[name()="head"]
+
+//let nodes = file.responseXML.evaluate("/*[local-name()='csw:GetRecordsResponse']/*[local-name()='csw:SearchResults/gmd:fileIdentifier']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+//let nodes = file.responseXML.evaluate("/*:csw:GetRecordsResponse/*:csw:SearchResults/@numberOfRecordsMatched",  file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+          //    let nodes = file.responseXML.evaluate("//gco:CharacterString", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+          //  let nodes = file.responseXML.evaluate("//csw:GetRecordsResponse/csw:SearchResults/gmd:MD_MetaData/gmd:fileIdentifier/gco:CharacterString", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+          //    let nodes = file.responseXML.evaluate("//gmd:fileIdentifier", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+              //      let nodes = file.responseXML.evaluate("//csw:SearchStatus", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+  //   let nodes = file.responseXML.evaluate("//csw:GetRecordsResponse", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+  console.log( '6 xpath result nodes',nodes);
+//    console.log( '4 xpath result nodes value',nodes.nodeValue);
+//        console.log( '4 xpath inner result',nodes.childNodes[0].nodeValue);
+// works
+                 self.Graphic = '';
+                 let Categ = [];
+                let  result2 = nodes.iterateNext();
+    //            console.log( '4 xpath inner result',result2.childNodes[0].nodeValue);
+// works
+                while (result2) {
+                //     console.log( '4 xpath inner result',result2);
+                     console.log( '6 xpath inner result',result2.childNodes[0].nodeValue);
+// works
+//     self.Categories = [].concat(result2.childNodes[0].nodeValue);
+
+//    self.Categories =Array.from(self.Categories);
+     //       self.Categories = self.Categories.concat(result2.childNodes[0].nodeValue);
+           self.Graphic = self.Graphic.concat(result2.childNodes[0].nodeValue);
+        //   self.Graphic = '<a href=\"'+ self.Graphic +'\">';
+
+          if (self.Graphic.search("http") !== -1 ) {
+
+       if (self.Graphic.search("img") === -1 )
+           self.Graphic = '<img src =\"'+ self.Graphic +'\" alt="Graphic"  height="500" width="500">';
+         //  self.Categories2 = self.Categories2.concat(result2.childNodes[0].nodeValue);
+           console.log('1 graphic =',self.Graphic);
+           return;
+
+            }
+            else { self.Graphic ="https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg";
+             self.Graphic = '<img src =\"'+ self.Graphic +'\" alt="Graphic"  height="500" width="500">';
+             console.log('graphic 2=',self.Graphic);
+             result2 = nodes.iterateNext();
+
+
+       //   return;
+                }
+            console.log('graphic3=',self.Graphic);
+                   result2 = nodes.iterateNext();
+  //  console.log( 'xpath inner result after iterate',result2.childNodes[0].nodeValue);
+  // works
+                                  }
+                                 // console.log('cat',self.Categories2);
+                   console.log('cat');
+                                    return Categ;
+                         }
+
+                      }
+                 } //parseString
+              )
+  }
+
+} )
+
+}
+
+
+function GetCatalogueValue5 ( url,query,xpathsought) {
+// return variable  xpathsought
+console.log('5 value parameterd'+url+' '+query+' '+xpathsought);
+file.open('POST', 'https://csw.open.canada.ca/geonetwork/srv/eng/csw', true);
+file.setRequestHeader('Content-type', 'application/xml');
+file.send(query);
+console.log(' 5 just did send in get catalogue');
+
+//return new Promise((resolve,reject) => { //file.onreadystatechange =
+file.onreadystatechange =  (r => { console.log ('5 bout to test');
+  //      if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+ if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+  //useMarkdown(language, self.sections, `${extenStringdir}/images/`, extenString + `-${language}.md`);
+     console.log(' 5 response from geose3rver is');
+     console.log(file.responseText);
+     let parser = new DOMParser();
+   let xmlText = parser.parseFromString(file.responseText,"text/xml");
+
+       let xmlDoc = "";
+  //     let  p = new xjs.Parser();
+      let  p = new xjs.Parser({ mergeAttrs: true });
+
+      p.parseString( file.responseText, function( err, result ) {
+        if (err) {
+               console.log(' 5 There was an error processing this image: ' + err)
+             }
+        else {
+
+
+                 console.log(  '5 result is' );
+
+              //    console.log(' 4 response xml evaluate',file.responseXML.evaluate);
+                  console.log('5 response xml',file.responseXML);
+//   http://www.opengis.net/cat/csw/2.0.2'
+               let xmlDoc = file.responseXML ;
+
+        //       let nsResolver =  function (prefix) {
+                 let nsResolver =  function (prefix) {
+
+                   return  'http://www.opengis.net/cat/csw/2.0.2';
+              //     return  'http://www.w3.org/1999/xlink';
+            //       return  'http://www.opengis.net/cat/csw/2.0.2/CSW-discovery.xsd';
+                 }
+        //  console.log('nsresolve response =',nsResolver);
+           if (file.responseXML.evaluate) {
+                 console.log( '5 evaluating xml,nrreslver is ',nsResolver());
+
+
+let nodes = file.responseXML.evaluate("//*[name()='gmd:abstract']//*[name()='gco:CharacterString'][1]", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+//let nodes = file.responseXML.evaluate("//*[name()='gmd:fileIdentifier'][*[name()='gco:CharacterString']]", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+// works but gets everything ------------------------
+//let nodes = file.responseXML.evaluate("//*[name()='gco:CharacterString']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+//*[name()="head"]
+
+//let nodes = file.responseXML.evaluate("/*[local-name()='csw:GetRecordsResponse']/*[local-name()='csw:SearchResults/gmd:fileIdentifier']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+//let nodes = file.responseXML.evaluate("/*:csw:GetRecordsResponse/*:csw:SearchResults/@numberOfRecordsMatched",  file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+          //    let nodes = file.responseXML.evaluate("//gco:CharacterString", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+          //  let nodes = file.responseXML.evaluate("//csw:GetRecordsResponse/csw:SearchResults/gmd:MD_MetaData/gmd:fileIdentifier/gco:CharacterString", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+          //    let nodes = file.responseXML.evaluate("//gmd:fileIdentifier", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+              //      let nodes = file.responseXML.evaluate("//csw:SearchStatus", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+  //   let nodes = file.responseXML.evaluate("//csw:GetRecordsResponse", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+  console.log( '5 xpath result nodes',nodes);
+//    console.log( '4 xpath result nodes value',nodes.nodeValue);
+//        console.log( '4 xpath inner result',nodes.childNodes[0].nodeValue);
+// works
+                 self.Abstract = [];
+                 let Categ = [];
+                let  result2 = nodes.iterateNext();
+    //            console.log( '4 xpath inner result',result2.childNodes[0].nodeValue);
+// works
+                while (result2) {
+                //     console.log( '4 xpath inner result',result2);
+                     console.log( '5 xpath inner result',result2.childNodes[0].nodeValue);
+// works
+//     self.Categories = [].concat(result2.childNodes[0].nodeValue);
+
+//    self.Categories =Array.from(self.Categories);
+     //       self.Categories = self.Categories.concat(result2.childNodes[0].nodeValue);
+           self.Abstract = self.Abstract.concat(result2.childNodes[0].nodeValue);
+       //  self.Categories2 = self.Categories2.concat(result2.childNodes[0].nodeValue);
+         //4    console.log('cat',Categ);
+                   result2 = nodes.iterateNext();
+  //  console.log( 'xpath inner result after iterate',result2.childNodes[0].nodeValue);
+  // works
+                                  }
+                                 // console.log('cat',self.Categories2);
+                   console.log('cat');
+                                    return Categ;
+                         }
+
+                      }
+                 } //parseString
+              )
+  }
+
+} )
+
+}
+
+
+
+
+
+function GetCatalogueValue4 ( url,query,xpathsought) {
+// return variable  xpathsought
+console.log('4 value parameterd'+url+' '+query+' '+xpathsought);
+file.open('POST', 'https://csw.open.canada.ca/geonetwork/srv/eng/csw', true);
+file.setRequestHeader('Content-type', 'application/xml');
+file.send(query);
+console.log(' 4 just did send in get catalogue');
+
+//return new Promise((resolve,reject) => { //file.onreadystatechange =
+file.onreadystatechange =  (r => { console.log ('4 bout to test');
+  //      if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+ if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+  //useMarkdown(language, self.sections, `${extenStringdir}/images/`, extenString + `-${language}.md`);
+     console.log(' 4 response from geose3rver is');
+     console.log(file.responseText);
+     let parser = new DOMParser();
+//    let xmlDoc = parser.parseFromString(file.responseText,"text/xml");
+
+// convert to a dom documnet
+   let xmlText = parser.parseFromString(file.responseText,"text/xml");
+
+ //self.searchText = xmlDoc ;
+//  xmlText = xmlText.replace(/\"/g, " ");
+     let xmlDoc = "";
+//  let xmlDoc = xmlText;
+//    xmlDoc = file.responseText.replace(/\"/g, " ");
+//    let xmlDoc = xmlText;
+ //     let  p = new xjs.Parser();
+      let  p = new xjs.Parser({ mergeAttrs: true });
+
+      p.parseString( file.responseText, function( err, result ) {
+        if (err) {
+               console.log(' 4 There was an error processing this image: ' + err)
+             }
+        else {
+               // convert to string !! don't stringify to process or doesn'twork
+ //     let  jsonarray = JSON.stringify( result, undefined, 3 );
+
+
+                 console.log(  '4 result is' );
+
+// let path = "/csw:GetDomainResponse/csw:DomainValues/csw:PropertyName/csw:ListOfValues";
+                 //let path = "/csw:GetDomainResponse/csw:DomainValues";
+              //    console.log(' 4 response xml evaluate',file.responseXML.evaluate);
+                  console.log('4 response xml',file.responseXML);
+//   http://www.opengis.net/cat/csw/2.0.2'
+               let xmlDoc = file.responseXML ;
+
+        //       let nsResolver =  function (prefix) {
+                 let nsResolver =  function (prefix) {
+
+                   return  'http://www.opengis.net/cat/csw/2.0.2';
+              //     return  'http://www.w3.org/1999/xlink';
+            //       return  'http://www.opengis.net/cat/csw/2.0.2/CSW-discovery.xsd';
+                 }// var ns = {
+//   'i' : 'http://www.opengis.net/cat/csw/2.0.2'
+//};
+// return ns[prefix] || null;
+           // return  'http://www.opengis.net/cat/csw/2.0.2';
+//   resolve ( r => { return  'http://www.opengis.net/cat/csw/2.0.2'} );
+
+              //                                      }
+      //  console.log('nsresolve response =',nsResolver);
+           if (file.responseXML.evaluate) {
+                 console.log( '4 evaluating xml,nrreslver is ',nsResolver());
+
+//*[local-name()='configuration']/*[local-name()='properties']
+//let nodes = file.responseXML.evaluate("/*[local-name()='csw:SearchResults']/*[local-name()='gmd:fileIdentifier']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+//let nodes = file.responseXML.evaluate("/*[local-name()='csw:SearchResults']/*[local-name()='gmd:fileIdentifier']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+//let nodes = file.responseXML.evaluate("/*[local-name()='csw:GetRecordsResponse']/*[local-name()='csw:SearchResults']/@numberOfRecordsMatched", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+//let nodes = file.responseXML.evaluate("*[local-name(.)='csw:SearchResults/gmd:fileIdentifier']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+// works
+//let nodes = file.responseXML.evaluate("//*[name()='gmd:fileIdentifier']//*[name()='gco:CharacterString']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+
+let nodes = file.responseXML.evaluate("//*[name()='gmd:title']//*[name()='gco:CharacterString']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+//let nodes = file.responseXML.evaluate("//*[name()='gmd:fileIdentifier'][*[name()='gco:CharacterString']]", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+// works but gets everything ------------------------
+//let nodes = file.responseXML.evaluate("//*[name()='gco:CharacterString']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+//*[name()="head"]
+
+//let nodes = file.responseXML.evaluate("/*[local-name()='csw:GetRecordsResponse']/*[local-name()='csw:SearchResults/gmd:fileIdentifier']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+//let nodes = file.responseXML.evaluate("/*:csw:GetRecordsResponse/*:csw:SearchResults/@numberOfRecordsMatched",  file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+          //    let nodes = file.responseXML.evaluate("//gco:CharacterString", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+          //  let nodes = file.responseXML.evaluate("//csw:GetRecordsResponse/csw:SearchResults/gmd:MD_MetaData/gmd:fileIdentifier/gco:CharacterString", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+          //    let nodes = file.responseXML.evaluate("//gmd:fileIdentifier", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+              //      let nodes = file.responseXML.evaluate("//csw:SearchStatus", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+  //   let nodes = file.responseXML.evaluate("//csw:GetRecordsResponse", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+  console.log( '4 xpath result nodes',nodes);
+//    console.log( '4 xpath result nodes value',nodes.nodeValue);
+//        console.log( '4 xpath inner result',nodes.childNodes[0].nodeValue);
+// works
+                 self.Titles = [];
+                 let Categ = [];
+                let  result2 = nodes.iterateNext();
+    //            console.log( '4 xpath inner result',result2.childNodes[0].nodeValue);
+// works
+                while (result2) {
+                //     console.log( '4 xpath inner result',result2);
+                     console.log( '4 xpath inner result',result2.childNodes[0].nodeValue);
+// works
+//     self.Categories = [].concat(result2.childNodes[0].nodeValue);
+
+//    self.Categories =Array.from(self.Categories);
+     //       self.Categories = self.Categories.concat(result2.childNodes[0].nodeValue);
+           self.Titles = self.Titles.concat(result2.childNodes[0].nodeValue);
+       //  self.Categories2 = self.Categories2.concat(result2.childNodes[0].nodeValue);
+         //4    console.log('cat',Categ);
+                   result2 = nodes.iterateNext();
+  //  console.log( 'xpath inner result after iterate',result2.childNodes[0].nodeValue);
+  // works
+                                  }
+                                 // console.log('cat',self.Categories2);
+                   console.log('cat');
+                                    return Categ;
+                         }
+
+                      }
+                 } //parseString
+              )
+  }
+
+} )
+
+}
+
+function GetCatalogueValue3 ( url,query,xpathsought) {
+// return variable  xpathsought
+console.log('3 value parameterd'+url+' '+query+' '+xpathsought);
+file.open('POST', 'https://csw.open.canada.ca/geonetwork/srv/eng/csw', true);
+file.setRequestHeader('Content-type', 'application/xml');
+file.send(query);
+console.log(' 3 just did send in get catalogue');
+
+//return new Promise((resolve,reject) => { //file.onreadystatechange =
+file.onreadystatechange =  (r => { console.log ('3 bout to test');
+  //      if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+ if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+  //useMarkdown(language, self.sections, `${extenStringdir}/images/`, extenString + `-${language}.md`);
+     console.log(' 3 response from geose3rver is');
+     console.log(file.responseText);
+     let parser = new DOMParser();
+//    let xmlDoc = parser.parseFromString(file.responseText,"text/xml");
+
+// convert to a dom documnet
+   let xmlText = parser.parseFromString(file.responseText,"text/xml");
+
+ //self.searchText = xmlDoc ;
+//  xmlText = xmlText.replace(/\"/g, " ");
+     let xmlDoc = "";
+//  let xmlDoc = xmlText;
+//    xmlDoc = file.responseText.replace(/\"/g, " ");
+//    let xmlDoc = xmlText;
+ //     let  p = new xjs.Parser();
+      let  p = new xjs.Parser({ mergeAttrs: true });
+
+      p.parseString( file.responseText, function( err, result ) {
+        if (err) {
+               console.log(' 3 There was an error processing this image: ' + err)
+             }
+        else {
+               // convert to string !! don't stringify to process or doesn'twork
+ //     let  jsonarray = JSON.stringify( result, undefined, 3 );
+
+
+                 console.log(  '3 result is' );
+
+// let path = "/csw:GetDomainResponse/csw:DomainValues/csw:PropertyName/csw:ListOfValues";
+                 //let path = "/csw:GetDomainResponse/csw:DomainValues";
+                  console.log(' 3 response xml evaluate',file.responseXML.evaluate);
+                  console.log('3response xml',file.responseXML);
+//   http://www.opengis.net/cat/csw/2.0.2'
+               let xmlDoc = file.responseXML ;
+
+        //       let nsResolver =  function (prefix) {
+                 let nsResolver =  function (prefix) {
+                  // var ns = {
+                  //   'i' : 'http://www.opengis.net/cat/csw/2.0.2'
+                   //};
+                  // return ns[prefix] || null;
+                  return  'http://www.opengis.net/cat/csw/2.0.2';
+                }// var ns = {
+//   'i' : 'http://www.opengis.net/cat/csw/2.0.2'
+//};
+// return ns[prefix] || null;
+           // return  'http://www.opengis.net/cat/csw/2.0.2';
+//   resolve ( r => { return  'http://www.opengis.net/cat/csw/2.0.2'} );
+
+              //                                      }
+
+           if (file.responseXML.evaluate) {
+                 console.log( '3 evaluating xml');
+                 let nodes = file.responseXML.evaluate("//csw:Value", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+                 console.log( '3 xpath result nodes',nodes);
+                 self.Categories2 = [];
+                 let Categ = [];
+                let  result2 = nodes.iterateNext();
+                while (result2) {
+                //     console.log( '3 xpath inner result',result2);
+              //         console.log( '3 xpath inner result',result2.childNodes[0].nodeValue);
+// works
+//     self.Categories = [].concat(result2.childNodes[0].nodeValue);
+
+//    self.Categories =Array.from(self.Categories);
+     //       self.Categories = self.Categories.concat(result2.childNodes[0].nodeValue);
+           self.Categories2 = self.Categories2.concat(result2.childNodes[0].nodeValue);
+       //  self.Categories2 = self.Categories2.concat(result2.childNodes[0].nodeValue);
+         //    console.log('cat',Categ);
+                   result2 = nodes.iterateNext();
+  //  console.log( 'xpath inner result after iterate',result2.childNodes[0].nodeValue);
+  // works
+                                  }
+                                 // console.log('cat',self.Categories2);
+                   console.log('cat');
+                                    return Categ;
+                         }
+
+                      }
+                 } //parseString
+              )
+  }
+
+} )
+
+}
+
+
+async function GetCatalogueValue2 ( url,query,xpathsought) {
+//function GetCatalogueValue2 ( url,query,xpathsought) {
+// return variable  xpathsought
+console.log('value parameterd'+url+' '+query+' '+xpathsought);
+
+// sasynch set to false then have a pronel loops and red multilpe times
+file.open('POST', url, true);
+file.setRequestHeader('Content-type', 'application/xml');
+file.send(query);
+console.log('just did send in get catalogue');
+
+file.onreadystatechange =   await ( r => {
+//  file.onreadystatechange =  ( r => {
+//    if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+ //useMarkdown(language, self.sections, `${extenStringdir}/images/`, extenString + `-${language}.md`);
+    console.log(' 2 response from geose3rver is');
+    console.log(file.responseText);
+    let parser = new DOMParser();
+//    let xmlDoc = parser.parseFromString(file.responseText,"text/xml");
+
+// convert to a dom documnet
+    let xmlText = parser.parseFromString(file.responseText,"text/xml");
+
+//self.searchText = xmlDoc ;
+//  xmlText = xmlText.replace(/\"/g, " ");
+    let xmlDoc = "";
+//  let xmlDoc = xmlText;
+//    xmlDoc = file.responseText.replace(/\"/g, " ");
+//    let xmlDoc = xmlText;
+//     let  p = new xjs.Parser();
+     let  p = new xjs.Parser({ mergeAttrs: true });
+
+     p.parseString( file.responseText, function( err, result ) {
+       if (err) {
+              console.log(' 2 There was an error processing this image: ' + err)
+            }
+       else {
+              // convert to string !! don't stringify to process or doesn'twork
+//     let  jsonarray = JSON.stringify( result, undefined, 3 );
+
+
+  //              console.log(  '2 result is' );
+
+// let path = "/csw:GetDomainResponse/csw:DomainValues/csw:PropertyName/csw:ListOfValues";
+                let path = "/csw:GetDomainResponse/csw:DomainValues";
+//                   console.log(' 2 response xml evaluate',file.responseXML.evaluate);
+//                   console.log('2 response xml',file.responseXML);
+//   http://www.opengis.net/cat/csw/2.0.2'
+              let xmlDoc = file.responseXML ;
+
+              let nsResolver =  function (prefix) {
+// var ns = {
+//   'i' : 'http://www.opengis.net/cat/csw/2.0.2'
+//};
+// return ns[prefix] || null;
+             return  'http://www.opengis.net/cat/csw/2.0.2';
+                                                   }
+
+          if (file.responseXML.evaluate) {
+  //              console.log( 'evaluating xml');
+                let nodes = file.responseXML.evaluate("//csw:ListOfValues/csw:Value", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+//                console.log( '2 xpath result nodes',nodes);
+
+
+                let Categ = [];
+
+                     self.Categories2 = [];
+
+               let  result2 = nodes.iterateNext();
+               while (result2) {
+//                    console.log( '2 xpath inner result',result2);
+//                      console.log( '2 xpath inner result',result2.childNodes[0].nodeValue);
+// works
+//     self.Categories = [].concat(result2.childNodes[0].nodeValue);
+
+//    self.Categories =Array.from(self.Categories);
+    //       self.Categories = self.Categories.concat(result2.childNodes[0].nodeValue);
+
+      //    Categ = Categ.concat(result2.childNodes[0].nodeValue);
+          self.Categories2 = self.Categories2.concat(result2.childNodes[0].nodeValue);
+
+      //  self.Categories2 = self.Categories2.concat(result2.childNodes[0].nodeValue);
+        //    console.log('cat',Categ);
+                  result2 = nodes.iterateNext();
+ //  console.log( 'xpath inner result after iterate',result2.childNodes[0].nodeValue);
+ // works
+                                 }
+                                // console.log('cat',self.Categories2);
+                  console.log('cat',Categ);
+                                   return Categ;
+                        }
+
+                     }
+                } //parseString
+             )
+ }
+
+} )
+
+}
+
+// test routine
+
+function GetCatalogueValue ( url,query,xpathsought) {
+// return variable  xpathsought
+console.log('value parameterd'+url+' '+query+' '+xpathsought);
+file.open('POST', url, true);
+file.setRequestHeader('Content-type', 'application/xml');
+file.send(query);
+console.log('just did send in get catalogue');
+
+return new Promise((resolve,reject) => { //file.onreadystatechange =
+//  file.onreadystatechange =  (r => {
+//      if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+  if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+   //useMarkdown(language, self.sections, `${extenStringdir}/images/`, extenString + `-${language}.md`);
+      console.log(' 2 response from geose3rver is');
+      console.log(file.responseText);
+      let parser = new DOMParser();
+//    let xmlDoc = parser.parseFromString(file.responseText,"text/xml");
+
+// convert to a dom documnet
+      let xmlText = parser.parseFromString(file.responseText,"text/xml");
+
+  //self.searchText = xmlDoc ;
+//  xmlText = xmlText.replace(/\"/g, " ");
+      let xmlDoc = "";
+//  let xmlDoc = xmlText;
+//    xmlDoc = file.responseText.replace(/\"/g, " ");
+//    let xmlDoc = xmlText;
+  //     let  p = new xjs.Parser();
+       let  p = new xjs.Parser({ mergeAttrs: true });
+
+       p.parseString( file.responseText, function( err, result ) {
+         if (err) {
+    //            console.log(' 2 There was an error processing this image: ' + err)
+              }
+         else {
+                // convert to string !! don't stringify to process or doesn'twork
+  //     let  jsonarray = JSON.stringify( result, undefined, 3 );
+
+
+                  console.log(  '2 result is' );
+
+// let path = "/csw:GetDomainResponse/csw:DomainValues/csw:PropertyName/csw:ListOfValues";
+                  let path = "/csw:GetDomainResponse/csw:DomainValues";
+  //                 console.log(' 2 response xml evaluate',file.responseXML.evaluate);
+  //                 console.log('2 response xml',file.responseXML);
+//   http://www.opengis.net/cat/csw/2.0.2'
+                let xmlDoc = file.responseXML ;
+
+                let nsResolver =  function (prefix) {
+// var ns = {
+//   'i' : 'http://www.opengis.net/cat/csw/2.0.2'
+//};
+// return ns[prefix] || null;
+            // return  'http://www.opengis.net/cat/csw/2.0.2';
+    resolve ( r => { return  'http://www.opengis.net/cat/csw/2.0.2'} );
+
+                                                     }
+
+            if (file.responseXML.evaluate) {
+      //            console.log( 'evaluating xml');
+                  let nodes = file.responseXML.evaluate("//csw:ListOfValues/csw:Value", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+      //            console.log( '2 xpath result nodes',nodes);
+                  let Categ = [];
+                   self.Categories2 = [];
+                 let  result2 = nodes.iterateNext();
+                 while (result2) {
+        //              console.log( '2 xpath inner result',result2);
+      //                  console.log( '2 xpath inner result',result2.childNodes[0].nodeValue);
+// works
+//     self.Categories = [].concat(result2.childNodes[0].nodeValue);
+
+//    self.Categories =Array.from(self.Categories);
+      //       self.Categories = self.Categories.concat(result2.childNodes[0].nodeValue);
+
+      self.Categories2 = self.Categories2.concat(result2.childNodes[0].nodeValue);
+
+        //    Categ = Categ.concat(result2.childNodes[0].nodeValue);
+        //  self.Categories2 = self.Categories2.concat(result2.childNodes[0].nodeValue);
+          //    console.log('cat',Categ);
+                    result2 = nodes.iterateNext();
+   //  console.log( 'xpath inner result after iterate',result2.childNodes[0].nodeValue);
+   // works
+                                   }
+                                  // console.log('cat',self.Categories2);
+                    console.log('cat',Categ);
+                                     return Categ;
+                          }
+
+                       }
+                  } //parseString
+               )
+   }
+
+ } )
+
+}
+// let query = '<?xml version="1.0"?>'+
+// '<csw:GetDomain xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" service="CSW" version="2.0.2">'+
+//     '<csw:PropertyName>TopicCategory</csw:PropertyName>'+
+//  '</csw:GetDomain>';
+// let self.Categories = GetCatalogueValue('https://csw.open.canada.ca/geonetwork/srv/eng/csw',query,xpathsought,"/csw:GetDomainResponse/csw:DomainValues";)
+
+
+// query to return any element with name like victorai
+
+//file.send('<?xml version="1.0"?>'+
+//'<csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" service="CSW" version="2.0.2" resultType="results" outputSchema="csw:IsoRecord">'+
+//  '<csw:Query typeNames="gmd:MD_Metadata">'+
+//  '<csw:ElementName>/gmd:MD_Metadata/gmd:fileIdentifier</csw:ElementName>'+
+//    '<csw:ElementName>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:title</csw:ElementName>'+
+//    '<csw:Constraint version="1.1.0">'+
+//        '<Filter xmlns="http://www.opengis.net/ogc" xmlns:gml="http://www.opengis.net/gml">'+
+//            '<PropertyIsLike wildCard="%" singleChar="_" escapeChar="\">'+
+//                '<PropertyName>TopicCategory</PropertyName>'+
+//                '<Literal>Brazil</Literal>'+
+//            '</PropertyIsLike>'+
+//					' </Filter>'+
+//    '</csw:Constraint>'+
+//  '</csw:Query>'+
+// '</csw:GetRecords>');
+
+// get property domain of TopicCaaategeory - works and displays in pull down
+
+// following open works
+//file.open('POST', 'https://dev.gcgeo.gc.ca/geonetwork/srv/eng/csw', true);
+
+file.open('POST', 'https://csw.open.canada.ca/geonetwork/srv/eng/csw', true);
+file.setRequestHeader('Content-type', 'application/xml');
+
+file.send('<?xml version="1.0"?>'+
+'<csw:GetDomain xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" service="CSW" version="2.0.2">'+
+ '<csw:PropertyName>TopicCategory</csw:PropertyName>'+
+'</csw:GetDomain>');
+
+// get property domain of TopicCaaategeory - works and displays in pull down
+
+
+//file.send("<?xml version='1.0'?>" +
+//' <!DOCTYPE GetCapabilities > ' +
+//' <ogc:GetCapabilities service="WMS" version="1.1.1" >' +
+//' </ogc:GetCapabilities>');
+
+file.onreadystatechange = (r => {
+//      if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+    if (file.readyState === XMLHttpRequest.DONE && file.status === 200) {
+     //useMarkdown(language, self.sections, `${extenStringdir}/images/`, extenString + `-${language}.md`);
+        console.log('response from geose3rver is');
+        console.log(file.responseText);
+        let parser = new DOMParser();
+//    let xmlDoc = parser.parseFromString(file.responseText,"text/xml");
+
+// convert to a dom documnet
+        let xmlText = parser.parseFromString(file.responseText,"text/xml");
+
+    //self.searchText = xmlDoc ;
+//  xmlText = xmlText.replace(/\"/g, " ");
+        let xmlDoc = "";
+//  let xmlDoc = xmlText;
+//    xmlDoc = file.responseText.replace(/\"/g, " ");
+//    let xmlDoc = xmlText;
+    //     let  p = new xjs.Parser();
+         let  p = new xjs.Parser({ mergeAttrs: true });
+
+         p.parseString( file.responseText, function( err, result ) {
+           if (err) {
+                  console.log('There was an error processing this image: ' + err)
+                }
+           else {
+                  // convert to string !! don't stringify to process or doesn'twork
+    //     let  jsonarray = JSON.stringify( result, undefined, 3 );
+
+        let  jsonarray = result;
+
+      //  console.log ('json array')
+        for (let key in jsonarray) {
+          if (key.typeof !== 'undefined' ) {
+               console.log(jsonarray[key]);
+           console.log(key.toUpperCase() + ':', jsonarray[key]);
+         }   }
+
+        for( let i = 0; i < jsonarray.length; i++) {
+              let obj = jsonarray[i];
+        }
+        // sesarch json for object property name value
+    //        let t = findObjectByLabel (jsonarray, 'csw:Capabilities' );
+
+ // works
+//    let t = findObjectByLabel (jsonarray, 'ows:ProviderName' );
+  //   let t = findObjectByLabel (jsonarray, 'xlink:href' );
+//  let t = findObjectByLabel (jsonarray, 'gmd:MD_TopicCategoryCode' );
+//    self.searchText = t;
+
+// workd with getcapavbiibies
+//  self.searchText = findObjectByLabel (jsonarray, 'xlink:href' );
+
+//  console.log(findObjectByLabel (jsonarray, 'gmd:URL' ));
+
+//self.searchText = findObjectByLabel (jsonarray, 'gmd:URL' );
+console.log(  ' result is' );
+
+// let path = "/csw:GetDomainResponse/csw:DomainValues/csw:PropertyName/csw:ListOfValues";
+let path = "/csw:GetDomainResponse/csw:DomainValues";
+//  let path = "/csw:GetDomainResponse/csw:DomainValues";
+//  let path = "/csw:GetDomainResponse/csw:DomainValues";
+console.log('response xml evaluate',file.responseXML.evaluate);
+console.log('response xml',file.responseXML);
+//   http://www.opengis.net/cat/csw/2.0.2'
+let xmlDoc = file.responseXML ;
+//   let nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument === null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
+
+let nsResolver =  function (prefix) {
+// var ns = {
+//   'i' : 'http://www.opengis.net/cat/csw/2.0.2'
+ //};
+// return ns[prefix] || null;
+return  'http://www.opengis.net/cat/csw/2.0.2';
+}
+
+console.log('ns resolver',nsResolver());
+
+ if (file.responseXML.evaluate) {
+          console.log( 'evaluating xml');
+
+//let  nodes = file.responseXML.evaluate("//*[local-name()='csw:GetDomainResponse']", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+// works
+//  let  nodes = file.responseXML.evaluate("//csw:GetDomainResponse", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+// displayd list of values
+//let  nodes = file.responseXML.evaluate("//csw:ListOfValues", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+
+// tried adding title or category to search but didn't work so get all values and can't skip to a positon in file
+let nodes = file.responseXML.evaluate("//csw:ListOfValues/csw:Value", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+// nodes = file.responseXML.evaluate("//csw:PropertyName", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+// nodes = file.responseXML.evaluate("//csw:ListOfValues/csw:Value", file.responseXML, nsResolver, XPathResult.ANY_TYPE, null);
+console.log( 'xpath result nodes',nodes);
+
+      let  result2 = nodes.iterateNext();
+      while (result2) {
+        console.log( 'xpath inner result',result2);
+        console.log( 'xpath inner result',result2.childNodes[0].nodeValue);
+// works
+//     self.Categories = [].concat(result2.childNodes[0].nodeValue);
+
+//    self.Categories =Array.from(self.Categories);
+        self.Categories = self.Categories.concat(result2.childNodes[0].nodeValue);
+      //  self.Categories2 = self.Categories2.concat(result2.childNodes[0].nodeValue);
+        result2 = nodes.iterateNext();
+      //  console.log( 'xpath inner result after iterate',result2.childNodes[0].nodeValue);
+      // works
+      }
+}
+
+ let query = '<?xml version="1.0"?>'+
+ '<csw:GetDomain xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" service="CSW" version="2.0.2">'+
+     '<csw:PropertyName>Title</csw:PropertyName>'+
+  '</csw:GetDomain>';
+   query = '<?xml version="1.0"?>'+
+  '<csw:GetDomain xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" service="CSW" version="2.0.2">'+
+//      '<csw:PropertyName>Title</csw:PropertyName>'+
+//'<csw:PropertyName>ParentIdentifier</csw:PropertyName>'+
+'<csw:PropertyName>Subject</csw:PropertyName>'+
+   '</csw:GetDomain>';
+// let self.Categories = GetCatalogueValue('https://csw.open.canada.ca/geonetwork/srv/eng/csw',query,xpathsought,"/csw:GetDomainResponse/csw:DomainValues";)
+let xpathtoget = '/csw:GetDomainResponse/csw:DomainValues';
+let url = 'https://csw.open.canada.ca/geonetwork/srv/eng/csw';
+
+//
+
+console.log(' calling getcat');
+
+// works if no syn open of file doelops therwise
+let tt = GetCatalogueValue2(url,query,xpathtoget);
+
+//  let tt  = GetCatalogueValue(url,query,xpathtoget).then(message => {console.log('tt');});
+
+setTimeout(function(){ console.log("Help"); }, 3000);
+
+//   self.Categories2 =  self.Categories;
+console.log(' finished calling getcat');
+//  console.log(' get cat value is ',  GetCatalogueValue(url,query,xpathtoget) );
+//setTimeout ( function(){},5000);
+console.log(' get cat value is ', self.Categories2  );
+//-----------------------------------------------------------------
+ // findObjectByLabel returns an object not a string
+// self.searchText = findObjectByLabel (jsonarray, 'csw:GetRecordsResponse' );
+
+// below worked
+
+//  let t = findObjectByLabel (jsonarray, 'csw:Value' );
+//   console.log(  't result is ',typeof(t ) ,t);
+//  console.log(  'window.val result is ',typeof(window.val ) ,window.val);
+
+    // stringify object returned from search
+//    self.searchText =  JSON.stringify( t, undefined, 3 ) ;
+
+//  self.searchText = [].concat(window.val);
+
+//    self.Categories = Array.from(window.val);
+
+//  self.Categories = [].concat(window.val);
+
+console.log('value of list=', typeof (self.Categories),self.Categories);
+
+//   console.log( JSON.stringify( t, undefined, 3 ) );
+//  console.log( JSON.stringify( result, undefined, 3 ) );
+}  } );
+
+      }
+   else {
+     console.log('no response', file.status);
+     }
+  });
+
+  /**
+        * Cancel save action.
+        *
+        * @function searchTitles
+        * @private
+        */
+       function searchTitles() {
+           // set back the original name for save file name to be not changed
+          self.Titles = {};
+          console.log(' search titles in changed pull down ListofValues');
+
+          console.log(' sselected subject vakue =',self.selectedSubject);
+          console.log(' sselected category value =',self.selectedCategory);
+
+       if (self.selectedSubject !== null)
+          { console.log ('subject changed ',self.selectedSubject);
+
+          let  query = ('<?xml version="1.0"?>'+
+           '<csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" service="CSW" version="2.0.2" resultType="results" outputSchema="csw:IsoRecord">'+
+             '<csw:Query typeNames="gmd:MD_Metadata">'+
+            '<csw:ElementSetName>full</csw:ElementSetName>'+
+     //      '<csw:ElementName>/gmd:MD_Metadata/gmd:fileIdentifier</csw:ElementName>'+
+     //  '<csw:ElementName>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:title</csw:ElementName>'+
+                  '<csw:Constraint version="1.1.0">'+
+                      '<Filter xmlns="http://www.opengis.net/ogc" xmlns:gml="http://www.opengis.net/gml">'+
+                          '<PropertyIsLike wildCard="%" singleChar="_" escapeChar="\">'+
+        ////                  '<PropertyName>Subject</PropertyName>'+
+            //              '<Literal>Boundaries</Literal>'+
+                          '<PropertyName>TopicCategory</PropertyName>'+
+                          '<Literal>'+ self.selectedCategory + '</Literal>'+
+                      '</PropertyIsLike>'+
+                        ' </Filter>'+
+                  '</csw:Constraint>'+
+             '</csw:Query>'+
+            '</csw:GetRecords>');
+
+         //   let xpathtoget = '//csw:Value';
+
+       //  let xpathtoget ='//gmd:title/gco:CharacterString';
+         let xpathtoget ='//gmd:CI_Citation/gmd:title/gco:CharacterString';
+
+         //  let xpathtoget = '/csw:GetDomainResponse/csw:DomainValues';
+         //let xpathtoget = '/meta';
+
+         //let url ='https://www.gebco.net/data_and_products/gebco_web_services/web_map_service';
+         let url = 'https://csw.open.canada.ca/geonetwork/srv/eng/csw';
+
+
+         let t = GetCatalogueValue4(url,query,xpathtoget);
+         // self.Categories =self.Categories2 ;
+         t = setTimeout ( function(){console.log(' finished calling getcat 5');
+          console.log('result of query - titles', self.Titles);}, 9000);
+        // console.log (' v ')
+          console.log('result of query - titles', self.Titles);
+
+        }
+
+        else if (self.Category !== null) {
+              console.log('category changed');
+
+
+        }
+        //      uopdate in case change or multi selecteiond
+
+        $scope.$apply();
+
+}
+
+
+  /**
+        * Cancel save action.
+        *
+        * @function searchTitles2
+        * @private
+        */
+       function searchTitles2() {
+           // set back the original name for save file name to be not changed
+          self.Titles = {};
+          console.log(' search titles 2222222 ');
+
+          console.log(' sselected 2222222subject vakue =',self.selectedSubject);
+          console.log(' sselected 2222 category value =',self.selectedCategory);
+
+
+      //     console.log ('subject changed ',self.selectedSubject);
+
+          let  query = ('<?xml version="1.0"?>'+
+           '<csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" service="CSW" version="2.0.2" resultType="results" outputSchema="csw:IsoRecord">'+
+             '<csw:Query typeNames="gmd:MD_Metadata">'+
+            '<csw:ElementSetName>full</csw:ElementSetName>'+
+     //      '<csw:ElementName>/gmd:MD_Metadata/gmd:fileIdentifier</csw:ElementName>'+
+     //  '<csw:ElementName>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:title</csw:ElementName>'+
+                  '<csw:Constraint version="1.1.0">'+
+                      '<Filter xmlns="http://www.opengis.net/ogc" xmlns:gml="http://www.opengis.net/gml">'+
+                          '<PropertyIsLike wildCard="%" singleChar="_" escapeChar="\">'+
+        ////                  '<PropertyName>Subject</PropertyName>'+
+            //              '<Literal>Boundaries</Literal>'+
+                          '<PropertyName>Subject</PropertyName>'+
+                          '<Literal>'+ self.selectedSubject + '</Literal>'+
+                      '</PropertyIsLike>'+
+                        ' </Filter>'+
+                  '</csw:Constraint>'+
+             '</csw:Query>'+
+            '</csw:GetRecords>');
+
+         //   let xpathtoget = '//csw:Value';
+
+       //  let xpathtoget ='//gmd:title/gco:CharacterString';
+         let xpathtoget ='//gmd:CI_Citation/gmd:title/gco:CharacterString';
+
+         //  let xpathtoget = '/csw:GetDomainResponse/csw:DomainValues';
+         //let xpathtoget = '/meta';
+
+         //let url ='https://www.gebco.net/data_and_products/gebco_web_services/web_map_service';
+         let url = 'https://csw.open.canada.ca/geonetwork/srv/eng/csw';
+
+
+         let t = GetCatalogueValue4(url,query,xpathtoget);
+         // self.Categories =self.Categories2 ;
+         t = setTimeout ( function(){console.log(' finished calling getcat 5');
+          console.log('result of query - titles', self.Titles);}, 9000);
+        // console.log (' v ')
+          console.log('result of query - titles', self.Titles);
+
+//      uopdate in case change or multi selecteiond
+          $scope.$apply();
+
+
+}
+
+/**
+  * Cancel save action.
+  *
+  * @function GetAbstract
+  * @private
+  */
+ function getAbstract() {
+     // set back the original name for save file name to be not changed
+
+    console.log(' in get abstract in changed pull down ListofValues');
+
+    console.log(' sselected subject vakue =',self.selectedSubject);
+    console.log(' sselected category value =',self.selectedCategory);
+
+ if (self.selectedSubject !== null)
+    { console.log ('title selected ',self.selectedTitle);
+
+  //  <gmd:abstract xsi:type="gmd:PT_FreeText_PropertyType">
+    //           <gco:CharacterString>La base de données présentée ci-dessous correspond au masque agricole 230 m utilisé dans l’application du Programme d’évaluation de l’état des cultures (PEEC) de Statistique Canada. Le masque a été généré à partir des classes 110 à 199 de la classification de l’utilisation du sol de 2015 d’Agriculture Canada. La sélection a ensuite été généralisée à une résolution spatiale de 230 m. Le masque de 2015 a été utilisé pour les saisons de croissance 2015 à //// 2018 inclusivement.</gco:CharacterString>
+    //           <gmd:PT_FreeText>
+    //             <gmd:textGroup>
+    //   <gmd:LocalisedCharacterString locale="#eng">The following dataset correspond to the 230 m agricultural mask from Statistics Canada’s Crop Condition Assessment Program (CCAP). The mask have been generated from the classes 110 to 199 of the 2015 Agriculture and Agri-Food Canada’s landcover classification. The selection was then generalized to a spatial resolution of 230 m. The 2015 mask was used from the 2015 to the 2018 growing seasons inclusively.<///////
+    // gmd:LocalisedCharacterString>
+      //           </gmd:textGroup>
+
+    let  query = ('<?xml version="1.0"?>'+
+     '<csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" service="CSW" version="2.0.2" resultType="results" outputSchema="csw:IsoRecord">'+
+       '<csw:Query typeNames="gmd:MD_Metadata">'+
+      '<csw:ElementSetName>full</csw:ElementSetName>'+
+//      '<csw:ElementName>/gmd:MD_Metadata/gmd:fileIdentifier</csw:ElementName>'+
+//  '<csw:ElementName>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:title</csw:ElementName>'+
+            '<csw:Constraint version="1.1.0">'+
+                '<Filter xmlns="http://www.opengis.net/ogc" xmlns:gml="http://www.opengis.net/gml">'+
+                    '<PropertyIsLike wildCard="%" singleChar="_" escapeChar="\">'+
+//                    '<PropertyName>Identifier</PropertyName>'+
+                    '<PropertyName>Title</PropertyName>'+
+                    '<Literal>'+ self.selectedTitle +'</Literal>'+
+            //            '<Literal>1a337ccf-1943-484a-bd2b-77048736b3ca</Literal>'+
+                    '</PropertyIsLike>'+
+                  ' </Filter>'+
+            '</csw:Constraint>'+
+       '</csw:Query>'+
+      '</csw:GetRecords>');
+
+   //   let xpathtoget = '//csw:Value';
+
+ //  let xpathtoget ='//gmd:title/gco:CharacterString';
+   let xpathtoget ="//*[name()='gmd:abstract']//*[name()='gco:LocalisedCharacterString']";
+
+   //  let xpathtoget = '/csw:GetDomainResponse/csw:DomainValues';
+   //let xpathtoget = '/meta';
+
+   //let url ='https://www.gebco.net/data_and_products/gebco_web_services/web_map_service';
+   let url = 'https://csw.open.canada.ca/geonetwork/srv/eng/csw';
+
+// gets abstract
+   let t = GetCatalogueValue5(url,query,xpathtoget);
+   // self.Categories =self.Categories2 ;
+    xpathtoget ="//*[name()='gmd:MD_BrowseGraphic']//*[name()='gco:LocalisedCharacterString']";
+
+    t = setTimeout ( function(){console.log(' finished calling getcat 5');
+                               $scope.$apply(); // update thedisplay to dispay abstract
+                               console.log('result of abstract =', self.Abstract);
+                               }, 9000);
+  // console.log (' v ')
+  //  console.log('result of query - titles', self.Titles);
+
+   t = setTimeout ( function(){console.log(' finished calling getcat 6');
+//    $scope.update();  // works
+//  let tt = GetCatalogueValue6(url,query,xpathtoget);
+
+// get graphic
+let tt = GetCatalogueValue6(url,query,xpathtoget);
+  t = setTimeout ( function(){
+    // get Identifier
+
+                              console.log(' finished calling getcat 7');
+                             $scope.$apply(); // update thedisplay to dispay abstract
+                             console.log('result of abstract =', self.Abstract);
+                           }, 5000);
+
+  //self.Graphic = '<a href="+ self.Graphic +\">';
+//   self.Graphic = '<a href=\"'+ self.Graphic +'\">';
+  console.log( 'graphic = ',self.Graphic );
+//       $scope.$apply(); // update thedisplay to dispay abstract
+   console.log('result of query - titles', self.Graphic);}, 5000);
+
+      // get Identifier
+//      let ttt = GetCatalogueValue7(url,query,xpathtoget);
+//  let ttt = GetCatalogueValue7(url,query,xpathtoget);
+
+t = setTimeout ( function(){  let ttt = GetCatalogueValue7(url,query,xpathtoget);
+
+                          console.log(' finished calling getcat 7');
+                         $scope.$apply(); // update thedisplay to dispay abstract
+                         console.log('result of abstract =', self.Abstract);
+                       }, 9000);
+
+  // $scope.$apply(); // update thedisplay to dispay abstract
+//     console.log('-- graphic --',self.Graphic);
+//   $scope.$apply(); // update thedisplay to dispay abstract
+
+ //
+  }
+
+  else if (self.Category !== null) {
+        console.log('category changed',self.Abstract);
+
+
+  }
+}
+     //      document.getElementById('avSearchName').value = name;
+       //    self.close();
+
+       /**      */
+                    function saveUrl() {
+                        // set back the original name for save file name to be not changed
+
+                       console.log(' in get save');
+
+              //         console.log(' sselected subject vakue =',self.selectedSubject);
+                //       console.log(' sselected category value =',self.selectedCategory);
+
+                    if (self.selectedSubject !== null)
+                       { console.log ('title selected ',self.selectedTitle);
+
+
+                       let  query = ('<?xml version="1.0"?>'+
+                        '<csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" service="CSW" version="2.0.2" resultType="results" outputSchema="csw:IsoRecord">'+
+                          '<csw:Query typeNames="gmd:MD_Metadata">'+
+                         '<csw:ElementSetName>full</csw:ElementSetName>'+
+                  //      '<csw:ElementName>/gmd:MD_Metadata/gmd:fileIdentifier</csw:ElementName>'+
+                  //  '<csw:ElementName>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:title</csw:ElementName>'+
+                               '<csw:Constraint version="1.1.0">'+
+                                   '<Filter xmlns="http://www.opengis.net/ogc" xmlns:gml="http://www.opengis.net/gml">'+
+                                       '<PropertyIsLike wildCard="%" singleChar="_" escapeChar="\">'+
+                   //                    '<PropertyName>Identifier</PropertyName>'+
+                                       '<PropertyName>Title</PropertyName>'+
+                                       '<Literal>'+ self.selectedTitle +'</Literal>'+
+                               //            '<Literal>1a337ccf-1943-484a-bd2b-77048736b3ca</Literal>'+
+                                       '</PropertyIsLike>'+
+                                     ' </Filter>'+
+                               '</csw:Constraint>'+
+                          '</csw:Query>'+
+                         '</csw:GetRecords>');
+
+                      //   let xpathtoget = '//csw:Value';
+
+                    //  let xpathtoget ='//gmd:title/gco:CharacterString';
+                      let xpathtoget ="//*[name()='gmd:abstract']//*[name()='gco:LocalisedCharacterString']";
+
+                      //  let xpathtoget = '/csw:GetDomainResponse/csw:DomainValues';
+                      //let xpathtoget = '/meta';
+
+                      //let url ='https://www.gebco.net/data_and_products/gebco_web_services/web_map_service';
+                      let url = 'https://csw.open.canada.ca/geonetwork/srv/eng/csw';
+
+                  // gets abstract
+                    //  let t = GetCatalogueValue5(url,query,xpathtoget);
+                      // self.Categories =self.Categories2 ;
+                       xpathtoget ="//*[name()='gmd:MD_BrowseGraphic']//*[name()='gco:LocalisedCharacterString']";
+
+
+
+                 // get the url
+               console.log('calling gert cat 8');
+              let      t = setTimeout ( function(){  let ttt = GetCatalogueValue8(url,query,xpathtoget);
+
+                                                                      console.log(' finished calling getcat 8');
+                                  //                                   $scope.$apply(); // update thedisplay to dispay abstract
+                                                                     console.log('result of url =', self.URL);
+                                                                   }, 5000);
+
+                   console.log('calling get cat 9');
+                   t = setTimeout ( function(){  console.log('calling get cat val 999 with url of -',self.URL[1]);
+                                            let ttt = GetCatalogueValue9(self.URL[1],self.URL[1],xpathtoget);
+                                                console.log(' finished calling get URl ');
+                                //               $scope.$apply(); // update thedisplay to dispay abstract
+                                        console.log('result- getcapability Titles =', self.Titles);
+                                             }, 9000);
+
+                     // $scope.$apply(); // update thedisplay to dispay abstract
+                   console.log('-- URL --',self.URL);
+
+        //           console.log('-- Titles --',self.Titles);
+                   //   $scope.$apply(); // update thedisplay to dispay abstract
+
+                   //   $scope.$apply(); // update thedisplay to dispay abstract
+
+                    //
+                     }
+
+                     else if (self.Category !== null) {
+                           console.log('category changed',self.Abstract);
+
+
+                     }
+
+            //         initLayer($scope,layers);
+
+                     addLayer($scope,$scope.model.layers);
+               }
+
+
+   }
+
 }

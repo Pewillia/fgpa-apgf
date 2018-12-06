@@ -55,6 +55,13 @@
 
         @extend %container;
     }
+    .av-search-dialog {
+        height: 900px;
+        width: 1000px;
+        border-radius: 0;
+
+        @extend %container;
+    }
 
     .av-agol-dialog {
         height: 380px;

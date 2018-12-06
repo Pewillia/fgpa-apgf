@@ -64,5 +64,14 @@
             <label>{{ 'header.filename' | translate }}</label>
             <label>{{ self.saveName }}</label>
         </div>
+
+        <md-button
+            translate
+            aria-label="{{ 'header.help' | translate }}"
+            class="md-icon-button av-button-32 black av-help-button"
+            ng-click="self.search()">
+            <md-tooltip>{{ 'header.help' | translate }}</md-tooltip>
+            <md-icon md-svg-src="action:shopping_cart"></md-icon>
+        </md-button>
     </div>
 </div>

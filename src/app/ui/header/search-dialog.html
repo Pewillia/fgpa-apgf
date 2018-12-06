@@ -1,0 +1,105 @@
+<md-dialog-container aria-label="Search FGP Catalogue" class="av-search-dialog">
+    <av-content-panel close-panel="self.close()" title-style="title" title-value="Search FGP Catalogue">
+      <p class="av-save-desc">Select the Category or Subject of the service to add</p>
+
+            <p class="av-save-desc"></p>
+    <div  >
+            <table style="width:100%">
+              <tr>
+                 <th>Topic Category</th>
+                 <th colspan="2">Subject</th>
+              </tr>
+
+            </table>
+
+    </div  >
+
+    <div  >
+            <select  multiple style='width:350px' ng-model="self.selectedCategory" ng-change='self.searchTitles()' ng-options="x for x in self.Categories">
+            </select>
+            <select multiple  style='width:350px' ng-model="self.selectedSubject" ng-change='self.searchTitles2()' ng-options="x for x in self.Categories2">
+            </select>
+
+      </div>
+
+      <div  >
+        <p class="av-save-desc"> </p>
+        <input type="text" placeholder="Search on title" ng-model="userSearch">
+
+        <p class="av-save-desc"> Select the Title of the web service to add</p>
+
+              <select size='10' mutilple style='width:700px' ng-model="self.selectedTitle" ng-change='self.getAbstract()' ng-options="x for x in self.Titles | filter:userSearch">
+              </select>
+             
+
+              <div  >
+<!--
+                <label ng-repeat="option in self.Layers ">{{self.Layers}}<input type="checkbox" ng-model="selected[$index]" /><br/></label>
+        -->           </div>
+             <!---- need diskay bloc or all on one line,white-space: nowrap;vertical-align:middle;, noecount is numbe rof layers, layers and tooltip in same array-->
+<!--- inline block many on same line-->
+                <div >
+                  <button  ng-show="self.Layers" style="float:left; display:block;"ng-click="self.selectAll(selectedLayers)"> select All </button>
+
+                  <button ng-show="self.Layers"  style="float:left; display:block;"  ng-click="self.removeAll(selectedLayers)"> Deselect All </button>
+                  <button ng-show="self.Layers"  style="float:left; display:block;" ng-click="self.saveLayers(selectedLayers)"> Save </button>
+                  <div>  &nbsp;  </div>
+                  <div>  &nbsp;  </div>
+                  <div>  &nbsp;  </div>  
+                </div>
+                <div ng-show="self.Layers" style="OVERFLOW-Y:scroll; WIDTH:600px; HEIGHT:300px;">        
+                    <label ng-show="self.Layers" id= "layerlist" style="clear:left;  display:block;   " title={{self.Layers[$index+self.nodecount]}} ng-repeat="selectedLayers in self.Layers | limitTo: self.nodecount track by $index ">
+                   <input style=" clear:left;    "
+                 type="checkbox"
+                 name="selectedLayers[]"
+                 value="{{selectedLayers}}"
+                 ng-checked="self.selection.indexOf(selectedLayers) > -1"
+                 ng-click="self.toggleSelection(selectedLayers)"
+               > {{selectedLayers}}
+                </label>
+
+               </div>
+
+        </div>
+          <div>  &nbsp;  </div>
+
+           <div style=" max-width:500px; text-align:center;"> Abstract of Web Service   </div>
+           <div>  &nbsp;  </div>
+
+          <div   >
+            <textarea rows="15" cols="100" style="  text-align:left; word-wrap:break-word;"  ng-bind-html = self.Abstract >
+              </textarea>
+
+          <div>  &nbsp;  </div>
+          <p    style=" max-width:500px; text-align:center;">  Graphic </p>
+
+          <p      ng-bind-html = self.Graphic  Graphic >Graphic </p>
+
+          </div>
+
+          <a href="https://gcgeo.gc.ca/geonetwork/metadata/eng/{{self.Identifier}}" target="_blank">Full Metadata</a>
+
+          <md-button
+            class="av-button-square md-raised md-primary av-searchdialog"
+            ng-click="self.saveUrl()"
+            ng-disabled="self.fileName.length === 0 || self.isError === true">
+            {{ 'button.save' | translate }}
+            <md-tooltip>{{ 'button.save' | translate }}</md-tooltip>
+        </md-button>
+        <md-button
+            class="av-button-square md-raised md-primary av-searchdialog"
+            ng-click="self.openPreview()"
+            ng-disabled="self.fileName.length === 0 || self.isError === true">
+            {{ 'summary.preview' | translate }}
+            <md-tooltip>{{ 'summary.preview' | translate }}</md-tooltip>
+        </md-button>
+        <md-button
+            class="av-button-square md-raised av-searchdialog-cancel"
+            ng-click="self.cancel()">
+            {{ 'button.cancel' | translate }}
+            <md-tooltip>{{ 'button.cancel' | translate }}</md-tooltip>
+        </md-button>
+
+
+    </av-content-panel>
+</md-dialog-container>
