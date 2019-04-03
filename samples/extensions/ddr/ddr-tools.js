@@ -1,19 +1,5 @@
 // FIXME: we cant use ES6 because of IE11. When we can get rid of this non browser, update the code (https://kangax.github.io/compat-table/es6/)
 // set translations
-
-/**
-* @module ddr_tools.js
-* @memberof extensions
-* @restrict E
-* @description
-*
-* The data dissemination repository ddr publishng process to delete, upload, publish
-* a zip file package (created by a user) containing a fgp author conﬁguration ﬁle (conﬁg-ﬁle.json),HTML snippet and it can have folders (Images/help/about folders).
-*
-* Users will need a DDR account to use authoring tool DDR extension.
-* Users need to contact nrcan.ddrsupport.rncan@canada.ca to create an account.
-* All conﬁguration packages will be copied to SSC Prod server (internal and external).
- */
 const lang = localStorage.getItem('fgpa-lang');
 const translations = {
     'en-CA': {
@@ -120,17 +106,7 @@ const translations = {
 };
 
 // bind function to set label (http://jsfiddle.net/RkTMD/)
-
-/**
- * Bind function to set labels in frame-ddr.html elements (http://jsfiddle.net/RkTMD/).
- *
- * @function bindHTML
- * @private
- * @param {Object} element html element with the specified ID
- * @param {String} data translated text
- * @param {String} att element property either - innertext default , placeholder, value
- */
- function bindHTML(element, data, att) {
+function bindHTML(element, data, att) {
     if (typeof att === 'undefined') {
         att = 'innerText';
     }
@@ -247,13 +223,7 @@ $(document).ready(function() {
 
 });
 
-/**
- * Get FME session token from login parameters.
- *
- * @function getToken
- * @private
- */
- function getToken() {
+function getToken() {
     const username = 'guest';
     const password = 'guest';
 
@@ -299,13 +269,6 @@ $(document).ready(function() {
     });
 }
 
-/**
- * Determine publisher role.
- *
- * @function getPublisherRole
- * @private
- * @param {Object} json file from fmeserver
- */
 function getPublisherRole(json) {
 
     $('.av-progress-section').hide();
@@ -353,24 +316,11 @@ function getPublisherRole(json) {
 //--------------------------------------------------
 //  SECTION 2 - Select function and receive info
 //--------------------------------------------------
-/*
-* Display main menu function section by hiding displayed section via setting html attributes.
-*
-* @function returnMainMenu
-* @private
-* @param {String} menu html user menu displayed
-*/
 function returnMainMenu(menu) {
     $('.av-' + menu + '-section').hide();
     $('.av-function-section').show();
 }
 
-/*
-* Set FME Server workspace for the current session id.
-*
-* @function selectUpload
-* @private
-*/
 function selectUpload() {
     $('.av-function-section').hide();
     $('.av-upload-section').show();
@@ -380,12 +330,6 @@ function selectUpload() {
     FMEServer.getSession(repository, workspace, setVars);
 }
 
-/**
- * From selected role, get files to delete.
- *
- * @function selectDelete
- * @private
- */
 function selectDelete() {
     $('.av-progress-section').show();
     $('.av-function-section').hide();
@@ -404,13 +348,7 @@ function selectDelete() {
     }
 }
 
-/**
- * From publisher role, get files to publish.
- *
- * @function selectPublish
- * @private
- */
- function selectPublish() {
+function selectPublish() {
     $('.av-progress-section').show();
     $('.av-function-section').hide();
 
@@ -424,14 +362,6 @@ function selectDelete() {
     }
 }
 
-/**
- *
- * Get list of files that can be deleted and set the interface.
- *
- * @function getDeleteList
- * @private
- * @param {Object} json file from fmeserver
- */
 function getDeleteList(json) {
     $('.av-progress-section').hide();
     $('.av-delete-section').show();
@@ -489,14 +419,7 @@ function getDeleteList(json) {
     setInterface('av-deletelist-external', list.external, 'delexternal');
 }
 
-/**
- * Determine publisher role and set the interface.
- *
- * @function getPublishList
- * @private
- * @param {Object} json file from fmeserver
- */
- function getPublishList(json) {
+function getPublishList(json) {
     $('.av-progress-section').hide();
     $('.av-publish-section').show();
 
@@ -527,16 +450,7 @@ function getDeleteList(json) {
     setInterface('av-publishlist-env', [translations[lang].internallist, translations[lang].externallist], 'pubenv');
 }
 
-/**
- * Set the user interface for published lists.
- *
- * @function setInterface
- * @private
- * @param {String} id html id of element
- * @param {Array} list fieldset list to display
- * @param {String} type publisher type - pubprivate ,pubenv
- */
- function setInterface(id, list, type) {
+function setInterface(id, list, type) {
     // remove existing values
     $('.' + id).not('legend').children().not('legend').remove();
 
@@ -571,14 +485,7 @@ function getDeleteList(json) {
 //--------------------------------------------------
 //  SECTION 3 - Delete and publish
 //--------------------------------------------------
-
-/**
- * Delete list of selected files.
- *
- * @function deleteList
- * @private
- */
- function deleteList() {
+function deleteList() {
     const deleteArr = [];
     $('.av-deletelist-private :checkbox').each(function() {
         if (this.checked) {
@@ -604,13 +511,7 @@ function getDeleteList(json) {
     $('.av-progress-section').show();
 }
 
-/**
- * Publish list of selected files.
- *
- * @function publish
- * @private
- */
- function publish() {
+function publish() {
     const publishArr = [];
     const publishEnv = [];
     $('.av-publishlist-private :checkbox').each(function() {
@@ -638,14 +539,7 @@ function getDeleteList(json) {
 //--------------------------------------------------
 //  SECTION 4 - Package Upload and update
 //--------------------------------------------------
-
-/**
- * Run upload zip package to FME.
- *
- * @function runUpdate
- * @private
- */
- function runUpdate() {
+function runUpdate() {
     // Remove message when changing section
     $('.av-upload-section').hide();
     $('.av-progress-section').show();
@@ -658,14 +552,7 @@ function getDeleteList(json) {
     runWorkspace();
 }
 
-/**
- * Set variables for the upload process.
- *
- * @function setVars
- * @private
- * @param {Object} json file from fme server
- */
- function setVars(json) {
+function setVars(json) {
     if (typeof json.serviceResponse.files !== 'undefined') {
         session = json.serviceResponse.session;
         path = json.serviceResponse.files.folder[0].path;
@@ -676,7 +563,7 @@ function getDeleteList(json) {
     if (span.firstChild !== null) {
         span.removeChild(span.firstChild);
     }
-
+    
     const node = document.getElementById('options');
     while (node.firstChild) {
         node.removeChild(node.firstChild);
@@ -686,36 +573,18 @@ function getDeleteList(json) {
     generateOptions();
 }
 
-/**
- * FME Server  upload
- *
- * @function uploadFile
- * @private
- */
- function uploadFile() {
+function uploadFile() {
     // Ask FME Server to upload the file
     FMEServer.dataUpload(repository, workspace, fileInput, session, processFiles);
 }
 
-/**
- * Get the workspace published parameters.
- *
- * @function generateOptions
- * @private
- */
- function generateOptions() {
+function generateOptions() {
     // Get the workspace published parameters from FME Server
     FMEServer.getWorkspaceParameters(repository, workspace, buildOptions);
 }
 
-/**
- * Build forms items.
- *
- * @function buildOptions
- * @private
- * @param {Object} json file from fmeserver
- */
- function buildOptions(json) {
+// Build forms items
+function buildOptions(json) {
     // Use the API to build the form items
     FMEServer.generateFormItems('options', json);
 
@@ -743,14 +612,7 @@ function getDeleteList(json) {
     createFileInput($(fileInput));
 }
 
-/**
- * Create the package file input.
- *
- * @function createFileInput
- * @private
- * @param {Object} input array
- */
- function createFileInput(input) {
+function createFileInput(input) {
     // limit to zip file and set id to link with label
     input.attr({ 'accept': '.zip', 'tabindex': -1 });
 
@@ -764,14 +626,8 @@ function getDeleteList(json) {
     });
 }
 
-/**
- * List files picked in chooser.
- *
- * @function  processFiles
- * @private
- * @param {Object} json file from fmeserver
- */
- function processFiles(json) {
+// List files picked in chooser
+function processFiles(json) {
     const list = $('.av-file-list');
     if (typeof json.serviceResponse !== 'undefined') {
         files = json.serviceResponse.files.archive;
@@ -787,16 +643,7 @@ function getDeleteList(json) {
 }
 
 // Manage form parameters
-
-/**
- * Process the form parameters for input to FME run workspace.
- *
- * @function  processParams
- * @private
- * @param {Object} element_id  id of html element
- * @return {Array} properties input to FME runworkspace
- */
- function processParams(element_id) {
+function processParams(element_id) {
     // Convert HTML NodeList types to regular array types
     let inputs = document.getElementById(element_id).getElementsByTagName('input');
     let selects = document.getElementById(element_id).getElementsByTagName('select');
@@ -837,13 +684,7 @@ function getDeleteList(json) {
     return properties;
 }
 
-/**
- * Run the FME workspace.
- *
- * @function  runWorkspace
- * @private
- */
- function runWorkspace() {
+function runWorkspace() {
     const params = {
         filename: fileInput.name,
         files: files,
@@ -857,27 +698,14 @@ function getDeleteList(json) {
 // --------------------------------------------------
 //  SECTION 5 - Execution Report
 //--------------------------------------------------
-/**
- * Show messages from FME success/error report.
- *
- * @function  showMessages
- * @private
- * @param {Object} json file from fmeserver
- */
- function showMessages(json) {
+function showMessages(json) {
     $('.av-progress-section').hide();
     $('.av-report-section').show();
     setMessages(json.MessageList);
 }
 
-/**
- * Callback function for FMEServer.runWorkspaceWithData and FMEServer.runDataStreaming.
- *
- * @function  setMessages
- * @private
- * @param {String} message fmeserver message
- */
- function setMessages(message) {function setMessages(message) {
+// Callback function for FMEServer.runWorkspaceWithData and FMEServer.runDataStreaming
+function setMessages(message) {
     // keep message as outputStream to reuse later
     outputStream = message;
 
@@ -894,14 +722,7 @@ function getDeleteList(json) {
     }
 }
 
-/**
- *  Creates the report Header.
- *
- * @function  setHeader
- * @private
- * @param {Object} header
- */
- function setHeader(header) {
+function setHeader(header) {
     // set variables
     const serviceName = (typeof header.ServiceName !== 'undefined') ? header.ServiceName : '';
     const job = (typeof header.JobID !== 'undefined') ? header.JobID : '';
@@ -917,17 +738,7 @@ function getDeleteList(json) {
     bindHTML(document.getElementById('avMess'), translations[lang].headMess);
 }
 
-
-/**
- * Add row elemens to table body.
- *
- * @function addRow
- * @private
- * @param {Object} tableBody  html table to display results
- * @param {Object} rowInfo row info from fme server
- * @param {Object} message html snippet with fmeserver message
- */
- function addRow(tableBody, rowInfo, message) {
+function addRow(tableBody, rowInfo, message) {
     let info = [rowInfo.TimeStamp, rowInfo.MessageType + '-' + rowInfo.Severity, message];
     let row = document.createElement('tr');
     row.classList.add('av-row', rowInfo.MessageType, rowInfo.Severity);
@@ -942,13 +753,7 @@ function getDeleteList(json) {
     tableBody.appendChild(row);
 }
 
-/**
- *  Filter Message Type by making message type visible.
- *
- * @function  filterMessType
- * @private
- */
- function filterMessType() {
+function filterMessType() {
     let mess = document.getElementById('avMessageType');
     let value = mess.options[mess.selectedIndex].value;
 
@@ -966,13 +771,7 @@ function getDeleteList(json) {
     }
 }
 
-/**
- *  Filter Message Severity by making message visible.
- *
- * @function  filterMessSev
- * @private
- */
- function filterMessSev() {
+function filterMessSev() {
     let mess = document.getElementById('avMessageSev');
     let value = mess.options[mess.selectedIndex].value;
 

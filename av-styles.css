@@ -30653,6 +30653,7 @@ The fix is based on the following hack: https://codepen.io/mkstix6/pen/pRbErK
 }
 
 .fgpa .av-save-dialog md-input-container input,
+.fgpa .av-search-dialog md-input-container input,
 .fgpa .av-agol-dialog md-input-container input,
 .fgpa .av-agolimport-dialog md-input-container input,
 .fgpa .av-error-dialog md-input-container input,
@@ -30665,6 +30666,7 @@ The fix is based on the following hack: https://codepen.io/mkstix6/pen/pRbErK
 }
 
 .fgpa .av-save-dialog md-input-container .av-hint,
+.fgpa .av-search-dialog md-input-container .av-hint,
 .fgpa .av-agol-dialog md-input-container .av-hint,
 .fgpa .av-agolimport-dialog md-input-container .av-hint,
 .fgpa .av-error-dialog md-input-container .av-hint,
@@ -30684,6 +30686,7 @@ The fix is based on the following hack: https://codepen.io/mkstix6/pen/pRbErK
 }
 
 .fgpa .av-save-dialog .av-error,
+.fgpa .av-search-dialog .av-error,
 .fgpa .av-agol-dialog .av-error,
 .fgpa .av-agolimport-dialog .av-error,
 .fgpa .av-error-dialog .av-error,
@@ -30695,6 +30698,7 @@ The fix is based on the following hack: https://codepen.io/mkstix6/pen/pRbErK
 }
 
 .fgpa .av-save-dialog button,
+.fgpa .av-search-dialog button,
 .fgpa .av-agol-dialog button,
 .fgpa .av-agolimport-dialog button,
 .fgpa .av-error-dialog button,
@@ -31345,6 +31349,12 @@ The fix is based on the following hack: https://codepen.io/mkstix6/pen/pRbErK
 .fgpa .av-save-dialog {
   height: 240px;
   width: 600px;
+  border-radius: 0;
+}
+
+.fgpa .av-search-dialog {
+  height: 900px;
+  width: 1000px;
   border-radius: 0;
 }
 
