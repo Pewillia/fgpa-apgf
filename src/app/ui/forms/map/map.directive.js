@@ -52,7 +52,7 @@ function avMap() {
  * @param {Object} layerService service use to get info from ESRI layers
  * @param {Object} commonService service with common functions
  */
-function Controller($scope, $translate, $timeout,
+function Controller($rootScope, $scope, $translate, $timeout,
     events, modelManager, stateManager, formService, debounceService, constants, layerService, commonService) {
     'ngInject';
     const self = this;
@@ -73,6 +73,11 @@ function Controller($scope, $translate, $timeout,
     events.$on(events.avLoadModel, () => {
         modelManager.updateModel($scope, self.modelName);
         init();
+    });
+
+    // added pw
+    $rootScope.$on("$broadcast", function ($event) {
+        console.log("BROADCAST: " + $event.name);
     });
 
     // when user change language, reset schema and form
@@ -126,7 +131,7 @@ function Controller($scope, $translate, $timeout,
             }
 
             // validate legend for error then validate model (solve the bad validation legend error at the same time)
-            events.$broadcast(events.avValidateLegend);
+           // events.$broadcast(events.avValidateLegend);
             $scope.$broadcast('schemaFormValidate');
             stateManager.validateModel(self.modelName, $scope.activeForm, $scope.form[0].tabs, $scope.model);
 
@@ -138,11 +143,14 @@ function Controller($scope, $translate, $timeout,
 
     events.$on(events.avValidateForm, () => {
         $scope.$broadcast('schemaFormValidate');
+        console.log('calling state manager validate') ;
         stateManager.validateModel(self.modelName, $scope.activeForm, $scope.form[0].tabs, $scope.model);
     });
 
     events.$on(events.avValidateLegend, () => {
+        console.log('validatig legend event ');
         validateLegend();
+       // events.$broadcast(events.avValidateForm) ;
     });
 
     /**
@@ -348,11 +356,18 @@ function Controller($scope, $translate, $timeout,
             // set message
             help.innerHTML = e;
 
+       
             // Broadcast error if needed
+            console.log("error in legend");
             events.$broadcast(events.avLegendError);
+           // $scope.$broadcast('schemaFormValidate');
+           
+           $rootScope.$emit('schemaFormValidate');
+         //   $rootScope.$broadcast(events.avValidateForm);
         }
     }
 
+   
     /**
      * Validate legend's layers ID
      *

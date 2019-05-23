@@ -41,6 +41,7 @@ function stateManager($timeout, $translate, events, constants, commonService, mo
     function getState(modelName) {
         const link = constants.schemas
             .indexOf(`${modelName}.[lang].json`) + 1;
+            console.log('link is ',link);
         // create state object used by the summary section
         _state[modelName] = { 'key': modelName,
             'title': $translate.instant(`app.section.${modelName}`),
@@ -52,7 +53,7 @@ function stateManager($timeout, $translate, events, constants, commonService, mo
             'stype': '',
             'shlink': '',
             items: [] };
-
+            console.log('state is ',_state[modelName]);
         return _state[modelName];
     }
 
@@ -133,6 +134,7 @@ function stateManager($timeout, $translate, events, constants, commonService, mo
         // but just one in the stateModel. This is caused by the way we managed JSON schema 'OneOf'
         // Should not be applied on list of elements [tileSchemas, extents, lods, basemaps, layers]
         if (modelName === 'ui') {
+            console.log('ui section',_state[modelName]);
             let modUndefExist = [];
             // Special case where we have to add aboutChoice key;
             for (let i of modUndef) {
@@ -712,7 +714,9 @@ function stateManager($timeout, $translate, events, constants, commonService, mo
      * @param {Object}  model the model
      */
     function setLegendAttributes(mapStateModel, model) {
-
+        console.log('map state model=',mapStateModel.items);
+        console.log(' model=',model);
+        
         for (let item of mapStateModel.items) {
             if (item.key === 'legend') {
 
@@ -721,21 +725,33 @@ function stateManager($timeout, $translate, events, constants, commonService, mo
 
                 // Structured or autopopulate
                 let path = ['legend', 'root'];
-                if (typeof model.legend.root.title !== 'undefined') {
+             
+                
+                console.log('model.legen.rootd=',model.legend);
+                console.log(' item=',item);
+                
+                console.log('root =',item.items[1]);
+                
+             //   if (typeof model.legend.root.title !== 'undefined') {
+               if (typeof model.legend.type !== 'undefined') {
+                        console.log('inside if ,root is =',root);
                     if (model.legend.type === 'autopopulate') {
                         root.title = $translate.instant('form.map.legendauto');
                         root.valid = true;
 
-                    } else {
+                    } else { console.log('structure legend',model.legend.type);
+                    console.log('legend states',legendState);
                         root.title = $translate.instant('form.map.legendstruct');
                         root.valid = legendState;
 
                         // Set state back to is original value
                         legendState = true;
                     }
+                
 
 
                     setStateValueUp(mapStateModel, path, 'valid', root.valid);
+                    break;
                 } else {
                     setStateValueUp(mapStateModel, path, 'valid', true);
                 }
