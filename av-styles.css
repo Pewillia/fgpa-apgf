@@ -31408,6 +31408,11 @@ The fix is based on the following hack: https://codepen.io/mkstix6/pen/pRbErK
   width: 120px;
 }
 
+.fgpa .av-header .av-headerversion {
+  margin-left: 10px;
+  display: inline;
+}
+
 .fgpa av-help-overlay {
   position: absolute;
   z-index: 999;
