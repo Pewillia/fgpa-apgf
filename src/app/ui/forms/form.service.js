@@ -1,4 +1,5 @@
 import marked from 'marked';
+
 const renderer = new marked.Renderer();
 
 const templateUrls = {
@@ -27,7 +28,7 @@ angular
  * @param {Object} events Angular events object
  * @param {Object} $mdDialog Angular dialog window object
  * @param {Object} $translate Angular translation object
- * @param  {Object} keyNames key names with corresponding key code
+ * @param {Object} keyNames key names with corresponding key code
  * @param {Object} commonService service with common functions
  * @param {Object} constants service with all constants for the application
  * @param {Object} projectionService service to project geometries
@@ -38,12 +39,14 @@ angular
 function formService($timeout, $rootScope, events, $mdDialog, $translate, keyNames, commonService, constants, projectionService,
     $http, modelManager) {
 
+
     const service = {
         showAdvance,
         triggerValidation,
         advanceModel: false,
+        frenchLanguage: (commonService.getLang() === 'fr-CA') ? true : false,  
         toggleSection,
-        toggleAll,
+        toggleAll, 
         addCustomAccordion,
         setExtent,
         setAreaOfInterest,
@@ -56,7 +59,7 @@ function formService($timeout, $rootScope, events, $mdDialog, $translate, keyNam
         updateLinkValues,
         getActiveElemIndex
     };
-
+ 
     // if show advance is true we need to toggle the hidden because the form has been reset
     events.$on(events.avSchemaUpdate, () => {
         resestShowAdvance();
@@ -66,15 +69,16 @@ function formService($timeout, $rootScope, events, $mdDialog, $translate, keyNam
         resestShowAdvance();
         triggerValidation();
     });
-    events.$on(events.avSwitchLanguage, () => { resestShowAdvance(); });
 
+    events.$on(events.avSwitchLanguage, () => { resestShowAdvance(); service.frenchLanguage = (commonService.getLang() === 'fr-CA') ? true : false; });
+  
     // when we add basemap or layers, if show advance is click, remove hidden
     events.$on(events.avNewItems, () => { $timeout(() => {
         showAdvance();
         showVersion();
     }, constants.debInput) });
 
-    // when version is set, show/hide dev version fields
+    // when version is set, show/hide dev version fields`
     events.$on(events.avVersionSet, () => { $timeout(() => showVersion(), constants.debInput) });
 
     // set WCAG
@@ -115,7 +119,7 @@ function formService($timeout, $rootScope, events, $mdDialog, $translate, keyNam
      * @function resestShowAdvance
      * @private
      */
-    function resestShowAdvance() {
+    function resestShowAdvance() { 
         if (service.advanceModel) { $timeout(() => showAdvance(), constants.delayAccordion); }
     }
 
