@@ -482,7 +482,25 @@
                                             "type": "string",
                                             "default": "",
                                             "description": "Suffixe à ajouter au survol de données."
-                                        }
+                                        },
+                                        
+                                        "details":{ 
+                                            "type":"object",
+                                            "title":"Panneau de détails",
+                                            "properties":{
+                                            "enable":{
+                                                "title":"Activer",
+                                                "type":"boolean",
+                                                "default": true,
+                                                "description":" "
+                                                      },
+                                            "description":
+                                                    { "title":"Description",
+                                                     "type":"string",
+                                                     "default":"",
+                                                    "description": "Description du panneau de détails"}
+                                                        }
+                                                   }
                                     },
                                     "required": ["type", "measure", "split"]
                                 }

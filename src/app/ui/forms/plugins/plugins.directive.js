@@ -321,7 +321,7 @@ function Controller($scope, $translate, events, modelManager, stateManager, form
                                 { value: 'config', name: $translate.instant('form.plugins.chartconfig') },
                                 { value: 'field', name: $translate.instant('form.plugins.chartfield') }
                             ] },
-                            { 'key': 'chart.axis.xAxis.type', 'condition': 'model.chart.enable === true && model.chart.type == "line"', 'titleMap': [
+                            { 'key': 'chart.axis.xAxis.type', 'condition': 'model.chart.enable ===  true && model.chart.type == "line"', 'titleMap': [
                                 { value: 'date', name: $translate.instant('form.plugins.chartdate') },
                                 { value: 'linear', name: $translate.instant('form.plugins.chartlinear') }
                             ] },
@@ -330,10 +330,15 @@ function Controller($scope, $translate, events, modelManager, stateManager, form
                             { 'key': 'chart.axis.xAxis.split' }
                         ] },
                         { 'key': 'chart.axis.yAxis', 'items': [
-                            { 'key': 'chart.axis.yAxis.type', 'titleMap': [
+                            { 'key': 'chart.axis.yAxis.type', 'condition': 'model.chart.enable === true && model.chart.type == "bar"','titleMap': [
                                 { value: 'config', name: $translate.instant('form.plugins.chartconfig') },
                                 { value: 'field', name: $translate.instant('form.plugins.chartfield') }
                             ] },
+                            { 'key': 'chart.axis.yAxis.type', 'condition': 'model.chart.enable === true && model.chart.type == "line"', 'titleMap': [
+                                { value: 'date', name: $translate.instant('form.plugins.chartdate') },
+                                { value: 'linear', name: $translate.instant('form.plugins.chartlinear') }
+                            ] },
+                          
                             { 'key': 'chart.axis.yAxis.title' },
                             { 'key': 'chart.axis.yAxis.values' },
                             { 'key': 'chart.axis.yAxis.split' }
@@ -342,17 +347,29 @@ function Controller($scope, $translate, events, modelManager, stateManager, form
                     // TODO: re enable add when geoapi will support layer id. At the same time re enable layer id selection
                     // TODO: remove default value = 0 inside the schema
                     // TODO: remove layer id explanation
-                    { 'key': 'chart.layers', 'condition': 'model.chart.enable === true', 'add': null, 'items': [
-                        { 'type': 'fieldset', 'htmlClass': 'av-tileschema', 'readonly': true, 'items': [
-                            {
-                                'key': 'chart.layers[].id',
-                                'type': 'dynamic-select',
-                                'optionData': 'initLayerId',
-                                'model': 'id',
-                                'array': true
-                            }
-                        ] },
-                        { 'key': 'chart.layers[].data', 'title': $translate.instant('form.plugins.chartdata'), 'htmlClass': 'av-accordion-all', 'startEmpty': true, 'onChange': () => {
+
+            //        {  'key': 'chart.layers', 'condition': 'model.chart.enable === true', 'add': null, 'items': [
+              //        { 'type': 'fieldset', 'htmlClass': 'av-tileschema',  'items': [
+
+             
+                        {  'key': 'chart.layers', 'condition': 'model.chart.enable === true','htmlClass': 'av-accordion-content', 'add':  $translate.instant('button.add'), 'items': [
+                            { 'type': 'fieldset', 'htmlClass': 'av-tileschema',  'items': [
+             
+       
+                        //                 { 'type': 'fieldset', 'htmlClass': 'av-tileschema', 'readonly': true, 'items': [
+   
+                    //  hidden because plugin only works with 1 layer on map 
+                          {
+                         'key': 'chart.layers[].id[]',
+    //                         'type': 'select',
+                            'type': 'dynamic-select',
+                             'optionData': 'initLayerId',
+                               'model': 'id',
+                               'array': true
+                          }
+                       ] 
+                     },
+                        { 'key': 'chart.layers[].data', 'title': $translate.instant('form.plugins.chartdata'), 'htmlClass': 'av-accordion-content', 'startEmpty': true, 'onChange': () => {
                             // new item, create accordion
                             events.$broadcast(events.avNewItems);
                         }, 'add': $translate.instant('button.add'), 'items': [
@@ -374,12 +391,18 @@ function Controller($scope, $translate, events, modelManager, stateManager, form
                                         { 'key': 'chart.layers[].data[].label.split' }
                                     ] },
                                     { 'key': 'chart.layers[].data[].prefix' },
-                                    { 'key': 'chart.layers[].data[].suffix' }
+                                    { 'key': 'chart.layers[].data[].suffix' },
+                                    { 'key': 'chart.layers[].data[].details', 'condition': 'model.chart.enable === true && model.chart.type === "pie"', 'items': [
+
+                                        { 'key': 'chart.layers[].data[].details.enable' },
+                                        { 'key': 'chart.layers[].data[].details.description','type':"textarea"}
+                                   ] } 
                                 ] }
                             ] }
                         ] }
                     ] }
                 ] },
+
                 { 'title': $translate.instant('form.plugins.swiper'), 'key': 'swiper', 'items': [
                     { 'type': 'template', 'template': self.formService.addCustomAccordion($translate.instant('form.custom.help'), `help/info-plugins-${commonService.getLang()}.md`, true) },
                     { 'key': 'swiper.enable' },

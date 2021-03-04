@@ -488,10 +488,29 @@
                                             "default": "",
                                             "description": "Suffix to add to data hover."
                                         }
+                                        ,
+                                        "details":{ 
+                                            "type":"object",
+                                            "title":"Details Panel",
+                                            "properties":{
+                                            "enable":{
+                                                "title":"Enable",
+                                                "type":"boolean",
+                                                "default": true,
+                                                "description":" "
+                                                      },
+                                            "description":
+                                                    { "title":"Description",
+                                                     "type":"string",
+                                                     "default":"",
+                                                    "description": "Description of Details Panel"}
+                                                        }
+                                                   }
                                     },
                                     "required": ["type", "measure", "split"]
                                 }
                             }
+                         
                         },
                         "required": ["id"]
                     }
